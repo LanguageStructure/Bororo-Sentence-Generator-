@@ -33,7 +33,7 @@ def main():
     if a.json:
         Path(a.json).write_text(json.dumps(rows,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     for x in rows:
-        roles=" ".join(f"{k}={x[k]}" for k in ("S","A","O") if x[k])
+        roles=("A=UNRESOLVED O="+x["O"] if x["frame"]=="divalent" and x["O"] else " ".join(f"{k}={x[k]}" for k in ("S","A","O") if x[k]))
         print(f'{x["lemma"]}\t{x["frame"]}\t{roles}\t{x["predicate_form"]}\t{",".join(x["sent_ids"])}')
     print(f"\nTOTAL\t{len(rows)}")
 if __name__=="__main__": main()
