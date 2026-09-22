@@ -1,6 +1,3 @@
-"""Non-destructive analytical normalization.
-
-The source CoNLL-U is never rewritten. Normalized forms are comparison keys only.
-"""
+"""Non-destructive analytical normalization."""
 def form_key(form):
     return str(form or "_").casefold()
