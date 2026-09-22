@@ -5,3 +5,10 @@ venv/
 .env
 .DS_Store
 .pytest_cache/
+
+# Private linguistic sources (never commit)
+data/private/
+private/
+*.xlsx
+*Dicionário*.tsv
+*Dicionario*.tsv
