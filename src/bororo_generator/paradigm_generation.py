@@ -2,6 +2,7 @@
 from .person_index import INDEXES, reviewed_stem_class
 from .valency_review import reviewed_frame
 from .batch import generate_batch
+from .a_host import reviewed_a_persons
 
 PERSONS=("1SG","2SG","3SG","1PL.INCL","1PL.EXCL","2PL","3PL","CORF")
 
@@ -19,8 +20,10 @@ def paradigm_requests(lemma):
     if frame=="extended_intransitive":
         return [{"lemma":lemma,"s_person":p} for p in persons]
     if frame=="divalent":
+        # A-host cells are independently reviewed; do not extrapolate them from
+        # the lexical predicate stem class.
         return [{"lemma":lemma,"a_person":a,"o_person":o}
-                for a in persons for o in persons]
+                for a in reviewed_a_persons() for o in persons]
     return []
 
 def generate_paradigm(lemma,attestation_index=None):
