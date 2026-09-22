@@ -1,7 +1,7 @@
 """Central gate preventing unreviewed morphology from entering generation."""
 from dataclasses import dataclass,field
 from typing import List
-from .review import generation_ready
+from .review import generation_ready,cell_generation_ready
 
 @dataclass
 class GateResult:
@@ -11,7 +11,21 @@ class GateResult:
 
 def check_lemmas(lemmas,review_path="config/morphology_review.yaml"):
     blocked=sorted({x for x in lemmas if x and x!="_" and not generation_ready(x,review_path)})
+    reasons=["human morphology review required"] if blocked else []
+    return GateResult(not blocked,blocked,reasons)
+
+def check_tokens(tokens,review_path="config/morphology_review.yaml"):
+    """Gate tokens by whole-lemma approval OR exact reviewed FEATS+form cell."""
+    blocked=[]
     reasons=[]
-    if blocked:
-        reasons.append("human morphology review required")
+    for t in tokens:
+        if not isinstance(t.get("id"),int): continue
+        upos=str(t.get("upos") or "_").strip().upper()
+        lemma=str(t.get("lemma") or "_")
+        if upos=="PUNCT" or lemma=="_": continue
+        if generation_ready(lemma,review_path): continue
+        if cell_generation_ready(lemma,t.get("feats") or {},t.get("form"),review_path): continue
+        label=f"{lemma}:{t.get('form') or '_'}"
+        if label not in blocked: blocked.append(label)
+    if blocked: reasons.append("human morphology review required for exact lemma/form/FEATS")
     return GateResult(not blocked,blocked,reasons)
