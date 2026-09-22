@@ -19,6 +19,9 @@ lemmas:
       "pa(g)-":
         analysis: "1PL.INCL"
         status: reviewed
+      "ta(g)-":
+        analysis: "2PL"
+        status: reviewed
       "ce-":
         analysis: "1PL.EXCL"
         status: reviewed
@@ -38,6 +41,10 @@ lemmas:
         analysis: "CAUS or IMP"
         status: reviewed_ambiguous
     analyzed_forms:
+      tagago:
+        segmentation: "ta(g)-ako"
+        analysis: ["2PL", "ako"]
+        status: reviewed
       akago:
         segmentation: "a(k)-ako"
         analysis: ["2SG", "ako"]
