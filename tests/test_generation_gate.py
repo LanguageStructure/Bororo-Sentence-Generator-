@@ -18,3 +18,13 @@ def test_exact_cell_gate(tmp_path):
  bad=[{"id":1,"form":"inagokare","lemma":"ako","upos":"NOUN","feats":{"Mood":"Ind","Number":"Sing","Person":"1"}}]
  assert check_tokens(good,p).allowed
  assert not check_tokens(bad,p).allowed
+
+
+def test_construction_ambiguity_blocks_lexical_generation(monkeypatch):
+    import bororo_generator.generation_gate as g
+    monkeypatch.setattr(g,"generation_ready",lambda lemma,path: True)
+    monkeypatch.setattr(g,"reviewed_frame",lambda lemma,path: "monovalent")
+    monkeypatch.setattr(g,"review_status",lambda lemma,frame,stem: "construction_ambiguity")
+    result=g.check_lexical_generation(["tu"])
+    assert not result.allowed
+    assert any("construction_ambiguity" in x for x in result.blocked_lemmas)
