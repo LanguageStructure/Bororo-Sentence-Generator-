@@ -7,8 +7,35 @@ lemmas:
     lexical_meaning: "voz, som, fala"
     gloss_note: "ako = voz/som/fala; inago = minha fala; ego = fala deles"
     note: >
-      Partial analysis only. Do not infer a complete paradigm or automatic
-      interchangeability from shared FEATS.
+      Partial analysis cross-checked against the author's Bororo grammar draft.
+      Bound indexes are clitics used across possessors, core/oblique arguments
+      and postpositions. Do not infer automatic interchangeability from shared FEATS.
+    grammar_review:
+      status: reviewed
+      source: "Bororo grammar draft, 2026-09-16"
+      bound_index_inventory:
+        "1SG": "i="
+        "2SG": "a="
+        "3SG": ["u=", "zero"]
+        "1PL.INCL": "pa="
+        "1PL.EXCL": "ce="
+        "2PL": "ta="
+        "3PL": "e="
+        "CORF": "tu="
+        "RECP": "pu="
+      morphophonology_note: >
+        Person indexes have paradigmatic allomorphy; consonantal alternants occur
+        before vowel-initial stems. Surface forms such as akago/pagago/tagago
+        therefore must not be generalized by literal string concatenation.
+      re_note: >
+        -re marks declarative/indicative illocutionary force and is not a realis marker.
+        It can co-occur with irrealis -modu.
+      ka_note: >
+        In finite declaratives -ka is negative; attested ordering with irrealis is
+        ROOT-modu-ka-re.
+      do_note: >
+        -do participates in causative morphology and also in positive imperative
+        constructions with monovalent predicates; these uses remain context-sensitive.
     morphemes:
       "i(n)-":
         analysis: "1SG"
