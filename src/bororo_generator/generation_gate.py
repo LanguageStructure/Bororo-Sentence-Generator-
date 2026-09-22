@@ -3,6 +3,7 @@ from dataclasses import dataclass,field
 from typing import List
 from .review import generation_ready,cell_generation_ready
 from .valency_review import reviewed_frame
+from .lexical_review import review_status
 
 @dataclass
 class GateResult:
@@ -37,8 +38,10 @@ def check_lexical_generation(lemmas,review_path="config/morphology_review.yaml",
     blocked=[];reasons=[]
     for lemma in sorted({x for x in lemmas if x and x!="_"}):
         missing=[]
+        status=review_status(lemma,reviewed_frame(lemma,valency_path),None)
+        if status=="construction_ambiguity": missing.append("construction_ambiguity")
         if not generation_ready(lemma,review_path): missing.append("morphology")
         if reviewed_frame(lemma,valency_path) is None: missing.append("coding_frame")
         if missing: blocked.append(f"{lemma}:"+",".join(missing))
-    if blocked: reasons.append("independent morphology and coding-frame review required")
+    if blocked: reasons.append("independent morphology, coding-frame, and lexical-review clearance required")
     return GateResult(not blocked,blocked,reasons)
