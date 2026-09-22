@@ -15,3 +15,7 @@ def test_reviewed_lexical_class_registry():
     assert indexed_reviewed_stem("aregodu","1SG") == "itaregodu"
     assert reviewed_stem_class("ako") is None
     assert indexed_reviewed_stem("ako","2SG") is None
+
+
+def test_ogwa_n_class_exclusive_from_concrete_paradigm():
+    assert indexed_reviewed_stem("ogwa","1PL.EXCL")=="ceogwa"
