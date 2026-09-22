@@ -1,0 +1,9 @@
+[
+  {"lemma":"nudu","s_person":"3SG"},
+  {"lemma":"meru","s_person":"2SG"},
+  {"lemma":"kodu","s_person":"1SG"},
+  {"lemma":"maragodu","s_person":"2PL"},
+  {"lemma":"mako","s_person":"2SG","oblique_phrase":"Boe"},
+  {"lemma":"maku","a_person":"3PL","o_person":"3PL"},
+  {"lemma":"tawuje","a_person":"2SG","o_person":"3PL"}
+]
