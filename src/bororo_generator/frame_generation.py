@@ -19,10 +19,11 @@ def monovalent_declarative(lemma, person, valency_path="config/valency_review.ya
     stem=indexed_reviewed_stem(lemma,person)
     if stem is None:
         return None
-    return Candidate(stem+"re",Provenance(
+    predicate=stem+"re"
+    return Candidate(predicate,Provenance(
         status="generated",
         pattern="reviewed monovalent declarative: S=LEX-re",
         rules=["reviewed_coding_frame","reviewed_stem_class","declarative_re"],
         notes=[f"lemma={lemma}",f"S={person}",
                "Controlled morphological predicate candidate; no overt RP generated."],
-    ))
+    ),predicate_form=predicate)
