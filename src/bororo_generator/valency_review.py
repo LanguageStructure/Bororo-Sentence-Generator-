@@ -18,3 +18,10 @@ def reviewed_frame(lemma,path=DEFAULT):
 
 def generation_frame_ready(lemma,path=DEFAULT):
     return reviewed_frame(lemma,path) is not None
+
+
+def reviewed_oblique(lemma,path=DEFAULT):
+    """Return an explicitly reviewed selected oblique marker, if any."""
+    e=valency_entry(lemma,path)
+    if not e or e.get("status")!="reviewed": return None
+    return e.get("selected_oblique")
