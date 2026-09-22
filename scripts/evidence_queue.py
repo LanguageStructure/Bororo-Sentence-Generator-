@@ -8,8 +8,8 @@ def main():
     p.add_argument("--minimum-tokens",type=int,default=2)
     a=p.parse_args()
     rows=lexical_evidence_queue(a.corpus,a.minimum_tokens)[:a.limit]
-    print("lemma\ttokens\tforms\tneeds\ttop_forms")
+    print("lemma\ttokens\tforms\tstatus\tneeds\ttop_forms")
     for r in rows:
         forms=", ".join(f"{f}:{n}" for f,n in r["top_forms"])
-        print(f'{r["lemma"]}\t{r["tokens"]}\t{r["distinct_forms"]}\t{",".join(r["needs"])}\t{forms}')
+        print(f'{r["lemma"]}\t{r["tokens"]}\t{r["distinct_forms"]}\t{r["review_status"]}\t{",".join(r["needs"])}\t{forms}')
 if __name__=="__main__": main()
