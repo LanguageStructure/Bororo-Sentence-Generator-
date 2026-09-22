@@ -4,19 +4,11 @@ Bororo divalent coding is represented constructionally as A=re + O=LEX.
 The A index and O index are realized independently; no nominative/accusative
 template is assumed.
 """
-from .person_index import indexed_reviewed_stem, INDEXES, reviewed_stem_class
+from .person_index import indexed_reviewed_stem, reviewed_stem_class
+from .a_host import reviewed_a_declarative
 from .valency_review import reviewed_frame
 from .candidate import Candidate
 from .provenance import Provenance
-
-def _a_declarative(person):
-    # A uses the ordinary bound person series as an independent operator host.
-    # Surface realization is licensed only where the index value is explicit.
-    # For vowel-initial lexical stems, stem-class allomorphy is irrelevant here.
-    basic=INDEXES["C"].get(person)
-    if basic is None:
-        return None
-    return basic+"re"
 
 def divalent_declarative(
     lemma, a_person, o_person,
@@ -28,7 +20,7 @@ def divalent_declarative(
     if reviewed_stem_class(lemma) is None:
         return None
     pred=indexed_reviewed_stem(lemma,o_person)
-    a_host=_a_declarative(a_person)
+    a_host=reviewed_a_declarative(a_person)
     if pred is None or a_host is None:
         return None
     parts=[]
@@ -39,7 +31,7 @@ def divalent_declarative(
     return Candidate(" ".join(parts),Provenance(
         status="generated",
         pattern="reviewed divalent declarative: (RP-A) A=re (RP-O) O=LEX",
-        rules=["reviewed_divalent_frame","reviewed_stem_class","A_declarative_host","O_predicate_index"],
+        rules=["reviewed_divalent_frame","reviewed_stem_class","reviewed_A_declarative_host","O_predicate_index"],
         notes=[f"lemma={lemma}",f"A={a_person}",f"O={o_person}",
                "A and O are kept as distinct coding positions."],
     ))
