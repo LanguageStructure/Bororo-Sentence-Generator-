@@ -11,11 +11,14 @@ def main():
     p.add_argument("--json")
     a=p.parse_args()
     ev=evaluate_lexemes(a.lemmas,a.corpus)
-    rows=[]
+    rows=[]; seen=set()
     for result in ev["results"]:
         for r in result["records"]:
             att=r.get("attestation",{})
             if not att.get("predicate_form_attested"): continue
+            key=(result["lemma"],att.get("predicate_form"))
+            if key in seen: continue
+            seen.add(key)
             req=r.get("request",{})
             rows.append({
                 "lemma":result["lemma"],
@@ -25,7 +28,7 @@ def main():
                 "O":req.get("o_person"),
                 "generated":r.get("text"),
                 "predicate_form":att.get("predicate_form"),
-                "sent_ids":att.get("predicate_source_sent_ids",[]),
+                "sent_ids":list(dict.fromkeys(att.get("predicate_source_sent_ids",[]))),
             })
     if a.json:
         Path(a.json).write_text(json.dumps(rows,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
