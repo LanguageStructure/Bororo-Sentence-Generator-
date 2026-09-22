@@ -23,10 +23,23 @@ lemmas:
         "3PL": "e="
         "CORF": "tu="
         "RECP": "pu="
+      stem_class_system:
+        status: reviewed
+        classes: ["C", "U", "O", "N", "I"]
+        source_section: "4.4.1.2"
+        note: >
+          C/U are consonant-initial classes; O/N/I are vowel-initial classes
+          distinguished by person-index allomorphy. Class assignment is lexical
+          evidence and must never be guessed from spelling alone.
       morphophonology_note: >
         Person indexes have paradigmatic allomorphy; consonantal alternants occur
         before vowel-initial stems. Surface forms such as akago/pagago/tagago
         therefore must not be generalized by literal string concatenation.
+      ako_stem_class:
+        status: unresolved
+        note: >
+          Do not assign ako mechanically to O/N/I. The reviewed surface paradigm
+          must be reconciled with the grammar's stem-class analysis first.
       re_note: >
         -re marks declarative/indicative illocutionary force and is not a realis marker.
         It can co-occur with irrealis -modu.
