@@ -29,6 +29,7 @@ def generate_record(lemma, **kwargs):
     return {
         "status":"generated",
         "text":rec["text"],
+        "predicate_form":rec.get("predicate_form"),
         "evidence":evidence,
         "provenance":rec["provenance"],
         "validation":rec["validation"],
