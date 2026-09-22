@@ -8,12 +8,15 @@ from .orthography import normalize_bororo
 class Candidate:
     text:str
     provenance:Provenance
+    predicate_form:str|None=None
 
     def __post_init__(self):
         # Generated/recombined Bororo output is always in project orthography.
         self.text=normalize_bororo(self.text)
+        if self.predicate_form is not None:
+            self.predicate_form=normalize_bororo(self.predicate_form)
 
     def record(self):
         result=validate_candidate(self.text,self.provenance)
-        return {"text":self.text,"provenance":self.provenance.to_dict(),
+        return {"text":self.text,"predicate_form":self.predicate_form,"provenance":self.provenance.to_dict(),
                 "validation":asdict(result)}
