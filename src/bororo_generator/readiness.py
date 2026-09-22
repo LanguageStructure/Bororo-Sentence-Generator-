@@ -1,25 +1,23 @@
-"""Conservative readiness filtering for evolving CorBo CoNLL-U data."""
-from .corpus import read_conllu
-
-def assess_sentence(s, max_tokens=100):
+"""Structural readiness checks for CoNLL-U generation evidence."""
+def assess_sentence(s,max_tokens=100):
     reasons=[]
-    n=len(s.tokens)
-    roots=[t for t in s.tokens if t.get("head")==0]
-    forms=[str(t.get("form","")) for t in s.tokens]
-    ids=[t.get("id") for t in s.tokens]
-    if n==0: reasons.append("empty")
-    if n>max_tokens: reasons.append("too_long")
-    if len(roots)!=1: reasons.append("root_count_not_1")
-    if len(ids)!=len(set(ids)): reasons.append("duplicate_token_ids")
-    if not s.text.strip(): reasons.append("missing_text")
-    if any("<w:" in f or "</w:" in f or "w:val=" in f for f in forms):
-        reasons.append("xml_contamination")
-    return {"trusted":not reasons,"reasons":reasons,"tokens":n,
-            "sent_id":s.sent_id,"text":s.text}
+    toks=[t for t in s.tokens if isinstance(t.get("id"),int)]
+    ids=[t["id"] for t in toks]
+    if not toks: reasons.append("empty")
+    if len(toks)>max_tokens: reasons.append("too_long")
+    true_roots=[t for t in toks if t.get("head")==0 and t.get("deprel")=="root"]
+    if len(true_roots)!=1: reasons.append("root_count_not_1")
+    # A token labelled root with a non-zero head is internally inconsistent.
+    stray_roots=[t for t in toks if t.get("deprel")=="root" and t.get("head")!=0]
+    if stray_roots: reasons.append("root_deprel_nonzero_head")
+    if len(ids)!=len(set(ids)): reasons.append("duplicate_ids")
+    if not getattr(s,"text",None): reasons.append("missing_text")
+    text=getattr(s,"text","") or ""
+    if any(x in text for x in ("<w:","</w:","<xml","<?xml")): reasons.append("xml_contamination")
+    return {"trusted":not reasons,"reasons":reasons,"sent_id":getattr(s,"sent_id",None),
+            "tokens":len(toks)}
 
-def assess_corpus(path,max_tokens=100):
-    trusted=[];excluded=[]
-    for s in read_conllu(path):
-        a=assess_sentence(s,max_tokens)
-        (trusted if a["trusted"] else excluded).append((s,a))
-    return trusted,excluded
+def assess_corpus(sentences,max_tokens=100):
+    results=[assess_sentence(s,max_tokens) for s in sentences]
+    return {"trusted":[x for x in results if x["trusted"]],
+            "excluded":[x for x in results if not x["trusted"]]}
