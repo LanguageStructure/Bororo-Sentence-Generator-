@@ -21,7 +21,9 @@ def realize_ako(person=None,number=None,clusivity=None,mood=None,polarity=None,s
         e=forms.get("ego")
         if _match_analysis(e,["3PL","ako"]): return "ego"
 
-    # Explicitly reviewed 2SG and 1PL.INCL forms.
+    # Explicitly reviewed 2SG, 2PL and 1PL.INCL forms.
+    if person==2 and number=="Plur" and mood is None and not any([polarity,status,derivation,usage,clusivity]):
+        if _match_analysis(forms.get("tagago"),["2PL","ako"]): return "tagago"
     if person==2 and number=="Sing" and not any([polarity,status,derivation,usage,clusivity]):
         key="akagore" if mood=="Ind" else ("akago" if mood is None else None)
         if key and _match_analysis(forms.get(key),["2SG","ako"]+(["IND"] if mood=="Ind" else [])): return key
