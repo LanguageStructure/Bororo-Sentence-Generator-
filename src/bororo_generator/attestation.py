@@ -11,7 +11,7 @@ def surface_attestation(sentences):
     for s in sentences:
         text=getattr(s,"text",None); sid=getattr(s,"sent_id",None)
         if text and sid: idx[form_key(text)].append(sid)
-    return dict(idx)
+    return {k:list(dict.fromkeys(v)) for k,v in idx.items()}
 
 def token_attestation(sentences):
     idx=defaultdict(list)
@@ -20,7 +20,7 @@ def token_attestation(sentences):
         for t in getattr(s,"tokens",()) or ():
             form=t.get("form")
             if form and sid: idx[form_key(str(form))].append(sid)
-    return dict(idx)
+    return {k:list(dict.fromkeys(v)) for k,v in idx.items()}
 
 def annotate_attestation(record,surface_index=None,token_index=None):
     if record.get("status")!="generated" or not record.get("text"):
