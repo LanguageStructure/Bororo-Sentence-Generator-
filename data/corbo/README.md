@@ -1,14 +1,23 @@
-# CorBo-derived data
+# Derived CorBo evidence
 
-This directory is for **derived evidence reports**, not a second authoritative copy of CorBo.
+This directory contains derived evidence only. CorBo remains the documentary source of truth.
 
-The source of truth remains the CorBo repository. Run the analyzer against the canonical CoNLL-U file, for example:
+Run:
 
 ```bash
-pip install -e .
-python scripts/analyze_corbo.py ../Bororo-Corpus/CorBo/Corpus_Files/Bororo_UD_enriched_v5_plus_scripture.conllu
+python3 scripts/diagnose_conllu.py ../Bororo-Corpus/CorBo/Corpus_Files/Bororo_UD_enriched_v5_plus_scripture.conllu
+python3 scripts/analyze_corbo.py ../Bororo-Corpus/CorBo/Corpus_Files/Bororo_UD_enriched_v5_plus_scripture.conllu
 ```
 
-The resulting `evidence.json` records corpus summary, attested construction patterns, exact surface patterns, lexical distributions and observed predicate valency frames.
+The analysis writes three distinct products:
 
-No generated sentence is admitted to CorBo automatically.
+- `evidence.json`: diagnostic evidence from the complete parsed input; it is **not automatically trusted for generation**.
+- `trusted-evidence.json`: only units that pass the conservative readiness gate.
+- `readiness.json`: excluded units and the explicit reasons for exclusion.
+
+The default readiness gate excludes units over 100 tokens, units without exactly one root,
+duplicate token IDs, missing text metadata, and obvious Word/XML contamination. The threshold
+is operational, not a claim about Bororo grammar.
+
+As CorBo annotation improves, rerun the same commands against the newest CoNLL-U version.
+No generated sentence or correction is written back to CorBo automatically.
