@@ -13,3 +13,8 @@ def test_divalent_not_forced_into_monovalent_template():
 
 def test_unknown_class_blocks_even_reviewed_frame():
     assert monovalent_declarative("regodu","3PL") is None
+
+
+def test_meru_and_kodu_now_cross_morphology_and_valency_review():
+    assert monovalent_declarative("meru","2SG").text=="amerure"
+    assert monovalent_declarative("kodu","1SG").text=="ikodure"
