@@ -6,10 +6,11 @@ realizer may be changed. The attested dependency structure is preserved.
 from .candidate import Candidate
 from .provenance import Provenance
 from .compositional import realize_ako
+from .orthography import normalize_bororo
 
 def _render(tokens):
     # Conservative plain rendering; provenance retains token structure.
-    return " ".join(str(t.get("form") or "") for t in tokens).strip()
+    return normalize_bororo(" ".join(str(t.get("form") or "") for t in tokens).strip())
 
 def replace_ako_cell(sentence, token_id, features, source_version=None, review_path="config/morphology_review.yaml"):
     tokens=[dict(t) for t in sentence.tokens if isinstance(t.get("id"),int)]
