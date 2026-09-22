@@ -1,7 +1,7 @@
-"""Corpus attestation index for generated Bororo surfaces.
+"""Corpus attestation indexes for generated Bororo outputs.
 
-Attestation is an evidence label, not a grammaticality judgment. Matching uses
-the project's Bororo comparison key and preserves the source sentence ids.
+Sentence-surface and token-form attestation are independent evidence levels.
+Neither is a grammaticality judgment.
 """
 from collections import defaultdict
 from .orthography import form_key
@@ -9,20 +9,34 @@ from .orthography import form_key
 def surface_attestation(sentences):
     idx=defaultdict(list)
     for s in sentences:
-        text=getattr(s,"text",None)
-        sid=getattr(s,"sent_id",None)
-        if text and sid:
-            idx[form_key(text)].append(sid)
+        text=getattr(s,"text",None); sid=getattr(s,"sent_id",None)
+        if text and sid: idx[form_key(text)].append(sid)
     return dict(idx)
 
-def annotate_attestation(record,index):
+def token_attestation(sentences):
+    idx=defaultdict(list)
+    for s in sentences:
+        sid=getattr(s,"sent_id",None)
+        for t in getattr(s,"tokens",()) or ():
+            form=t.get("form")
+            if form and sid: idx[form_key(str(form))].append(sid)
+    return dict(idx)
+
+def annotate_attestation(record,surface_index=None,token_index=None):
     if record.get("status")!="generated" or not record.get("text"):
         return record
-    ids=index.get(form_key(record["text"]),[])
     record=dict(record)
+    text=record["text"]
+    sids=(surface_index or {}).get(form_key(text),[])
+    # Predicate candidate is the last whitespace-delimited generated word.
+    # This is intentionally narrow; structured constituent spans can replace it later.
+    predicate=text.split()[-1] if text.split() else text
+    tids=(token_index or {}).get(form_key(predicate),[])
     record["attestation"]={
-        "attested":bool(ids),
-        "source_sent_ids":ids,
-        "match":"exact_surface" if ids else None,
+        "sentence_attested":bool(sids),
+        "sentence_source_sent_ids":sids,
+        "predicate_form":predicate,
+        "predicate_form_attested":bool(tids),
+        "predicate_source_sent_ids":tids,
     }
     return record
