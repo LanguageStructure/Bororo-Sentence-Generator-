@@ -1,10 +1,37 @@
 # Human-reviewed Bororo morphology.
-# Add analyses only after linguistic review. Corpus evidence is never promoted
-# automatically into this file.
+# Approval here is local to a form–FEATS correspondence; it is NOT a complete
+# morphological analysis of the lemma and does not license unlisted cells.
 lemmas:
   ako:
-    status: review_required
+    status: partial
     note: >
-      The lemma ako has multiple attested surface realizations. Their
-      morphosyntactic distinctions must be reviewed before generation.
-    forms: {}
+      Corpus evidence strongly supports three form–FEATS correspondences.
+      The lemma as a whole remains under review. No segmentation or analysis
+      of -re, -kare, -mode, ina-, e-, a-, etc. is asserted here.
+    approved_cells:
+      - feats:
+          Mood: Ind
+          Number: Sing
+          Person: 1
+        form: inagore
+        evidence_count: 96
+      - feats:
+          Mood: Ind
+          Number: Sing
+          Person: 3
+        form: akore
+        evidence_count: 52
+      - feats:
+          Mood: Ind
+          Number: Plur
+          Person: 3
+        form: egore
+        evidence_count: 84
+    review_required_forms:
+      - inagokare
+      - inago
+      - ako
+      - ego
+      - akomode
+      - akodo
+      - cenagore
