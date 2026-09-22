@@ -19,7 +19,7 @@ MONOVALENT=CodingFrame("monovalent",("S",),"S","S")
 DIVALENT=CodingFrame("divalent",("A","O"),"O","A")
 EXTENDED_INTRANSITIVE=CodingFrame(
     "extended_intransitive",("S",),"S","S",
-    oblique_role="additional_participant",oblique_marker="ji"
+    oblique_role="additional_participant",oblique_marker=None
 )
 
 FRAMES={x.name:x for x in (MONOVALENT,DIVALENT,EXTENDED_INTRANSITIVE)}
@@ -32,4 +32,4 @@ def declarative_schema(name):
     if f is None: return None
     if name=="monovalent": return "(RP) S=LEX-re"
     if name=="divalent": return "(RP-A) A=re (RP-O) O=LEX"
-    if name=="extended_intransitive": return "(RP) S=LEX-re ... RP ji"
+    if name=="extended_intransitive": return "(RP) S=LEX-re ... RP POSTP"
