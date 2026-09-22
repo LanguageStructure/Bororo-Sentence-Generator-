@@ -22,4 +22,4 @@ def test_template_replacement_with_reviewed_cell(tmp_path):
 def test_template_replacement_blocks_unknown_cell(tmp_path):
  p=tmp_path/"x.conllu";p.write_text(S,encoding="utf-8")
  s=list(read_conllu(p))[0]
- assert replace_ako_cell(s,1,{"person":2,"number":"Sing","mood":"Ind"}) is None
+ assert replace_ako_cell(s,1,{"person":2,"number":"Plur","mood":"Ind"}) is None
