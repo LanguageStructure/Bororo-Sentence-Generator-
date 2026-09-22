@@ -2,6 +2,7 @@
 from dataclasses import dataclass,field
 from typing import List
 from .review import generation_ready,cell_generation_ready
+from .valency_review import reviewed_frame
 
 @dataclass
 class GateResult:
@@ -28,4 +29,16 @@ def check_tokens(tokens,review_path="config/morphology_review.yaml"):
         label=f"{lemma}:{t.get('form') or '_'}"
         if label not in blocked: blocked.append(label)
     if blocked: reasons.append("human morphology review required for exact lemma/form/FEATS")
+    return GateResult(not blocked,blocked,reasons)
+
+
+def check_lexical_generation(lemmas,review_path="config/morphology_review.yaml",valency_path="config/valency_review.yaml"):
+    """Require independent morphology and coding-frame evidence for lexical generation."""
+    blocked=[];reasons=[]
+    for lemma in sorted({x for x in lemmas if x and x!="_"}):
+        missing=[]
+        if not generation_ready(lemma,review_path): missing.append("morphology")
+        if reviewed_frame(lemma,valency_path) is None: missing.append("coding_frame")
+        if missing: blocked.append(f"{lemma}:"+",".join(missing))
+    if blocked: reasons.append("independent morphology and coding-frame review required")
     return GateResult(not blocked,blocked,reasons)
