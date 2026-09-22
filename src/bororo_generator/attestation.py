@@ -28,9 +28,9 @@ def annotate_attestation(record,surface_index=None,token_index=None):
     record=dict(record)
     text=record["text"]
     sids=(surface_index or {}).get(form_key(text),[])
-    # Predicate candidate is the last whitespace-delimited generated word.
-    # This is intentionally narrow; structured constituent spans can replace it later.
-    predicate=text.split()[-1] if text.split() else text
+    # Prefer the predicate constituent supplied by generation. The final-token
+    # fallback is retained only for legacy records.
+    predicate=record.get("predicate_form") or (text.split()[-1] if text.split() else text)
     tids=(token_index or {}).get(form_key(predicate),[])
     record["attestation"]={
         "sentence_attested":bool(sids),
