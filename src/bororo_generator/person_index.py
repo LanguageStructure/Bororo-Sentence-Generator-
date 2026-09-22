@@ -21,7 +21,7 @@ def indexed_stem(stem,person,stem_class):
 # Lexical class assignments must be reviewed independently of the paradigm.
 # Representative roots below are explicitly exemplified in the grammar.
 REVIEWED_STEM_CLASSES = {
-    "tygo": "C",
+    "tugo": "C",
     "nudu": "U",
     "aregodu": "O",
     "ogwa": "N",
