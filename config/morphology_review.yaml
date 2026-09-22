@@ -1,37 +1,66 @@
 # Human-reviewed Bororo morphology.
-# Approval here is local to a form–FEATS correspondence; it is NOT a complete
-# morphological analysis of the lemma and does not license unlisted cells.
+# Analyses below are supplied/reviewed by the linguist. Corpus-derived evidence
+# remains a separate layer. Approval never licenses unlisted forms or cells.
 lemmas:
   ako:
     status: partial
+    gloss_note: "inago: 'minha fala' (possessive/nominal use)"
     note: >
-      Corpus evidence strongly supports three form–FEATS correspondences.
-      The lemma as a whole remains under review. No segmentation or analysis
-      of -re, -kare, -mode, ina-, e-, a-, etc. is asserted here.
+      Partial analysis only. Do not infer a complete paradigm or automatic
+      interchangeability from shared FEATS.
+    morphemes:
+      "i(n)-":
+        analysis: "1SG"
+        status: reviewed
+      "ce-":
+        analysis: "1PL.EXCL"
+        status: reviewed
+      "-ka":
+        analysis: "NEG"
+        status: reviewed
+      "-re":
+        analysis: "IND"
+        status: reviewed
+      "-modu":
+        analysis: "IRR"
+        status: reviewed
+      "-do":
+        analysis: "CAUS or IMP"
+        status: reviewed_ambiguous
+    analyzed_forms:
+      inagokare:
+        segmentation: "i(n)-ako-ka-re"
+        analysis: ["1SG", "ako", "NEG", "IND"]
+        status: reviewed
+        annotation_note: "Current corpus FEATS omit Polarity=Neg."
+      cenagore:
+        segmentation: "ce-n-ako-re"
+        analysis: ["1PL.EXCL", "ako", "IND"]
+        status: reviewed
+      akodo:
+        segmentation: "ako-do"
+        analysis: ["ako", "CAUS_or_IMP"]
+        status: reviewed_ambiguous
+      akomode:
+        segmentation: "ako-modu-re"
+        analysis: ["ako", "IRR", "IND"]
+        status: reviewed
+      inago:
+        segmentation: "i(n)-ako"
+        analysis: ["1SG", "ako"]
+        meaning: "minha fala"
+        usage: "nominal_possessive"
+        status: reviewed
     approved_cells:
-      - feats:
-          Mood: Ind
-          Number: Sing
-          Person: 1
+      - feats: {Mood: Ind, Number: Sing, Person: 1}
         form: inagore
         evidence_count: 96
-      - feats:
-          Mood: Ind
-          Number: Sing
-          Person: 3
+      - feats: {Mood: Ind, Number: Sing, Person: 3}
         form: akore
         evidence_count: 52
-      - feats:
-          Mood: Ind
-          Number: Plur
-          Person: 3
+      - feats: {Mood: Ind, Number: Plur, Person: 3}
         form: egore
         evidence_count: 84
     review_required_forms:
-      - inagokare
-      - inago
       - ako
       - ego
-      - akomode
-      - akodo
-      - cenagore
