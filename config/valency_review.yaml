@@ -1,0 +1,67 @@
+# Grammar-reviewed lexical valency/coding frames.
+# This layer is distinct from corpus-observed UD valency.
+# Entries are added only where the grammar explicitly supports the classification.
+lexemes:
+  regodu:
+    frame: monovalent
+    meaning: "run"
+    status: reviewed
+    evidence: "grammar §7.3.1–7.3.2, ex. 12"
+  meru:
+    frame: monovalent
+    meaning: "walk"
+    status: reviewed
+    evidence: "grammar §7.3.2, ex. 14–15"
+  kodu:
+    frame: monovalent
+    meaning: "depart/go"
+    status: reviewed
+    evidence: "grammar §7.3.2, ex. 17a"
+  nudu:
+    frame: monovalent
+    meaning: "sleep"
+    status: reviewed
+    evidence: "grammar §7.3.2, ex. 17b"
+  maragodu:
+    frame: monovalent
+    meaning: "work"
+    status: reviewed
+    evidence: "grammar imperative section"
+  mako:
+    frame: extended_intransitive
+    meaning: "speak"
+    status: reviewed
+    selected_oblique: ji
+    note: "Also attested with other postpositional expressions; ji frame is explicitly documented."
+    evidence: "grammar §3.4.2, ex. 4; verbal imperative section"
+  kudu:
+    frame: extended_intransitive
+    meaning: "drink"
+    status: reviewed
+    note: "Consumed substance is obliquely coded; grammar explicitly states kudu is not transitive."
+    evidence: "grammar imperative section, ex. 33d"
+  tawuje:
+    frame: divalent
+    meaning: "put"
+    status: reviewed
+    evidence: "grammar §7.3.4, ex. 20"
+  arego:
+    frame: divalent
+    meaning: "bring"
+    status: reviewed
+    evidence: "grammar §7.3.3, ex. 18"
+  pawuje:
+    frame: divalent
+    meaning: "understand"
+    status: reviewed
+    evidence: "grammar §7.3.5, ex. 22"
+  barigu:
+    frame: divalent
+    meaning: "throw"
+    status: reviewed
+    evidence: "grammar §7.3.5, ex. 23"
+  maku:
+    frame: divalent
+    meaning: "give"
+    status: reviewed
+    evidence: "grammar imperative section, ex. 34"
