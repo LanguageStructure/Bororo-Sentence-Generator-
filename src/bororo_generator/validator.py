@@ -6,6 +6,7 @@ grammaticality. Community/specialist review remains a separate layer.
 from dataclasses import dataclass,field
 from typing import List
 from .provenance import Provenance
+from .orthography import normalize_bororo
 
 @dataclass
 class ValidationResult:
@@ -17,6 +18,9 @@ def validate_candidate(text:str,provenance:Provenance)->ValidationResult:
     checks={}
     warnings=[]
     checks["nonempty_text"]=bool(text and text.strip())
+    checks["canonical_bororo_orthography"]=(text==normalize_bororo(text))
+    if not checks["canonical_bororo_orthography"]:
+        warnings.append("non-canonical Bororo orthography: y must be u")
     try:
         provenance.validate();checks["valid_provenance"]=True
     except ValueError as e:
