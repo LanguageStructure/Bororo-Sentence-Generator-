@@ -4,7 +4,8 @@
 lemmas:
   ako:
     status: partial
-    gloss_note: "inago: 'minha fala' (possessive/nominal use)"
+    lexical_meaning: "voz, som, fala"
+    gloss_note: "ako = voz/som/fala; inago = minha fala; ego = fala deles"
     note: >
       Partial analysis only. Do not infer a complete paradigm or automatic
       interchangeability from shared FEATS.
@@ -14,6 +15,9 @@ lemmas:
         status: reviewed
       "ce-":
         analysis: "1PL.EXCL"
+        status: reviewed
+      "e-":
+        analysis: "3PL"
         status: reviewed
       "-ka":
         analysis: "NEG"
@@ -51,6 +55,12 @@ lemmas:
         meaning: "minha fala"
         usage: "nominal_possessive"
         status: reviewed
+      ego:
+        segmentation: "e-ako"
+        analysis: ["3PL", "ako"]
+        meaning: "fala deles"
+        usage: "nominal_possessive"
+        status: reviewed
     approved_cells:
       - feats: {Mood: Ind, Number: Sing, Person: 1}
         form: inagore
@@ -61,6 +71,4 @@ lemmas:
       - feats: {Mood: Ind, Number: Plur, Person: 3}
         form: egore
         evidence_count: 84
-    review_required_forms:
-      - ako
-      - ego
+    review_required_forms: []
