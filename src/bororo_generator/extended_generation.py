@@ -30,10 +30,11 @@ def extended_intransitive_declarative(
         text += " " + oblique_phrase.strip() + " " + marker
         rules.append("reviewed_selected_oblique")
 
+    predicate=stem+"re"
     return Candidate(text,Provenance(
         status="generated",
         pattern="reviewed extended intransitive: S=LEX-re (... RP POSTP)",
         rules=rules,
         notes=[f"lemma={lemma}",f"S={s_person}",
                "Additional participant is oblique, not O."],
-    ))
+    ),predicate_form=predicate)
