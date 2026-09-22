@@ -23,6 +23,8 @@ def indexed_stem(stem,person,stem_class):
 REVIEWED_STEM_CLASSES = {
     "tugo": "C",
     "nudu": "U",
+    "meru": "C",
+    "kodu": "C",
     "aregodu": "O",
     "ogwa": "N",
     "ie": "I",
