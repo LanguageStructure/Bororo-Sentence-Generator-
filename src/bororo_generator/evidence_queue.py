@@ -8,6 +8,7 @@ from .corpus import read_conllu
 from .orthography import form_key
 from .valency_review import reviewed_frame
 from .person_index import reviewed_stem_class
+from .lexical_review import review_status, lexical_review
 
 PERSON_PREFIXES=("i","a","u","pa","ce","ta","e","tu","it","in","ik","ak","pag","ceg","tag","et","en","tug")
 
@@ -33,6 +34,8 @@ def lexical_evidence_queue(corpus_path, minimum_tokens=2):
             "sent_ids":sorted(d["sent_ids"])[:12],
             "reviewed_frame":frame,"reviewed_stem_class":cls,
             "needs":["coding_frame"]*(frame is None)+["stem_class"]*(cls is None),
+            "review_status":review_status(lemma,frame,cls),
+            "review_note":(lexical_review(lemma) or {}).get("note"),
         })
     rows.sort(key=lambda r:(-r["distinct_forms"],-r["tokens"],r["lemma"]))
     return rows
