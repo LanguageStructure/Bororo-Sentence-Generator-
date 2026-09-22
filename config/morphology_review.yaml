@@ -13,6 +13,12 @@ lemmas:
       "i(n)-":
         analysis: "1SG"
         status: reviewed
+      "a(k)-":
+        analysis: "2SG"
+        status: reviewed
+      "pa(g)-":
+        analysis: "1PL.INCL"
+        status: reviewed
       "ce-":
         analysis: "1PL.EXCL"
         status: reviewed
@@ -32,6 +38,22 @@ lemmas:
         analysis: "CAUS or IMP"
         status: reviewed_ambiguous
     analyzed_forms:
+      akago:
+        segmentation: "a(k)-ako"
+        analysis: ["2SG", "ako"]
+        status: reviewed
+      akagore:
+        segmentation: "a(k)-ako-re"
+        analysis: ["2SG", "ako", "IND"]
+        status: reviewed
+      pagago:
+        segmentation: "pa(g)-ako"
+        analysis: ["1PL.INCL", "ako"]
+        status: reviewed
+      pagagore:
+        segmentation: "pa(g)-ako-re"
+        analysis: ["1PL.INCL", "ako", "IND"]
+        status: reviewed
       inagokare:
         segmentation: "i(n)-ako-ka-re"
         analysis: ["1SG", "ako", "NEG", "IND"]
