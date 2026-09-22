@@ -34,4 +34,4 @@ def divalent_declarative(
         rules=["reviewed_divalent_frame","reviewed_stem_class","reviewed_A_declarative_host","O_predicate_index"],
         notes=[f"lemma={lemma}",f"A={a_person}",f"O={o_person}",
                "A and O are kept as distinct coding positions."],
-    ))
+    ),predicate_form=pred)
