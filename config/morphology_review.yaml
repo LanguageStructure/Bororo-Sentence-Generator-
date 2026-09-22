@@ -1,0 +1,10 @@
+# Human-reviewed Bororo morphology.
+# Add analyses only after linguistic review. Corpus evidence is never promoted
+# automatically into this file.
+lemmas:
+  ako:
+    status: review_required
+    note: >
+      The lemma ako has multiple attested surface realizations. Their
+      morphosyntactic distinctions must be reviewed before generation.
+    forms: {}
