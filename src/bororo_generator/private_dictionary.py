@@ -6,6 +6,7 @@ homographs as multiple records and does not infer valency or stem class.
 """
 import csv
 from pathlib import Path
+from .orthography import form_key
 
 def load_private_dictionary(path):
     path=Path(path)
@@ -13,8 +14,8 @@ def load_private_dictionary(path):
         return list(csv.DictReader(f,delimiter="\t"))
 
 def lookup_private(entries,form):
-    key=form.casefold()
-    return [r for r in entries if (r.get("entry") or "").casefold()==key]
+    key=form_key(form)
+    return [r for r in entries if form_key(r.get("entry"))==key]
 
 def lexical_evidence(record):
     return {
