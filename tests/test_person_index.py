@@ -8,3 +8,10 @@ def test_class_must_be_explicit():
     try: indexed_stem("ako","2SG","UNKNOWN")
     except ValueError: pass
     else: raise AssertionError("stem class must not be inferred")
+
+def test_reviewed_lexical_class_registry():
+    from bororo_generator.person_index import reviewed_stem_class, indexed_reviewed_stem
+    assert reviewed_stem_class("aregodu") == "O"
+    assert indexed_reviewed_stem("aregodu","1SG") == "itaregodu"
+    assert reviewed_stem_class("ako") is None
+    assert indexed_reviewed_stem("ako","2SG") is None
