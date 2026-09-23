@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Prepare a conservative human-audit worksheet for direct-condition outputs.
 
-Form well-formedness, construction choice, person realization, and coding-frame
-adequacy are independent dimensions.
+Form well-formedness, construction choice, argument-person realization, and
+coding-frame adequacy are independent dimensions.
 """
 import argparse,csv,json
 from pathlib import Path
@@ -10,7 +10,8 @@ from pathlib import Path
 FIELDS=[
  "task_id","lemma","frame","s_person","a_person","o_person",
  "direct_surface","controlled_surface","exact_match",
- "morphological_violation","construction_mismatch","person_mismatch","frame_violation",
+ "morphological_violation","construction_mismatch",
+ "s_person_mismatch","a_person_mismatch","o_person_mismatch","frame_violation",
  "constructional_overgeneralization","complementary_distribution_violation",
  "unsupported_but_plausible","auditor_status","notes"
 ]
@@ -33,6 +34,9 @@ def main():
             match=bool(c["exact_match"])
             if not match: pending+=1
             status="no" if match else "unresolved"
+            def person_status(field):
+                if not t.get(field): return "not_applicable"
+                return status
             w.writerow({
               "task_id":tid,"lemma":t["lemma"],"frame":t.get("frame",""),
               "s_person":t.get("s_person") or "","a_person":t.get("a_person") or "",
@@ -40,8 +44,10 @@ def main():
               "direct_surface":c["direct_surface"],"controlled_surface":c["controlled_surface"],
               "exact_match":"yes" if match else "no",
               "morphological_violation":status,"construction_mismatch":status,
-              "person_mismatch":status,"frame_violation":status,
-              "constructional_overgeneralization":status,
+              "s_person_mismatch":person_status("s_person"),
+              "a_person_mismatch":person_status("a_person"),
+              "o_person_mismatch":person_status("o_person"),
+              "frame_violation":status,"constructional_overgeneralization":status,
               "complementary_distribution_violation":status,
               "unsupported_but_plausible":status,
               "auditor_status":"reviewed" if match else "pending",
