@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse,json
 from pathlib import Path
-from bororo_generator.morphology_review_queue import morphology_review_queue,review_packet
+from bororo_generator.morphology_review_queue import morphology_review_queue,review_packet,review_queue_summary
 
 def main():
     p=argparse.ArgumentParser(description="Rank corpus-observed forms for human morphology review")
@@ -18,10 +18,15 @@ def main():
         for r in rows:
             if r["review_state"]=="needs_human_review":
                 r["review_packet"]=review_packet(r["lemma"],r["form"],a.corpus,a.contexts)
+    summary=review_queue_summary(rows)
     if a.output:
         out=Path(a.output); out.parent.mkdir(parents=True,exist_ok=True)
         out.write_text(json.dumps(rows,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         print("report:",out)
+    print("observed_forms:",summary["observed_forms"])
+    print("needs_human_review:",summary["needs_human_review"])
+    print("tokens_needing_review:",summary["tokens_needing_review"])
+    print("lemmas_needing_review:",summary["lemmas_needing_review"])
     print("lemma\tform\ttokens\treview_state\tsent_ids")
     for r in rows[:a.limit]:
         print(f'{r["lemma"]}\t{r["form"]}\t{r["tokens"]}\t{r["review_state"]}\t{",".join(r["sent_ids"][:5])}')
