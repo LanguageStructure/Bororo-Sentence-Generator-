@@ -7,6 +7,7 @@ from dataclasses import asdict
 from .generate import generate_declarative
 from .valency_review import valency_entry
 from .person_index import reviewed_stem_class
+from .evidence_layers import evidence_layers
 
 def generate_record(lemma, **kwargs):
     r=generate_declarative(lemma,**kwargs)
