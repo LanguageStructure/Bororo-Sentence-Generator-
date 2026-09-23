@@ -10,10 +10,15 @@ def main():
     p.add_argument("--limit",type=int,default=50)
     p.add_argument("--contexts",type=int,default=0,help="Include up to N corpus contexts for each needs-review form")
     p.add_argument("--needs-only",action="store_true",help="Print/write only unresolved forms requiring human review")
+    p.add_argument("--next-only",action="store_true",help="Return only the highest-priority unresolved form with its review packet")
     a=p.parse_args()
     rows=morphology_review_queue(a.lemmas,a.corpus)
-    if a.needs_only:
+    if a.needs_only or a.next_only:
         rows=[r for r in rows if r["review_state"]=="needs_human_review"]
+    if a.next_only:
+        rows=rows[:1]
+    if a.next_only and not a.contexts:
+        a.contexts=12
     if a.contexts:
         for r in rows:
             if r["review_state"]=="needs_human_review":
