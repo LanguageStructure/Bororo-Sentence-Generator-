@@ -28,3 +28,9 @@ def test_more_reviewed_c_class_roots():
     assert monovalent_declarative("kudu","2SG") is None
     # maku is divalent and must likewise remain outside this generator.
     assert monovalent_declarative("maku","3PL") is None
+
+
+def test_sparse_cells_do_not_expand_to_unreviewed_persons():
+    assert monovalent_declarative("meru","1SG") is None
+    assert monovalent_declarative("kodu","3SG") is None
+    assert monovalent_declarative("maragodu","1SG") is None
