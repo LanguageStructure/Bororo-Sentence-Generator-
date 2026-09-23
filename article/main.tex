@@ -352,21 +352,88 @@ evidence measures, not as an accuracy or grammaticality score. Broader
 evaluation will require additional reviewed lexical items and independent human
 judgment of novel outputs.
 
-\section{AI as a proposal layer}
+\section{AI proposal experiment}
 \label{sec:ai}
 
-A subsequent experiment will add an AI proposal layer above the deterministic
-grammar. Rather than asking a language model to produce an unrestricted Bororo
-surface sentence, the model can propose an abstract request such as a lemma,
-coding frame, participant features, and construction. The reviewed generator
-then realizes or rejects that request. This preserves the separation between a
-probabilistic proposal mechanism and the evidence required to license a
-surface form.
+The second experiment tests the specific claim introduced by the evidence-bound
+architecture: separating probabilistic proposal from grammatical realization
+should make unsupported generalization observable and blockable. The comparison
+uses the same lexical and constructional inventory in two conditions.
 
-A direct comparison between unrestricted model output and model proposals
-filtered through the controlled system can then measure constraint violations,
-blocked proposals, and the provenance available for accepted candidates. These
-results are not included in the v1 baseline.
+\paragraph{Condition A: direct generation.}
+An LLM receives a task specification and is asked to return a Bororo surface
+form or sentence directly. The output is retained exactly as produced and is
+subsequently audited against the reviewed grammar and corpus evidence.
+
+\paragraph{Condition B: evidence-bounded generation.}
+The same LLM receives an equivalent task but returns an abstract proposal
+rather than Bororo surface morphology. A proposal minimally specifies the
+lexeme, reviewed coding frame, relevant participant features, and construction.
+The deterministic component either realizes the proposal from reviewed
+licenses or blocks it. The LLM is not permitted to add a person cell, stem
+class, coding frame, morpheme analysis, or constructional realization to the
+reviewed grammar.
+
+\begin{table}[ht]
+\centering
+\caption{Planned comparison between direct and evidence-bounded generation.}
+\label{tab:llmexperiment}
+\begin{tabular}{p{.28\linewidth}p{.31\linewidth}p{.31\linewidth}}
+\toprule
+Property & Direct LLM & Evidence-bounded condition\\
+\midrule
+LLM produces Bororo surface & yes & no; proposes abstract request\\
+Morphology source & model output & reviewed deterministic realization\\
+Unsupported request & may surface & explicitly blocked\\
+Corpus match & measured after generation & measured after generation\\
+Grammar update from output & never automatic & never automatic\\
+Provenance & prompt/output audit & proposal + licenses + realization\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Evaluation categories}
+
+Outputs will be classified independently along several dimensions rather than
+collapsed into a single accuracy score. A \emph{morphological violation}
+contains a person realization or operator sequence incompatible with the
+reviewed inventory. A \emph{frame violation} requests or realizes an argument
+structure incompatible with the reviewed coding frame. A \emph{constructional
+overgeneralization} extends a construction-specific cell to an unreviewed
+context. A \emph{complementary-distribution violation} combines members of a
+reviewed mutually exclusive suffix domain. An \emph{unsupported but
+plausible} output is structurally interpretable by analogy but lacks the
+reviewed evidence required for a license. This last category is central: the
+controlled system should preserve it as unresolved rather than converting
+plausibility into grammatical knowledge.
+
+Corpus status is reported separately. A candidate may be sentence-attested,
+predicate-form-attested, or unattested in the supplied corpus. These labels
+describe documentary evidence and do not alter its grammatical-review status.
+
+\subsection{Experimental controls}
+
+To make the two conditions comparable, task specifications, target lexical
+items, person values, and constructions will be sampled from the same inventory.
+Prompts and model settings will be frozen and archived with the experiment.
+The direct condition will not receive additional examples unavailable to the
+proposal condition. Repeated runs will be retained rather than selectively
+discarded, and all automatic classifications that depend on a linguistic
+analysis will remain auditable against the reviewed grammar.
+
+The frozen v1 baseline precedes this experiment and will not be retrospectively
+modified in response to LLM outputs. New linguistic analyses discovered during
+error inspection will enter a later review version, preventing evaluation data
+from silently changing the grammar against which the same outputs are scored.
+
+\subsection{Research questions}
+
+The experiment addresses three questions: (i) what kinds of unsupported
+generalization arise under direct LLM generation; (ii) which of these are
+prevented by explicit evidential licensing; and (iii) what proportion of
+otherwise plausible proposals must be blocked because the available linguistic
+evidence is genuinely incomplete. The third question treats abstention as an
+observable system behavior rather than automatically as an error.
 
 \section{Discussion}
 
