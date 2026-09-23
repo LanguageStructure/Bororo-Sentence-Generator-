@@ -63,3 +63,13 @@ represent insufficient reviewed evidence.
 - report: reports/v1-baseline.json
 - schema: 1.2
 - target lexemes: nudu meru kodu mako maku
+
+## Frozen task file
+
+Build before collecting model outputs:
+
+```bash
+python3 scripts/build_experiment_tasks.py --output reports/experiment-v1/tasks.jsonl
+```
+
+The v1 inventory must contain exactly 28 tasks, with stable IDs v1-001 through v1-028. Both experimental conditions consume this same file.
