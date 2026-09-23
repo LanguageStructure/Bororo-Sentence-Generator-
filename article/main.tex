@@ -397,10 +397,11 @@ analysis, independent speaker judgment.
 \section{AI proposal experiment}
 \label{sec:ai}
 
-The second experiment tests the specific claim introduced by the evidence-bound
-architecture: separating probabilistic proposal from grammatical realization
-should make unsupported generalization observable and blockable. The comparison
-uses the same lexical and constructional inventory in two conditions.
+The second experiment evaluates the central operational claim of the
+evidence-bound architecture: probabilistic proposal can be separated from
+grammatical realization so that model output does not itself supply the
+morphological license. The comparison uses the same frozen lexical and
+constructional inventory in two conditions.
 
 \paragraph{Condition A: direct generation.}
 An LLM receives a task specification and is asked to return a Bororo surface
@@ -409,12 +410,12 @@ subsequently audited against the reviewed grammar and corpus evidence.
 
 \paragraph{Condition B: evidence-bounded generation.}
 The same LLM receives an equivalent task but returns an abstract proposal
-rather than Bororo surface morphology. A proposal minimally specifies the
-lexeme, reviewed coding frame, relevant participant features, and construction.
-The deterministic component either realizes the proposal from reviewed
-licenses or blocks it. The LLM is not permitted to add a person cell, stem
-class, coding frame, morpheme analysis, or constructional realization to the
-reviewed grammar.
+rather than Bororo surface morphology. A proposal specifies the lexeme,
+construction, relevant S/A/O person values, and any oblique phrase represented
+in the task schema. The deterministic component either realizes the proposal
+from reviewed licenses or blocks it. The LLM is not permitted to add a person
+cell, stem class, coding frame, morpheme analysis, or constructional realization
+to the reviewed grammar.
 
 \begin{table}[ht]
 \centering
@@ -532,12 +533,12 @@ silently changing the grammatical licenses against which they are evaluated.
 The experiment asks three related questions: (i) what kinds of divergence
 appear under direct LLM surface generation; (ii) whether an LLM can preserve
 the requested abstract structural specification when surface realization is
-delegated to reviewed grammar; and (iii) whether the evidence-bounded system
-must block any of those proposals because a required license is absent. In the
-frozen v1 sample, all 28 proposals preserve the requested specification and all
-28 are realizable, so the third outcome is observed as zero blocked proposals
-for this particular reviewed task set. This does not imply that blocking would
-remain zero outside the frozen licensed inventory.
+delegated to reviewed grammar; and (iii) whether any proposal in the frozen
+task set lacks a required license and is therefore blocked. In v1, all 28
+proposals preserve the requested specification and all 28 are realizable.
+Accordingly, no blocking event occurs in this deliberately licensed task set;
+the experiment does not estimate a general blocking rate for arbitrary Bororo
+requests.
 
 \section{Discussion}
 
