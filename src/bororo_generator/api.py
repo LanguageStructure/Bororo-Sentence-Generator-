@@ -28,6 +28,9 @@ def generate_record(lemma, **kwargs):
             "evidence":evidence,
             "reasons":r.reasons,
         }
+        # Blocked records also expose the evidence boundary: no generated
+        # candidate and no corpus attestation are manufactured.
+        record["evidence_layers"]=evidence_layers(record)
         return record
     rec=r.candidate.record()
     record={
