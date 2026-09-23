@@ -32,7 +32,7 @@ REVIEWED_PERSON_CELLS={
     "meru":{"2SG":"ameru","3PL":"emeru"},
     "kodu":{"1SG":"ikodu"},
     "maragodu":{"2PL":"tamaragodu"},
-    "mako":{"1SG":"imako","2SG":"amako"},
+    "mako":{"1SG":"imago","2SG":"amago","3SG":"mako"},
     "kudu":{"2SG":"akudu"},
     "maku":{"3SG":"maku","3PL":"emaku"},
 }
