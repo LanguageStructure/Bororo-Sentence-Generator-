@@ -23,3 +23,11 @@ It is an inspection aid, not an analysis. Fields for person, segmentation,
 stem class, and coding frame remain unset until explicitly reviewed by a human.
 Frequency, translation, UPOS, dependency relation, and formal resemblance must
 not populate those fields automatically.
+
+
+## Prioritization metrics
+
+Review queues may rank unresolved corpus forms by token frequency and report the
+number of affected form types, tokens, and lemmas. These values describe review
+workload only. Priority rank is not evidence for a morphological analysis,
+productivity, grammaticality, or lexical class.
