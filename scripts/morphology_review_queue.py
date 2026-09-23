@@ -9,8 +9,11 @@ def main():
     p.add_argument("--output")
     p.add_argument("--limit",type=int,default=50)
     p.add_argument("--contexts",type=int,default=0,help="Include up to N corpus contexts for each needs-review form")
+    p.add_argument("--needs-only",action="store_true",help="Print/write only unresolved forms requiring human review")
     a=p.parse_args()
     rows=morphology_review_queue(a.lemmas,a.corpus)
+    if a.needs_only:
+        rows=[r for r in rows if r["review_state"]=="needs_human_review"]
     if a.contexts:
         for r in rows:
             if r["review_state"]=="needs_human_review":
