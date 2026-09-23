@@ -25,6 +25,8 @@ def evaluate_paradigm(lemma, corpus_path):
     forms=[{"form":v["form"],"sent_ids":sorted(v["sent_ids"]),"requests":v["requests"]}
            for v in unique_forms.values()]
     frame=(records[0].get("evidence",{}).get("reviewed_frame") if records else None)
+    full=sum(1 for r in generated if r.get("evidence_layers",{}).get("reviewed_grammar",{}).get("morphology_license",{}).get("type")=="full_stem_class")
+    exact=sum(1 for r in generated if r.get("evidence_layers",{}).get("reviewed_grammar",{}).get("morphology_license",{}).get("type")=="exact_person_cell")
     return {
         "lemma":lemma,"frame":frame,
         "structural_cells_requested":len(records),
@@ -34,6 +36,8 @@ def evaluate_paradigm(lemma, corpus_path):
         "unique_predicate_forms_attested":len(forms),
         "attested_predicate_forms":forms,
         "blocked":len([r for r in records if r.get("status")=="blocked"]),
+        "licensed_by_full_class":full,
+        "licensed_by_exact_cell":exact,
         "records":records,
         "evidence_layers":[evidence_layers(r) for r in records],
         "interpretation":(
@@ -51,5 +55,7 @@ def evaluate_lexemes(lemmas, corpus_path):
         "generated_records":sum(r["generated_records"] for r in rows),
         "unique_predicate_forms_attested":sum(r["unique_predicate_forms_attested"] for r in rows),
         "blocked":sum(r["blocked"] for r in rows),
+        "licensed_by_full_class":sum(r["licensed_by_full_class"] for r in rows),
+        "licensed_by_exact_cell":sum(r["licensed_by_exact_cell"] for r in rows),
         "results":rows,
     }
