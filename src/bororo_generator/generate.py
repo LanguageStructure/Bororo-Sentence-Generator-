@@ -7,9 +7,9 @@ than falling back to another frame.
 from dataclasses import dataclass, field
 from typing import Optional
 from .valency_review import reviewed_frame
-from .frame_generation import monovalent_declarative
-from .extended_generation import extended_intransitive_declarative
-from .divalent_generation import divalent_declarative
+from .frame_generation import monovalent_indicative
+from .extended_generation import extended_intransitive_indicative
+from .divalent_generation import divalent_indicative
 
 @dataclass
 class DispatchResult:
@@ -18,7 +18,7 @@ class DispatchResult:
     blocked: bool
     reasons: list[str]=field(default_factory=list)
 
-def generate_declarative(
+def generate_indicative(
     lemma, *, s_person=None, a_person=None, o_person=None,
     oblique_phrase=None, overt_a=None, overt_o=None,
     valency_path="config/valency_review.yaml"
@@ -30,17 +30,17 @@ def generate_declarative(
     if frame=="monovalent":
         if s_person is None:
             return DispatchResult(None,frame,True,["S person required"])
-        c=monovalent_declarative(lemma,s_person,valency_path)
+        c=monovalent_indicative(lemma,s_person,valency_path)
     elif frame=="extended_intransitive":
         if s_person is None:
             return DispatchResult(None,frame,True,["S person required"])
-        c=extended_intransitive_declarative(
+        c=extended_intransitive_indicative(
             lemma,s_person,oblique_phrase,valency_path
         )
     elif frame=="divalent":
         if a_person is None or o_person is None:
             return DispatchResult(None,frame,True,["A and O persons required"])
-        c=divalent_declarative(
+        c=divalent_indicative(
             lemma,a_person,o_person,overt_a,overt_o,valency_path
         )
     else:
