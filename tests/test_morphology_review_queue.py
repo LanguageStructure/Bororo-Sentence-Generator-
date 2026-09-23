@@ -258,6 +258,6 @@ def test_ikoduwo_matches_kodu_subjunctive_cell(monkeypatch):
     row=q.morphology_review_queue(["kodu"],"x")[0]
     assert row["review_state"]=="construction_cell_reviewed"
     assert row["analysis_scope"]=="construction_cell"
-    assert row["match_type"]=="exact"
+    assert row["match_type"]=="exact_surface"
     assert row["reviewed_construction_cells"]==[
         {"lemma":"kodu","construction":"subjunctive","person":"1SG"}]
