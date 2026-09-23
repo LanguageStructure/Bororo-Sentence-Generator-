@@ -7,10 +7,11 @@ from collections import Counter
 from .corpus import read_conllu
 from .orthography import form_key
 
-def audit_lemma_contexts(corpus_path, lemma, limit=30):
-    key=form_key(lemma); rows=[]
+def audit_lemma_contexts(corpus_path, lemma, limit=30, form=None):
+    key=form_key(lemma); form_filter=form_key(form) if form else None; rows=[]
     for s in read_conllu(corpus_path):
-        hits=[t for t in s.tokens if form_key(str(t.get("lemma","")))==key]
+        hits=[t for t in s.tokens if form_key(str(t.get("lemma","")))==key and
+              (form_filter is None or form_key(str(t.get("form","")))==form_filter)]
         if not hits: continue
         for t in hits:
             rows.append({
