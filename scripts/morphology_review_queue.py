@@ -17,7 +17,7 @@ def main():
     if a.needs_only or a.next_only:
         rows=[r for r in rows if r["review_state"]=="needs_human_review"]
     elif a.reviewed_only:
-        rows=[r for r in rows if r["review_state"] in {"exact_cell_reviewed","full_class_reviewed"}]
+        rows=[r for r in rows if r["review_state"] in {"construction_cell_reviewed","exact_cell_reviewed","full_class_reviewed"}]
     if a.next_only:
         rows=rows[:1]
     if a.next_only and not a.contexts:
