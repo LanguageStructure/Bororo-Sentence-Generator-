@@ -54,3 +54,9 @@ def test_emagu_preserves_underlying_e_plus_maku_analysis():
 def test_meru_reviewed_1pl_exclusive_cell():
     assert reviewed_person_cell("meru","1PL.EXCL")=="cemeru"
     assert indexed_reviewed_stem("meru","1PL.EXCL")=="cemeru"
+
+
+def test_kodu_reviewed_2sg_imperative_cell():
+    from bororo_generator.person_index import reviewed_construction_cell
+    assert reviewed_construction_cell("kodu","imperative","2SG")=="akodudo"
+    assert reviewed_person_cell("kodu","2SG") is None
