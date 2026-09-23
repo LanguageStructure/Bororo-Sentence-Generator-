@@ -22,3 +22,15 @@ Evaluation output keeps three independent layers:
 3. `corpus_evidence`: observational predicate-form occurrence in the supplied CorBo corpus.
 
 Corpus occurrence is not grammatical review and does not promote a generated or unresolved analysis to reviewed status. Conversely, lack of corpus attestation is not evidence that a generated candidate is ungrammatical.
+
+
+## Legacy compatibility fields
+
+The top-level `evidence.reviewed_stem_class` field is retained for compatibility
+with existing scripts. New code should use
+`evidence_layers.reviewed_grammar.morphology_license`, which distinguishes a
+full reviewed stem-class paradigm from an exact reviewed person cell.
+
+The compatibility field must not be used to infer that every generated lexeme
+has a complete reviewed paradigm. A null value may coexist with an exact
+reviewed person-cell license.
