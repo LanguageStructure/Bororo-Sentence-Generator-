@@ -1,4 +1,4 @@
-from bororo_generator.person_index import indexed_stem,indexed_reviewed_stem
+from bororo_generator.person_index import indexed_stem,indexed_reviewed_stem,reviewed_person_cell
 def test_reviewed_stem_classes():
     assert indexed_stem("aregodu","1SG","O")=="itaregodu"
     assert indexed_stem("aregodu","2SG","O")=="akaregodu"
