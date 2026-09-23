@@ -81,6 +81,9 @@ REVIEWED_CONSTRUCTION_CELLS={
         "gerund":{
             "1SG":"ikodui",
         },
+        "optative":{
+            "1SG":"ikoduia",
+        },
     },
 }
 
