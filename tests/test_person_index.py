@@ -97,3 +97,8 @@ def test_kodu_reviewed_1pl_incl_irrealis_indicative_cell():
     assert reviewed_construction_cell(
         "kodu","irrealis_indicative","1PL.INCL"
     )=="pagodumode"
+
+
+def test_kodu_reviewed_corf_cell():
+    assert reviewed_person_cell("kodu","CORF")=="tugodu"
+    assert indexed_reviewed_stem("kodu","CORF")=="tugodu"
