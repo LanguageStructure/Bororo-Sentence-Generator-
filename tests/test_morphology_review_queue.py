@@ -285,3 +285,15 @@ def test_tugodure_matches_reviewed_kodu_corf(monkeypatch):
     assert row["analysis_scope"]=="exact_person_cell"
     assert row["match_type"]=="exact_surface"
     assert row["reviewed_requests"]==[{"lemma":"kodu","s_person":"CORF"}]
+
+
+def test_amagodo_matches_reviewed_mako_2sg_imperative(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Amagodo","count":1,"sent_ids":["43-4"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["mako"],"x")[0]
+    assert row["review_state"]=="construction_cell_reviewed"
+    assert row["analysis_scope"]=="construction_cell"
+    assert row["match_type"]=="capitalization_variant"
+    assert row["reviewed_construction_cells"]==[
+        {"lemma":"mako","construction":"imperative","person":"2SG"}]
