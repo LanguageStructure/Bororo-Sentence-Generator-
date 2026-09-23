@@ -126,3 +126,18 @@ def test_cegodure_matches_reviewed_kodu_1pl_exclusive(monkeypatch):
     assert row["review_state"]=="exact_cell_reviewed"
     assert row["match_type"]=="capitalization_variant"
     assert row["reviewed_requests"]==[{"lemma":"kodu","s_person":"1PL.EXCL"}]
+
+
+def test_review_rows_expose_analysis_scope(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Cegodure","count":2,"sent_ids":["s1"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["analysis_scope"]=="exact_person_cell"
+
+def test_construction_cell_has_construction_scope(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"tamagodo","count":1,"sent_ids":["s1"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["mako"],"x")[0]
+    assert row["analysis_scope"]=="construction_cell"
