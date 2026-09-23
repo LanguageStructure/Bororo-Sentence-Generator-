@@ -14,11 +14,14 @@ def test_multi_lexeme_summary(monkeypatch):
     monkeypatch.setattr(evaluation,"evaluate_paradigm",
         lambda l,p:{"lemma":l,"structural_cells_requested":8,
                     "structural_cells_sentence_attested":2,"generated_records":8,
-                    "unique_predicate_forms_attested":3,"blocked":0})
+                    "unique_predicate_forms_attested":3,"blocked":0,
+                    "licensed_by_full_class":5,"licensed_by_exact_cell":3})
     r=evaluation.evaluate_lexemes(["nudu","meru"],"x")
     assert r["generated_records"]==16
     assert r["structural_cells_sentence_attested"]==4
     assert r["unique_predicate_forms_attested"]==6
+    assert r["licensed_by_full_class"]==10
+    assert r["licensed_by_exact_cell"]==6
 
 
 def test_evaluation_exposes_separate_evidence_layers(monkeypatch):
