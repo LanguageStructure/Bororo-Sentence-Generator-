@@ -60,8 +60,9 @@ def evaluate_lexemes(lemmas, corpus_path):
     construction_cells=reviewed_construction_inventory(lemmas)
     by_frame={}
     for row in rows:
-        by_frame.setdefault(row["frame"],{"lexemes":0,"requested":0,"generated":0,"blocked":0})
-        bucket=by_frame[row["frame"]]
+        frame=row.get("frame","unknown")
+        by_frame.setdefault(frame,{"lexemes":0,"requested":0,"generated":0,"blocked":0})
+        bucket=by_frame[frame]
         bucket["lexemes"]+=1
         bucket["requested"]+=row["structural_cells_requested"]
         bucket["generated"]+=row["generated_records"]
