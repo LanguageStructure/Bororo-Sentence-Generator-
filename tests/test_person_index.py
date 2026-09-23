@@ -19,3 +19,16 @@ def test_reviewed_lexical_class_registry():
 
 def test_ogwa_n_class_exclusive_from_concrete_paradigm():
     assert indexed_reviewed_stem("ogwa","1PL.EXCL")=="ceogwa"
+
+
+def test_sparse_review_does_not_become_full_stem_class():
+    from bororo_generator.person_index import reviewed_stem_class, reviewed_person_cell
+    assert reviewed_stem_class("kudu") is None
+    assert reviewed_person_cell("kudu","2SG")=="akudu"
+    assert indexed_reviewed_stem("kudu","2SG")=="akudu"
+    assert indexed_reviewed_stem("kudu","3SG") is None
+
+def test_representative_paradigm_remains_full_class():
+    from bororo_generator.person_index import reviewed_stem_class
+    assert reviewed_stem_class("nudu")=="U"
+    assert indexed_reviewed_stem("nudu","3SG")=="unudu"
