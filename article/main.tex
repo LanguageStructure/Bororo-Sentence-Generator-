@@ -107,6 +107,31 @@ prefix or suffix is not segmented solely from its shape. Review queues expose
 the relevant contexts while leaving person, segmentation, stem class, and
 coding frame unset until they are explicitly reviewed.
 
+\section{Methodological motivation}
+\label{sec:motivation}
+
+The design addresses a recurrent asymmetry in low-resource computational work.
+A corpus can show that a form occurred in a particular documented context, but
+a generator requires a stronger decision: whether a representation is licensed
+for productive use in a specified construction. The latter decision may depend
+on lexical identity, coding frame, person-index allomorphy, morphotactics, and
+construction-specific restrictions that cannot safely be recovered from token
+frequency alone.
+
+We therefore distinguish \emph{observation}, \emph{analysis}, and
+\emph{licensing}. Observation records what the corpus contains. Analysis is a
+human linguistic claim about the structure of that evidence. Licensing is an
+explicit computational decision that a reviewed analysis is sufficiently
+specific to support a generation operation. These states are related, but they
+are not collapsed into one another.
+
+This distinction is especially consequential when paradigms are incomplete.
+An attested person form can license an exact cell without establishing a full
+stem class. Likewise, a form reviewed inside an imperative, subjunctive,
+gerundial, negative, or irrealis construction does not automatically establish
+the corresponding ordinary indicative form. The system represents such partial
+knowledge directly rather than completing paradigms by analogy.
+
 \section{Evidence-first architecture}
 \label{sec:architecture}
 
