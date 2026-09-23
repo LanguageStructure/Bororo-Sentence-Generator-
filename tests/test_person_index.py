@@ -37,3 +37,9 @@ def test_representative_paradigm_remains_full_class():
 def test_kodu_reviewed_1pl_exclusive_cell():
     assert reviewed_person_cell("kodu","1PL.EXCL")=="cegodu"
     assert indexed_reviewed_stem("kodu","1PL.EXCL")=="cegodu"
+
+
+def test_kodu_irrealis_declarative_cell_is_under_kodu():
+    from bororo_generator.person_index import reviewed_construction_cell
+    assert reviewed_construction_cell("kodu","irrealis_declarative","1SG")=="ikodumode"
+    assert reviewed_construction_cell("mako","irrealis_declarative","1SG") is None
