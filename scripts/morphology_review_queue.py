@@ -21,7 +21,8 @@ def main():
     summary=review_queue_summary(rows)
     if a.output:
         out=Path(a.output); out.parent.mkdir(parents=True,exist_ok=True)
-        out.write_text(json.dumps(rows,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+        payload={"summary":summary,"rows":rows}
+        out.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         print("report:",out)
     print("observed_forms:",summary["observed_forms"])
     print("needs_human_review:",summary["needs_human_review"])
