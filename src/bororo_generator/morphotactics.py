@@ -42,3 +42,17 @@ def realize_irrealis_indicative(indexed_stem):
     if surface is None:
         return None
     return indexed_stem+surface
+
+
+# Human-reviewed mutually exclusive suffix domain. These forms occupy the same
+# morphological position and therefore cannot co-occur in one realization.
+# Functional labels remain independently reviewed; membership here does not
+# assign a meaning to an otherwise unresolved suffix.
+EXCLUSIVE_SUFFIX_SLOT=("re","wo","iagu","ie","ia")
+
+def exclusive_suffix_violations(suffixes):
+    present=[s for s in suffixes if s in EXCLUSIVE_SUFFIX_SLOT]
+    return present if len(present)>1 else []
+
+def exclusive_suffix_licensed(suffixes):
+    return not exclusive_suffix_violations(suffixes)
