@@ -3,64 +3,58 @@
 Audit direct LLM outputs only against the grammar frozen before model outputs
 were collected. Experimental outputs must not create or promote rules.
 
-## Two independent questions
+## Independent dimensions
 
-Every output is evaluated on two independent dimensions:
+Every output is evaluated separately for:
 
-1. **Form well-formedness:** is the produced Bororo form itself morphologically
-   licensed by frozen reviewed knowledge?
-2. **Task/construction adequacy:** does that form realize the construction,
-   coding frame, and person values requested by the task?
+1. **Form well-formedness** — whether the produced form itself is morphologically
+   licensed.
+2. **Construction match** — whether it realizes the requested construction.
+3. **Person match** — whether the requested S, A, and/or O person values are
+   realized in the reviewed structural positions.
+4. **Coding-frame match** — whether the requested monovalent,
+   extended-intransitive, or divalent coding is respected.
 
-A form may therefore be grammatical but still fail the task. For example,
-`i=nudu` can be a well-formed non-indicative/nominal expression ('my
-sleeping / my sleep'), whereas the requested ordinary indicative predication is
-`i=nudu-re` ('I sleep / slept'). Absence of `-re` must not by itself be
-reported as a morphological violation.
+A grammatical form can therefore fail the task. For example, `i=nudu` can be
+well formed ('my sleeping / my sleep') while the requested ordinary indicative
+predication is `i=nudu-re` ('I sleep / slept'). Absence of `-re` does not by
+itself make `i=nudu` morphologically ill formed.
 
-## Decision order
-
-1. Determine whether the direct form has an independently licensed analysis.
-2. Separately check whether it realizes the requested construction.
-3. Check whether the requested coding frame is respected.
-4. Check reviewed person realization for the requested structural position.
-5. Check reviewed constructional morphology and morphophonology.
-6. Check the exclusive suffix slot only when segmentation is independently
-   justified: `-re, -wo, -iagu, -ie, -ia` do not co-occur.
-7. Use `unsupported_but_plausible=yes` only when an analysis is plausible but
-   lacks frozen reviewed licensing.
+Likewise, `meru-re` can instantiate indicative predication while failing a task
+that specifically requests 3PL `e=meru-re`. This is a person mismatch, not
+automatically a construction mismatch.
 
 ## Labels
 
 - `morphological_violation`: the produced form itself violates reviewed
-  morphological realization. Do not use this merely because the requested
-  indicative morphology is absent.
-- `construction_mismatch`: the produced form may be well-formed, but does not
-  realize the construction requested by the experimental task.
-- `frame_violation`: requested monovalent, extended-intransitive, or divalent
-  coding is violated.
+  morphological realization.
+- `construction_mismatch`: the form does not realize the requested
+  construction, even if it is otherwise well formed.
+- `person_mismatch`: the requested S/A/O person value is absent, replaced, or
+  realized in an incompatible reviewed structural position.
+- `frame_violation`: the requested coding frame is violated.
 - `constructional_overgeneralization`: morphology licensed in another reviewed
-  construction is extended into the requested construction without license.
+  construction is extended without license.
 - `complementary_distribution_violation`: independently justified segmentation
-  places more than one member of the exclusive suffix set in the same slot.
-- `unsupported_but_plausible`: plausible analogy, but not licensed by frozen v1.
+  places more than one of `-re, -wo, -iagu, -ie, -ia` in the exclusive slot.
+- `unsupported_but_plausible`: an analysis is plausible by analogy but lacks
+  frozen reviewed licensing.
 
-Values are `yes`, `no`, or `unresolved`. More than one label may apply.
+Values are `yes`, `no`, or `unresolved`; labels may co-occur.
 
-## Important cautions
+## Decision procedure
 
-A surface nonmatch is not automatically an error. Hyphens, spacing, punctuation,
-or capitalization must not be treated as morphological violations without
-linguistic justification. Likewise, a grammatical Bororo expression can be the
-wrong answer to an experimental task.
+Determine an independently licensed analysis of the direct form first. Then
+check construction, person values, coding frame, constructional morphology,
+morphophonology, and finally the exclusive suffix slot when segmentation is
+independently justified. Do not infer grammaticality from exact string match,
+frequency, spacing, hyphenation, capitalization, or similarity to an attested
+token.
 
-For divalent predicates, audit A and O separately. Frozen v1 represents the
-requested construction as `A=re + O=LEX`; do not reinterpret a direct output as
-a nominative/accusative template.
-
-For extended intransitives, an additional participant is oblique and does not
-become O. Absence of an oblique phrase in these v1 tasks does not itself
-constitute a frame violation.
+For divalent predicates, audit A and O independently. Frozen v1 represents the
+requested construction as `A=re + O=LEX`. For extended intransitives, an
+additional participant is oblique and does not become O; absence of an oblique
+phrase in these v1 tasks is not itself a frame violation.
 
 Record justification in `notes`. Do not edit reviewed grammar files during the
 audit.
