@@ -10,7 +10,6 @@ from .valency_review import reviewed_frame
 from .person_index import reviewed_stem_class
 from .lexical_review import review_status, lexical_review
 
-PERSON_PREFIXES=("i","a","u","pa","ce","ta","e","tu","it","in","ik","ak","pag","ceg","tag","et","en","tug")
 
 def lexical_evidence_queue(corpus_path, minimum_tokens=2):
     stats=defaultdict(lambda:{"tokens":0,"forms":Counter(),"sent_ids":set()})
