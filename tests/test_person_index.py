@@ -39,10 +39,11 @@ def test_kodu_reviewed_1pl_exclusive_cell():
     assert indexed_reviewed_stem("kodu","1PL.EXCL")=="cegodu"
 
 
-def test_kodu_irrealis_indicative_cell_is_under_kodu():
+def test_reviewed_irrealis_indicative_cells_are_lexeme_specific():
     from bororo_generator.person_index import reviewed_construction_cell
     assert reviewed_construction_cell("kodu","irrealis_indicative","1SG")=="ikodumode"
-    assert reviewed_construction_cell("mako","irrealis_indicative","1SG") is None
+    assert reviewed_construction_cell("mako","irrealis_indicative","1SG")=="imagomode"
+    assert reviewed_construction_cell("meru","irrealis_indicative","1SG") is None
 
 
 def test_emagu_preserves_underlying_e_plus_maku_analysis():
