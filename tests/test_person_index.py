@@ -39,10 +39,10 @@ def test_kodu_reviewed_1pl_exclusive_cell():
     assert indexed_reviewed_stem("kodu","1PL.EXCL")=="cegodu"
 
 
-def test_kodu_irrealis_declarative_cell_is_under_kodu():
+def test_kodu_irrealis_indicative_cell_is_under_kodu():
     from bororo_generator.person_index import reviewed_construction_cell
-    assert reviewed_construction_cell("kodu","irrealis_declarative","1SG")=="ikodumode"
-    assert reviewed_construction_cell("mako","irrealis_declarative","1SG") is None
+    assert reviewed_construction_cell("kodu","irrealis_indicative","1SG")=="ikodumode"
+    assert reviewed_construction_cell("mako","irrealis_indicative","1SG") is None
 
 
 def test_emagu_preserves_underlying_e_plus_maku_analysis():
@@ -79,10 +79,10 @@ def test_kodu_reviewed_1sg_optative_cell():
     assert reviewed_person_cell("kodu","1SG")=="ikodu"
 
 
-def test_kodu_reviewed_3sg_irrealis_negative_declarative_cell():
+def test_kodu_reviewed_3sg_irrealis_negative_indicative_cell():
     from bororo_generator.person_index import reviewed_construction_cell
     assert reviewed_construction_cell(
-        "kodu","irrealis_negative_declarative","3SG"
+        "kodu","irrealis_negative_indicative","3SG"
     )=="kodumodukare"
 
 
