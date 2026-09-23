@@ -202,3 +202,14 @@ def test_Akodudo_matches_kodu_imperative_cell(monkeypatch):
     assert row["reviewed_construction_cells"]==[
         {"lemma":"kodu","construction":"imperative","person":"2SG"}]
     assert row["licenses_generation"] is True
+
+
+def test_Ekodure_matches_reviewed_kodu_3pl(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Ekodure","count":1,"sent_ids":["5-2"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="exact_cell_reviewed"
+    assert row["analysis_scope"]=="exact_person_cell"
+    assert row["match_type"]=="capitalization_variant"
+    assert row["reviewed_requests"]==[{"lemma":"kodu","s_person":"3PL"}]
