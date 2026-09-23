@@ -553,28 +553,46 @@ output that differs from the controlled realization may still be a well-formed
 Bororo expression in another construction, or may remain linguistically
 unresolved.
 
-\section{Evaluation design and limitations}
+\section{Limitations and scope of inference}
 \label{sec:limits}
 
-The baseline is intentionally small. It measures the behavior of an
-evidence-bound generation architecture, not general coverage of Bororo.
-Predicate-form occurrence is morphological evidence only; in particular, for a
-divalent predicate it does not resolve the A argument of the generated
-structural cell. Conversely, a generated form absent from the supplied corpus
-is not thereby classified as ungrammatical.
+The experiments are deliberately narrow. They contain five target lexemes and
+28 ordinary-indicative tasks selected from combinations already licensed by the
+frozen v1 grammar. They therefore test the behavior of the evidence-bounded
+architecture inside a reviewed domain; they do not estimate general coverage of
+Bororo, performance on unseen constructions, or the system's blocking rate for
+arbitrary requests. In particular, the absence of blocked proposals in
+Experiment~2 follows from the licensed task design and should not be
+extrapolated beyond it.
 
-The same caution applies to the LLM comparison. Exact agreement with the
-controlled surface is a reproducible string-level measure, but disagreement is
-not itself evidence of ungrammaticality. Direct outputs are therefore audited
-along independent dimensions, and an unresolved analysis is retained as such.
-The current human audit is incomplete by design where the frozen evidence does
-not justify a stronger classification.
+The direct condition is also a single run of one model under one frozen prompt
+and setting. Its 28 outputs support a controlled case study of the observed
+error and mismatch types, not a general estimate of LLM performance on Bororo.
+Replication across runs, models, prompt formulations, lexical items, and
+construction types would be required for comparative model claims.
 
-The reported numbers should therefore be read as coverage, task-preservation,
-and evidence-control measures rather than as a single accuracy or
-grammaticality score. Broader evaluation requires additional reviewed lexical
-items and constructions and, for claims about acceptability beyond the reviewed
-analysis, independent speaker judgment.
+The linguistic audit has a separate limitation. Twelve direct outputs are
+currently fully reviewed while sixteen retain at least one unresolved
+classification. Preserving those unresolved states prevents unsupported
+analysis, but it also means that the experiment cannot yet report a complete
+grammaticality assessment of the direct outputs. Exact surface agreement,
+construction match, person match, coding-frame match, and morphological
+well-formedness must consequently remain separate measures.
+
+Corpus attestation has an equally restricted interpretation. Predicate-form
+occurrence supplies evidence about a surface morphological type, not about the
+complete structural cell in which the generator uses it; absence from the
+trusted corpus is likewise not evidence of ungrammaticality. The corpus is thus
+used for provenance and post-generation attestation rather than as a gold
+standard for acceptability.
+
+Finally, the reviewed computational grammar is itself a versioned analytical
+resource. Its licenses encode the analyses available at the time v1 was frozen,
+not an exhaustive or immutable description of Bororo. Claims about speaker
+acceptability beyond those reviewed analyses require independent speaker
+judgment. Future experiments can enlarge the reviewed domain, but later
+analyses should be evaluated under a new grammar version rather than
+retroactively changing the licenses used for the present results.
 
 \section{Discussion}
 
