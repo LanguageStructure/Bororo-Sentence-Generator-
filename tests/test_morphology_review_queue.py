@@ -164,3 +164,17 @@ def test_nonverbal_kodu_homograph_is_not_morphology_review(monkeypatch):
     assert row["lexical_identity_status"]=="nonverbal_homograph"
     assert row["licenses_generation"] is False
     assert q.review_queue_summary([row])["needs_human_review"]==0
+
+
+def test_mixed_upos_kodure_requires_token_identity_review(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"kodure","count":2,"sent_ids":["91-2","110-5"],
+         "upos":["NOUN","VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="token_identity_review"
+    assert row["lexical_identity_status"]=="mixed_upos_requires_token_review"
+    assert row["licenses_generation"] is False
+    summary=q.review_queue_summary([row])
+    assert summary["needs_human_review"]==1
+    assert summary["token_identity_review"]==1
