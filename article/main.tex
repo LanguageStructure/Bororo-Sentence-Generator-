@@ -282,7 +282,7 @@ gerundial, negative, or irrealis construction does not automatically establish
 the corresponding ordinary indicative form. The system represents such partial
 knowledge directly rather than completing paradigms by analogy.
 
-\section{Evidence-first architecture}
+\section{Evidence-bounded architecture}
 \label{sec:architecture}
 
 The current pipeline is:
@@ -334,7 +334,7 @@ cell. Extended-intransitive predicates similarly keep the core predicate and
 additional oblique participant distinct; no postposition is generalized across
 the construction without lexical evidence.
 
-\section{Experimental baseline}
+\section{Experiment 1: controlled-generation baseline}
 \label{sec:evaluation}
 
 We froze a first experimental baseline after resolving the human-review queue
@@ -377,30 +377,7 @@ attestation detects exact retrieval-like overlap, whereas predicate-form
 attestation supplies morphological corpus evidence. Neither measurement is
 treated as automatic grammatical validation.
 
-\section{Evaluation design and limitations}
-\label{sec:limits}
-
-The baseline is intentionally small. It measures the behavior of an
-evidence-bound generation architecture, not general coverage of Bororo.
-Predicate-form occurrence is morphological evidence only; in particular, for a
-divalent predicate it does not resolve the A argument of the generated
-structural cell. Conversely, a generated form absent from the supplied corpus
-is not thereby classified as ungrammatical.
-
-The same caution applies to the LLM comparison. Exact agreement with the
-controlled surface is a reproducible string-level measure, but disagreement is
-not itself evidence of ungrammaticality. Direct outputs are therefore audited
-along independent dimensions, and an unresolved analysis is retained as such.
-The current human audit is incomplete by design where the frozen evidence does
-not justify a stronger classification.
-
-The reported numbers should therefore be read as coverage, task-preservation,
-and evidence-control measures rather than as a single accuracy or
-grammaticality score. Broader evaluation requires additional reviewed lexical
-items and constructions and, for claims about acceptability beyond the reviewed
-analysis, independent speaker judgment.
-
-\section{AI proposal experiment}
+\section{Experiment 2: direct vs. evidence-bounded LLM generation}
 \label{sec:ai}
 
 The second experiment evaluates the central operational claim of the
@@ -440,6 +417,33 @@ Provenance & prompt/output audit & proposal + licenses + realization\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{Research questions}
+
+The experiment asks three related questions: (i) what kinds of divergence
+appear under direct LLM surface generation; (ii) whether an LLM can preserve
+the requested abstract structural specification when surface realization is
+delegated to reviewed grammar; and (iii) whether any proposal in the frozen
+task set lacks a required license and is therefore blocked. In v1, all 28
+proposals preserve the requested specification and all 28 are realizable.
+Accordingly, no blocking event occurs in this deliberately licensed task set;
+the experiment does not estimate a general blocking rate for arbitrary Bororo
+requests.
+
+\subsection{Experimental controls}
+
+To make the two conditions comparable, task specifications, target lexical
+items, person values, and constructions were drawn from the same frozen
+inventory. Prompts and model settings were frozen and archived with the
+experiment. The direct condition did not receive additional examples unavailable
+to the proposal condition. Raw outputs were retained, and classifications that
+depend on linguistic analysis remain auditable against the reviewed grammar.
+
+The v1 grammar and task inventory were frozen before the LLM outputs were
+collected. Inspection of those outputs did not modify the grammar used to score
+the same experiment. Linguistic observations arising during audit are therefore
+eligible only for a later review version. This prevents evaluation data from
+silently changing the grammatical licenses against which they are evaluated.
 
 \subsection{Evaluation categories}
 
@@ -519,32 +523,28 @@ not an independent grammaticality judgment. Conversely, a direct output that
 differs from the controlled realization may still be a well-formed Bororo
 expression in another construction.
 
-\subsection{Experimental controls}
+\n\section{Evaluation design and limitations}
+\label{sec:limits}
 
-To make the two conditions comparable, task specifications, target lexical
-items, person values, and constructions were drawn from the same frozen
-inventory. Prompts and model settings were frozen and archived with the
-experiment. The direct condition did not receive additional examples unavailable
-to the proposal condition. Raw outputs were retained, and classifications that
-depend on linguistic analysis remain auditable against the reviewed grammar.
+The baseline is intentionally small. It measures the behavior of an
+evidence-bound generation architecture, not general coverage of Bororo.
+Predicate-form occurrence is morphological evidence only; in particular, for a
+divalent predicate it does not resolve the A argument of the generated
+structural cell. Conversely, a generated form absent from the supplied corpus
+is not thereby classified as ungrammatical.
 
-The v1 grammar and task inventory were frozen before the LLM outputs were
-collected. Inspection of those outputs did not modify the grammar used to score
-the same experiment. Linguistic observations arising during audit are therefore
-eligible only for a later review version. This prevents evaluation data from
-silently changing the grammatical licenses against which they are evaluated.
+The same caution applies to the LLM comparison. Exact agreement with the
+controlled surface is a reproducible string-level measure, but disagreement is
+not itself evidence of ungrammaticality. Direct outputs are therefore audited
+along independent dimensions, and an unresolved analysis is retained as such.
+The current human audit is incomplete by design where the frozen evidence does
+not justify a stronger classification.
 
-\subsection{Research questions}
-
-The experiment asks three related questions: (i) what kinds of divergence
-appear under direct LLM surface generation; (ii) whether an LLM can preserve
-the requested abstract structural specification when surface realization is
-delegated to reviewed grammar; and (iii) whether any proposal in the frozen
-task set lacks a required license and is therefore blocked. In v1, all 28
-proposals preserve the requested specification and all 28 are realizable.
-Accordingly, no blocking event occurs in this deliberately licensed task set;
-the experiment does not estimate a general blocking rate for arbitrary Bororo
-requests.
+The reported numbers should therefore be read as coverage, task-preservation,
+and evidence-control measures rather than as a single accuracy or
+grammaticality score. Broader evaluation requires additional reviewed lexical
+items and constructions and, for claims about acceptability beyond the reviewed
+analysis, independent speaker judgment.
 
 \section{Discussion}
 
