@@ -189,3 +189,16 @@ def test_cemerure_matches_reviewed_meru_1pl_exclusive(monkeypatch):
     assert row["analysis_scope"]=="exact_person_cell"
     assert row["match_type"]=="capitalization_variant"
     assert row["reviewed_requests"]==[{"lemma":"meru","s_person":"1PL.EXCL"}]
+
+
+def test_Akodudo_matches_kodu_imperative_cell(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Akodudo","count":1,"sent_ids":["45-2"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="construction_cell_reviewed"
+    assert row["analysis_scope"]=="construction_cell"
+    assert row["match_type"]=="capitalization_variant"
+    assert row["reviewed_construction_cells"]==[
+        {"lemma":"kodu","construction":"imperative","person":"2SG"}]
+    assert row["licenses_generation"] is True
