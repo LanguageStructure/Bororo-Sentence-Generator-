@@ -51,7 +51,7 @@ def test_reviewed_predicate_surfaces_are_construction_aware():
     assert "imago" not in mako
     maku=q.reviewed_predicate_surfaces("maku")
     assert "maku" in maku
-    assert "emaku" in maku
+    assert "emagu" in maku
 
 def test_unreviewed_surface_is_not_licensed_by_shape():
     assert "kodure" not in q.reviewed_predicate_surfaces("kodu")
