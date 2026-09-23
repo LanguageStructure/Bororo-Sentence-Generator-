@@ -135,3 +135,9 @@ def test_mako_reviewed_3sg_negative_indicative_cell():
     assert reviewed_construction_cell(
         "mako","negative_indicative","3SG"
     )=="makokare"
+
+
+def test_mako_reviewed_3pl_negative_indicative_cell():
+    assert reviewed_construction_cell(
+        "mako","negative_indicative","3PL"
+    )=="emagokare"
