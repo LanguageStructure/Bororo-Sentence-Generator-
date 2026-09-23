@@ -14,3 +14,9 @@ def test_blocked_record_is_inspectable():
     assert r["text"] is None
     assert r["evidence"]["reviewed_frame"]=="divalent"
     assert r["evidence"]["reviewed_stem_class"] is None
+
+
+def test_api_exposes_layered_evidence():
+    r=generate_record("nudu",s_person="3SG")
+    assert r["evidence_layers"]["reviewed_grammar"]["morphology_license"] is None
+
