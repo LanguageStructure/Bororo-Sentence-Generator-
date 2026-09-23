@@ -178,3 +178,14 @@ def test_mixed_upos_kodure_requires_token_identity_review(monkeypatch):
     summary=q.review_queue_summary([row])
     assert summary["needs_human_review"]==1
     assert summary["token_identity_review"]==1
+
+
+def test_cemerure_matches_reviewed_meru_1pl_exclusive(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Cemerure","count":2,"sent_ids":["51-5","51-8"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["meru"],"x")[0]
+    assert row["review_state"]=="exact_cell_reviewed"
+    assert row["analysis_scope"]=="exact_person_cell"
+    assert row["match_type"]=="capitalization_variant"
+    assert row["reviewed_requests"]==[{"lemma":"meru","s_person":"1PL.EXCL"}]
