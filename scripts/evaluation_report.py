@@ -10,7 +10,9 @@ def main():
     p.add_argument("--output",required=True)
     a=p.parse_args()
     report=evaluation_report(a.lemmas,a.corpus)
-    Path(a.output).write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    output=Path(a.output)
+    output.parent.mkdir(parents=True,exist_ok=True)
+    output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     s=report["summary"]
     print("report:",a.output)
     print("lexemes:",s["lexemes"])
