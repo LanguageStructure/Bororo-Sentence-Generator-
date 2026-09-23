@@ -35,3 +35,11 @@ def test_evaluation_exposes_separate_evidence_layers(monkeypatch):
     assert layer["reviewed_grammar"]["reviewed_frame"]=="monovalent"
     assert layer["corpus_evidence"]["attested"]
     assert layer["corpus_evidence"]["sent_ids"]==["s1"]
+
+
+def test_reviewed_construction_inventory():
+    from bororo_generator.evaluation import reviewed_construction_inventory
+    rows=reviewed_construction_inventory(["nudu","mako"])
+    assert any(r["surface"]=="cenuduwo" and r["construction"]=="subjunctive" for r in rows)
+    assert any(r["surface"]=="inudukare" and r["construction"]=="negative_indicative" for r in rows)
+    assert any(r["surface"]=="tumagoi" and r["construction"]=="gerund" for r in rows)
