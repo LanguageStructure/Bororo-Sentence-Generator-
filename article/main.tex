@@ -146,6 +146,46 @@ evidence, and whether corpus attestation is being mistaken for grammatical
 productivity. Our evaluation therefore reports provenance and licensing
 coverage separately from surface attestation.
 
+\subsection{Computational documentation and explicit grammar}
+
+A second line of work connects language documentation with reusable
+computational descriptions. The CLD$^2$ proposal explicitly argues for a
+two-way relation between documentation and NLP: documentary projects should
+produce NLP-friendly annotated data, while computational work should exploit
+documentary databases for endangered-language technology
+\cite{zariquiey2022cld2}. The present architecture can be situated within this
+interface, but adds an explicit review boundary between documentary evidence
+and productive computational knowledge.
+
+Finite-state work on Indigenous and endangered languages demonstrates the
+value of linguistically explicit morphology under severe data scarcity. For
+Yine, Ingunza Torres et al.~\cite{ingunza2021yine} encode morphophonology,
+possession, and verbal predicates in finite-state transducers intended both for
+documentation and downstream language technology. Comparable analyzers model
+morphotactics and morphophonological alternations in Paraguayan Guaraní
+\cite{kuznetsova2021guarani} and Highland Puebla Nahuatl
+\cite{pugh2023nahuatl}. Work on Lakota is particularly relevant because a
+finite-state morphological component is coupled to a precision HPSG grammar
+and can operate in the generative direction \cite{curtis2014lakota}.
+
+These systems establish that explicit linguistic descriptions remain useful
+computational objects in low-resource settings. Our contribution is not a new
+finite-state formalism. Instead, it concerns the evidential control surrounding
+generation: lexical and constructional knowledge may remain partial, exact
+reviewed cells coexist with fuller paradigms, corpus matches remain
+observations, and unresolved evidence remains computationally unresolved.
+
+AvarLab offers a recent and especially close point of comparison
+\cite{zagidov2026avarlab}. Its rule-based generate--verify workflow
+generates inflected forms from lexical resources and verifies them against
+corpora. Our workflow shares the use of explicit rules and corpus verification,
+but reverses an important evidential assumption: corpus verification is not
+allowed to promote a generated Bororo form into reviewed grammatical knowledge.
+The human-review layer remains an independent gate. This distinction is
+designed for documentary situations in which corpus sparsity, homography,
+construction-specific allomorphy, and incomplete paradigms make automatic
+promotion particularly risky.
+
 \section{Methodological motivation}
 \label{sec:motivation}
 
