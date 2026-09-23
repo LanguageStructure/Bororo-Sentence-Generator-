@@ -261,3 +261,16 @@ def test_ikoduwo_matches_kodu_subjunctive_cell(monkeypatch):
     assert row["match_type"]=="exact_surface"
     assert row["reviewed_construction_cells"]==[
         {"lemma":"kodu","construction":"subjunctive","person":"1SG"}]
+
+
+def test_pagodumode_matches_reviewed_kodu_irrealis_indicative(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"pagodumode","count":1,"sent_ids":["94-3"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="construction_cell_reviewed"
+    assert row["analysis_scope"]=="construction_cell"
+    assert row["match_type"]=="exact_surface"
+    assert row["operator_analysis"]==["IRR","IND"]
+    assert row["reviewed_construction_cells"]==[
+        {"lemma":"kodu","construction":"irrealis_indicative","person":"1PL.INCL"}]
