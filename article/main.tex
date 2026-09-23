@@ -126,20 +126,24 @@ generation.
 \section{Corpus evidence is not grammatical licensing}
 \label{sec:evidence}
 
-The architecture distinguishes three evidential layers. First,
-\emph{reviewed grammar} records human-reviewed coding frames, person-index
-cells, stem-class assignments where a complete paradigm is independently
-supported, and construction-specific cells. Second, the \emph{generated
-candidate} records the surface output and the rules used to produce it. Third,
-\emph{corpus evidence} records whether a generated surface or predicate form
-occurs in the supplied corpus. The third layer never promotes itself into the
-first.
+A corpus establishes that a form occurred in a documented context; a generator
+requires a different decision, namely whether a reviewed analysis licenses that
+form or construction for productive use. We therefore distinguish
+\emph{observation}, \emph{analysis}, \emph{licensing}, \emph{generation},
+and \emph{attestation}. Observation records corpus material, analysis records a
+human linguistic interpretation, licensing authorizes a specific computational
+operation, generation records the resulting candidate and provenance, and
+attestation asks whether its surface or predicate form occurs independently in
+the corpus. Attestation does not promote itself into a grammatical license.
 
-This distinction also applies to lexical identity. Homographic corpus forms are
-not automatically assigned to the same lexical item, and a familiar-looking
-prefix or suffix is not segmented solely from its shape. Review queues expose
-the relevant contexts while leaving person, segmentation, stem class, and
-coding frame unset until they are explicitly reviewed.
+The same separation applies to lexical identity and partial paradigms.
+Homographic forms are not automatically assigned to one lexeme, and a
+familiar-looking affix is not segmented solely from its shape. An exact reviewed
+person cell may therefore coexist with an unresolved stem class, while a form
+reviewed in an imperative, subjunctive, gerundial, negative, or irrealis
+construction does not automatically establish the corresponding ordinary
+indicative cell. These unresolved states are represented rather than completed
+by analogy.
 
 \section{Related work}
 \label{sec:related}
@@ -257,31 +261,6 @@ contribution is this operationalization and evaluation of evidence-bounded
 licensing, rather than the individual presence of an FST or rule system,
 corpus search, provenance, human review, or LLM assistance.
 
-\section{Methodological motivation}
-\label{sec:motivation}
-
-The design addresses a recurrent asymmetry in low-resource computational work.
-A corpus can show that a form occurred in a particular documented context, but
-a generator requires a stronger decision: whether a representation is licensed
-for productive use in a specified construction. The latter decision may depend
-on lexical identity, coding frame, person-index allomorphy, morphotactics, and
-construction-specific restrictions that cannot safely be recovered from token
-frequency alone.
-
-We therefore distinguish \emph{observation}, \emph{analysis}, and
-\emph{licensing}. Observation records what the corpus contains. Analysis is a
-human linguistic claim about the structure of that evidence. Licensing is an
-explicit computational decision that a reviewed analysis is sufficiently
-specific to support a generation operation. These states are related, but they
-are not collapsed into one another.
-
-This distinction is especially consequential when paradigms are incomplete.
-An attested person form can license an exact cell without establishing a full
-stem class. Likewise, a form reviewed inside an imperative, subjunctive,
-gerundial, negative, or irrealis construction does not automatically establish
-the corresponding ordinary indicative form. The system represents such partial
-knowledge directly rather than completing paradigms by analogy.
-
 \section{Evidence-bounded architecture}
 \label{sec:architecture}
 
@@ -294,11 +273,12 @@ $\rightarrow$ generated candidate $\rightarrow$ validation and corpus
 attestation.
 \end{quote}
 
-The architecture is deliberately asymmetric. Corpus evidence can motivate a
-human review decision, but cannot directly license a new generation rule.
-Likewise, corpus attestation of a generated predicate form is reported as
-observational support and not as proof that the complete generated structural
-cell is attested.
+The arrows in this pipeline are deliberately asymmetric. Corpus evidence may
+trigger human review, but only a review decision changes the inventory of
+generation licenses. After generation, corpus attestation is reported as a
+separate evidential property of the candidate; predicate-form attestation, for
+example, does not establish that the complete generated structural cell was
+observed.
 
 \section{Reviewed grammatical constraints}
 \label{sec:grammar}
