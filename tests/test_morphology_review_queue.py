@@ -103,3 +103,16 @@ def test_mako_imperative_surface_is_reviewed_construction_cell(monkeypatch):
     assert by_form["Tamagodo"]["match_type"]=="capitalization_variant"
     assert by_form["tamagodo"]["reviewed_construction_cells"]==[
         {"lemma":"mako","construction":"imperative","person":"2PL"}]
+
+
+def test_construction_matching_is_not_imperative_specific(monkeypatch):
+    monkeypatch.setitem(q.REVIEWED_CONSTRUCTION_CELLS,"dummy",{
+        "other_construction":{"2SG":"DummyForm"}})
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"DummyForm","count":1,"sent_ids":["s1"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["dummy"],"x")[0]
+    assert row["review_state"]=="construction_cell_reviewed"
+    assert row["match_type"]=="exact_surface"
+    assert row["reviewed_construction_cells"]==[
+        {"lemma":"dummy","construction":"other_construction","person":"2SG"}]
