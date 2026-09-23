@@ -54,3 +54,18 @@ def review_packet(lemma, form, corpus_path, limit=12):
         "licenses_generation":False,
         "instruction":"Human review required; corpus context is evidence, not an inferred analysis.",
     }
+
+
+def review_queue_summary(rows):
+    """Summarize review workload without converting observations into analyses."""
+    unresolved=[r for r in rows if r.get("review_state")=="needs_human_review"]
+    return {
+        "observed_forms":len(rows),
+        "needs_human_review":len(unresolved),
+        "tokens_needing_review":sum(r.get("tokens",0) for r in unresolved),
+        "lemmas_needing_review":len({r.get("lemma") for r in unresolved}),
+        "top_unresolved":[
+            {"lemma":r["lemma"],"form":r["form"],"tokens":r["tokens"]}
+            for r in unresolved[:10]
+        ],
+    }
