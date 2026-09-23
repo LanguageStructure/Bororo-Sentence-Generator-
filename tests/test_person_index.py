@@ -60,3 +60,8 @@ def test_kodu_reviewed_2sg_imperative_cell():
     from bororo_generator.person_index import reviewed_construction_cell
     assert reviewed_construction_cell("kodu","imperative","2SG")=="akodudo"
     assert reviewed_person_cell("kodu","2SG") is None
+
+
+def test_kodu_reviewed_3pl_cell():
+    assert reviewed_person_cell("kodu","3PL")=="ekodu"
+    assert indexed_reviewed_stem("kodu","3PL")=="ekodu"
