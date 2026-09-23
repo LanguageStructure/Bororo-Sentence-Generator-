@@ -15,7 +15,9 @@ def generate_record(lemma, **kwargs):
     evidence={
         "lemma":lemma,
         "reviewed_frame":r.frame,
+        # Legacy compatibility field. Prefer evidence_layers.reviewed_grammar.morphology_license.
         "reviewed_stem_class":reviewed_stem_class(lemma),
+        "reviewed_stem_class_legacy":True,
         "valency_evidence":val.get("evidence"),
         "selected_oblique":val.get("selected_oblique"),
     }
