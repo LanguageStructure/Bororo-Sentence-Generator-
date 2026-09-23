@@ -17,21 +17,26 @@ A Human-in-the-Loop Approach for Low-Resource Languages}
 \maketitle
 
 \begin{abstract}
-This paper presents an evidence-bound architecture for controlled sentence
+This paper presents an evidence-bounded architecture for controlled sentence
 generation in a low-resource language, using Boe-Bororo as a case study. The
-central methodological distinction is between corpus observation and
-grammatical licensing. Corpus forms, frequencies, dependency annotations, and
-translations are treated as evidence for analysis, but do not automatically
-license generation. Generation is instead constrained by human-reviewed coding
-frames, person-index realizations, construction-specific morphology, and
-morphotactic restrictions. A first frozen experimental baseline evaluates five
-lexemes across monovalent, extended-intransitive, and divalent frames. The
-system generates all 28 requested reviewed structural cells, while none of the
-complete generated sentences is an exact corpus sentence. Fourteen unique
-generated predicate forms are independently attested as corpus tokens. The
-baseline therefore separates controlled recombination from simple retrieval
-while preserving a strict distinction between attestation and grammatical
-analysis.
+architecture separates corpus observation, human linguistic analysis,
+grammatical licensing, deterministic realization, and subsequent corpus
+attestation. Corpus occurrence therefore supplies evidence but does not
+automatically license productive generation. A frozen baseline evaluates five
+lexemes across 28 reviewed structural cells: all 28 are generated, none of the
+complete generated sentences is an exact corpus sentence, and 14 unique
+generated predicate forms are independently attested as corpus tokens. We then
+compare direct LLM surface generation with an evidence-bounded condition in
+which the same model proposes only an abstract structure and reviewed grammar
+realizes the surface form. Direct generation yields one exact surface match in
+28 tasks; this is not treated as a grammaticality score, because human audit
+distinguishes morphological well-formedness from construction, person, and
+coding-frame adequacy. In the evidence-bounded condition, all 28 proposals
+preserve the requested structural specification and all 28 are realized by the
+grammar frozen before model outputs were inspected. The results support a
+division of labor in which an LLM can propose structures without serving as the
+source of morphological or constructional knowledge, while unresolved evidence
+remains explicitly unresolved.
 \end{abstract}
 
 \section{Introduction}
