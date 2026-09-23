@@ -27,3 +27,12 @@ def test_sparse_cell_keeps_legacy_class_null():
     assert r["status"]=="generated"
     assert r["evidence"]["reviewed_stem_class"] is None
     assert r["evidence"]["reviewed_stem_class_legacy"] is True
+
+
+def test_blocked_record_has_evidence_boundary():
+    r=generate_record("tawuje",a_person="2SG",o_person="3PL")
+    layers=r["evidence_layers"]
+    assert layers["generated_candidate"]["status"]=="blocked"
+    assert layers["generated_candidate"]["text"] is None
+    assert layers["generated_candidate"]["reasons"]
+    assert not layers["corpus_evidence"]["attested"]
