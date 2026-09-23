@@ -186,6 +186,37 @@ designed for documentary situations in which corpus sparsity, homography,
 construction-specific allomorphy, and incomplete paradigms make automatic
 promotion particularly risky.
 
+\subsection{Human-in-the-loop systems and the closest architectural comparison}
+
+Human-in-the-loop NLP is usually formulated as a feedback cycle in which human
+judgments improve a model or its training data \cite{wang2021hitl}. Recent
+discussion of LLM-based applications emphasizes that this remains especially
+important for low-resource languages, where traditional pipelines can provide
+greater control and can operate with data regimes that do not support direct
+LLM training \cite{eckert2026humans}. Our use of human review is narrower and
+more formal: review changes an explicit inventory of computational licenses,
+rather than implicitly updating model parameters.
+
+A particularly close 2026 comparison is the \emph{langlit} platform
+\cite{haberland2026langlit}. It combines a finite-state morphological analyzer,
+a three-tier human-in-the-loop annotation workflow, searchable corpora,
+grammar-guided interactive word construction, corpus-linked hypothesis
+tracking with provenance, an editable dictionary, access controls, and optional
+LLM integration. This substantially narrows the novelty claim available to the
+present work: integration of corpus evidence, explicit morphology, provenance,
+human review, and optional LLM assistance is not by itself novel.
+
+The distinction investigated here is more specific. The generator represents
+\emph{licensing status} as an independent computational layer. Corpus
+observation, a human linguistic analysis, a license for generation, a generated
+candidate, and subsequent corpus attestation are different states with
+one-way promotion rules. Partial knowledge is first-class: an exact reviewed
+person cell need not imply a paradigm, and a construction-specific realization
+need not imply the corresponding ordinary indicative cell. The empirical
+question is therefore whether this evidence-bounded representation provides a
+useful safety and auditability advantage when generation is extended with LLM
+proposals.
+
 \section{Methodological motivation}
 \label{sec:motivation}
 
