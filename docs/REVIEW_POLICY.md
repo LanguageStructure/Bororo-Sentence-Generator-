@@ -31,3 +31,8 @@ Review queues may rank unresolved corpus forms by token frequency and report the
 number of affected form types, tokens, and lemmas. These values describe review
 workload only. Priority rank is not evidence for a morphological analysis,
 productivity, grammaticality, or lexical class.
+
+
+For interactive review, `--next-only` selects the highest-priority unresolved
+form and attaches corpus contexts. Selection is based on queue priority only;
+the resulting packet still contains no inferred morphological analysis.
