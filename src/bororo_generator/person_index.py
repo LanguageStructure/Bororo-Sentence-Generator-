@@ -30,7 +30,7 @@ REVIEWED_STEM_CLASSES={
 # These cells are useful evidence but do not establish a complete lexical class.
 REVIEWED_PERSON_CELLS={
     "meru":{"2SG":"ameru","3PL":"emeru"},
-    "kodu":{"1SG":"ikodu"},
+    "kodu":{"1SG":"ikodu","1PL.EXCL":"cegodu"},
     "maragodu":{"2PL":"tamaragodu"},
     "mako":{"1SG":"imago","2SG":"amago","3SG":"mako"},
     "kudu":{"2SG":"akudu"},
