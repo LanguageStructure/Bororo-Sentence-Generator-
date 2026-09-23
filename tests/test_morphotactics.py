@@ -14,4 +14,5 @@ def test_reviewed_irrealis_declarative_surface():
 
 
 def test_reviewed_irrealis_negative_declarative_surface():
+    from bororo_generator.morphotactics import reviewed_operator_surface
     assert reviewed_operator_surface("IRR","NEG","DECL")=="modukare"
