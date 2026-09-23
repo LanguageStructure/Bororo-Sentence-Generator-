@@ -32,3 +32,12 @@ def test_review_queue_summary_counts_workload_only():
     assert s["needs_human_review"]==2
     assert s["tokens_needing_review"]==11
     assert s["lemmas_needing_review"]==2
+
+
+def test_top_unresolved_preserves_priority_order():
+    rows=[
+        {"lemma":"kodu","form":"a","tokens":9,"review_state":"needs_human_review"},
+        {"lemma":"mako","form":"b","tokens":4,"review_state":"needs_human_review"},
+    ]
+    s=q.review_queue_summary(rows)
+    assert s["top_unresolved"][0]=={"lemma":"kodu","form":"a","tokens":9}
