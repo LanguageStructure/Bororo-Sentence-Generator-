@@ -13,7 +13,7 @@ def test_dispatch_extended():
 def test_dispatch_divalent():
     r=generate_declarative("maku",a_person="3PL",o_person="3PL")
     assert not r.blocked and r.frame=="divalent"
-    assert r.candidate.text=="ere emaku"
+    assert r.candidate.text=="ere emagu"
 
 def test_missing_role_is_explicitly_blocked():
     r=generate_declarative("maku",a_person="3PL")
