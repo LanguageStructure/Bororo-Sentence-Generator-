@@ -141,3 +141,8 @@ def test_mako_reviewed_3pl_negative_indicative_cell():
     assert reviewed_construction_cell(
         "mako","negative_indicative","3PL"
     )=="emagokare"
+
+
+def test_mako_reviewed_2pl_cell():
+    assert reviewed_person_cell("mako","2PL")=="tamago"
+    assert indexed_reviewed_stem("mako","2PL")=="tamago"
