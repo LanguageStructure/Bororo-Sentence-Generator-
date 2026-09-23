@@ -28,7 +28,8 @@ def working_schema():
 # from ordering constraints: it states how an already reviewed combination is
 # realized, not where operators may occur in general.
 REVIEWED_OPERATOR_SURFACES={
-    ("IRR","DECL"):"mode",  # -modu + -re -> -mode
+    ("IRR","DECL"):"mode",
+    ("IRR","NEG","DECL"):"modukare",  # -modu + -re -> -mode
 }
 
 def reviewed_operator_surface(*operators):
