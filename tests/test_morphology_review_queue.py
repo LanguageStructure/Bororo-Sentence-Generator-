@@ -274,3 +274,14 @@ def test_pagodumode_matches_reviewed_kodu_irrealis_indicative(monkeypatch):
     assert row["operator_analysis"]==["IRR","IND"]
     assert row["reviewed_construction_cells"]==[
         {"lemma":"kodu","construction":"irrealis_indicative","person":"1PL.INCL"}]
+
+
+def test_tugodure_matches_reviewed_kodu_corf(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"tugodure","count":1,"sent_ids":["11-2"],"upos":["VERB"],"deprels":["parataxis"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="exact_cell_reviewed"
+    assert row["analysis_scope"]=="exact_person_cell"
+    assert row["match_type"]=="exact_surface"
+    assert row["reviewed_requests"]==[{"lemma":"kodu","s_person":"CORF"}]
