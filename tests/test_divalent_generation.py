@@ -8,7 +8,7 @@ def test_maku_zero_o():
 def test_maku_plural_o():
     c=divalent_declarative("maku","3PL","3PL")
     assert c is not None
-    assert c.text=="ere emaku"
+    assert c.text=="ere emagu"
 
 def test_overt_rps_keep_coding_positions():
     c=divalent_declarative("maku","3PL","3SG",overt_a="Ime",overt_o="pao")
