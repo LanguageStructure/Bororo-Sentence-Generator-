@@ -8,8 +8,8 @@ ATTESTED_ORDER = (
     ("LEX","CAUS"),
     ("CAUS","PASS"),
     ("IRR","NEG"),
-    ("NEG","DECL"),
-    ("ASPECT","DECL"),
+    ("NEG","IND"),
+    ("ASPECT","IND"),
     ("NEG","QUOT"),
 )
 
@@ -28,17 +28,17 @@ def working_schema():
 # from ordering constraints: it states how an already reviewed combination is
 # realized, not where operators may occur in general.
 REVIEWED_OPERATOR_SURFACES={
-    ("IRR","DECL"):"mode",
-    ("IRR","NEG","DECL"):"modukare",  # -modu + -re -> -mode
+    ("IRR","IND"):"mode",
+    ("IRR","NEG","IND"):"modukare",  # -modu + -re -> -mode
 }
 
 def reviewed_operator_surface(*operators):
     return REVIEWED_OPERATOR_SURFACES.get(tuple(operators))
 
 
-def realize_irrealis_declarative(indexed_stem):
-    """Realize reviewed indexed predicate + IRR + DECL surface."""
-    surface=reviewed_operator_surface("IRR","DECL")
+def realize_irrealis_indicative(indexed_stem):
+    """Realize reviewed indexed predicate + IRR + IND surface."""
+    surface=reviewed_operator_surface("IRR","IND")
     if surface is None:
         return None
     return indexed_stem+surface
