@@ -1,5 +1,6 @@
 """Serializable candidate sentence object."""
 from dataclasses import dataclass,asdict
+from typing import Optional
 from .provenance import Provenance
 from .validator import validate_candidate
 from .orthography import normalize_bororo
@@ -8,7 +9,7 @@ from .orthography import normalize_bororo
 class Candidate:
     text:str
     provenance:Provenance
-    predicate_form:str|None=None
+    predicate_form:Optional[str]=None
 
     def __post_init__(self):
         # Generated/recombined Bororo output is always in project orthography.
