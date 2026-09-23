@@ -657,29 +657,36 @@ evidence for their own licensing.
 
 \section{Conclusion}
 
-This study argues for an evidential boundary between documentary data,
-linguistic analysis, and computational generation in low-resource language
-technology. In the Bororo case study, corpus occurrence is observational
-evidence rather than an automatic productive rule, and human-reviewed
-grammatical knowledge is represented explicitly enough to license, block, or
-leave a request unresolved.
+This study operationalizes an evidential boundary between documentary
+observation, human linguistic analysis, grammatical licensing, generation, and
+post-generation attestation. In the Bororo case study, these states remain
+separate computational objects: corpus occurrence can motivate analysis but
+does not by itself create a productive license, and partial reviewed knowledge
+can remain partial.
 
-The frozen baseline demonstrates controlled recombination across 28 reviewed
-structural cells without exact sentence retrieval from the corpus. The LLM
-experiment then shows a complementary result: direct surface generation rarely
-matches the controlled realization exactly and requires multidimensional human
-audit, whereas all 28 abstract proposals preserve the requested structure and
-can be realized by the frozen evidence-bounded system. These findings concern
-task preservation and reviewed licensing, not a general grammaticality score or
-a claim of complete coverage.
+The frozen baseline realizes 28 licensed structural cells without retrieving an
+exact complete sentence from the trusted corpus. In the LLM experiment, the
+direct condition yields one exact surface match to the controlled realization
+and requires a multidimensional linguistic audit of the remaining divergences.
+In the evidence-bounded condition, all 28 abstract proposals preserve the
+audited task specification and pass through the frozen deterministic realizer.
+The latter result demonstrates task preservation within the licensed v1 domain;
+it is neither an independent grammaticality judgment nor evidence of general
+Bororo coverage.
 
-The broader methodological implication is that an LLM need not function as the
-grammar of a low-resource language in order to contribute to generation. It can
-operate as a proposal mechanism upstream of an explicit, revisable, and
-auditable grammatical layer. This arrangement keeps uncertainty visible,
-prevents experimental outputs from becoming their own evidence, and provides a
-reproducible path for extending computational resources as linguistic analysis
-progresses.
+The methodological contribution is therefore not that corpus resources,
+explicit grammar, human review, provenance, or LLM assistance are individually
+new. It is the explicit representation and experimental use of
+\emph{evidence-bounded licensing}: the model may propose a structure, but the
+proposal does not acquire morphological or constructional authority merely by
+being generated or corpus-plausible. This division of labor keeps uncertainty
+and provenance inspectable and allows later linguistic analysis to extend a
+versioned grammar without retroactively changing the evidence used to evaluate
+earlier outputs.
+
+A natural next test is a challenge set containing unsupported and partially
+reviewed requests. Such an experiment would evaluate abstention and blocking
+directly, complementing the present licensed-domain study.
 
 \bibliographystyle{plain}
 \bibliography{references}
