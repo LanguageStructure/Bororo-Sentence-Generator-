@@ -346,11 +346,14 @@ codebase.
 \section{Experiment 1: controlled-generation baseline}
 \label{sec:evaluation}
 
-We froze a first experimental baseline after resolving the human-review queue
-for five target lexemes: \textit{nudu}, \textit{meru}, \textit{kodu},
-\textit{mako}, and \textit{maku}. The evaluation requests only structural cells
-licensed by the reviewed grammar and compares generated surfaces against the
-supplied trusted corpus.
+We froze a first experimental baseline after resolving the review queue for five
+target lexemes: \textit{nudu}, \textit{meru}, \textit{kodu}, \textit{mako},
+and \textit{maku}. A \emph{structural cell} in this report is a requested
+combination of lexical item, reviewed coding frame, and the participant-person
+values required by that frame. It is an evaluation unit, not a claim that a
+complete sentence with those values has previously occurred in the corpus. The
+28 requests were selected from combinations for which the frozen v1 dispatcher
+had the licenses required for ordinary indicative realization.
 
 \begin{table}[ht]
 \centering
@@ -364,27 +367,41 @@ Lexemes evaluated & 5\\
 Structural cells requested & 28\\
 Generated records & 28\\
 Blocked requests & 0\\
-Unique generated predicate forms attested in corpus & 14\\
 Complete generated sentences exactly attested & 0\\
-Licensed by full stem class & 8\\
-Licensed by exact person cell & 20\\
-Reviewed construction-specific cells & 16\\
+Unique generated predicate forms attested in corpus & 14\\
+Records licensed by exact person cell & 20\\
+Records licensed by full stem class & 8\\
+Reviewed construction-specific cells in grammar & 16\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Of the 28 requested cells, 16 belong to three monovalent lexemes, six to one
-extended-intransitive lexeme, and six to one divalent lexeme. All requested
-cells were generated and none was blocked. Twenty of the 28 records
-(71.4\%) depend on exact reviewed person cells, whereas eight (28.6\%) are
-licensed through a complete reviewed stem-class assignment.
+The inventory comprises 16 cells for three monovalent lexemes, six for one
+extended-intransitive lexeme, and six for one divalent lexeme. All 28 requests
+are realized and none is blocked. At the morphological licensing step, 20
+records (71.4\%) use an exact reviewed lemma--person cell, whereas eight
+(28.6\%) use an independently reviewed full stem-class assignment. These
+figures describe the provenance of the generated records; they are not two
+levels of grammatical confidence.
 
-No complete generated sentence is an exact normalized corpus sentence. At the
-same time, 14 unique generated predicate forms occur independently as corpus
-tokens. These two measurements answer different questions: sentence
-attestation detects exact retrieval-like overlap, whereas predicate-form
-attestation supplies morphological corpus evidence. Neither measurement is
-treated as automatic grammatical validation.
+The report also counts 16 reviewed construction-specific cells in the frozen
+grammar. This is an inventory statistic rather than a subset of the 28
+ordinary-indicative experimental requests: those construction-specific cells
+remain segregated from the dispatcher used for this baseline.
+
+Sentence and predicate-form attestation are likewise distinct measurements.
+Zero of the 28 complete generated outputs is an exact normalized sentence match
+in the trusted corpus. Independently, 14 \emph{unique} generated predicate
+forms occur as corpus tokens. The latter count is type-based and therefore
+should not be read as 14 of 28 structural cells being attested. In particular,
+predicate-form occurrence does not establish the complete participant
+configuration of a generated cell, and for divalent predicates it does not
+supply independent evidence for the generated A$\times$O combination.
+
+The baseline consequently demonstrates controlled recombination under the
+frozen licenses without exact sentence retrieval. Corpus matches remain
+post-generation evidence: neither predicate-form presence nor sentence absence
+changes the reviewed grammatical inventory used to produce the same records.
 
 \section{Experiment 2: direct vs. evidence-bounded LLM generation}
 \label{sec:ai}
