@@ -495,29 +495,85 @@ observable system behavior rather than automatically as an error.
 
 \section{Discussion}
 
-The baseline demonstrates the practical consequence of separating evidence
-from licensing. Most generated records depend on individually reviewed
-morphological cells rather than paradigm-wide extrapolation. The architecture
-therefore exposes incompleteness instead of hiding it behind automatic analogy.
-This is useful in a documentary setting, where a conservative unresolved state
-can be more informative than a fluent but unsupported output.
+The two experiments expose different consequences of separating evidence from
+licensing. The controlled baseline shows that partial reviewed knowledge can
+support productive recombination without collapsing corpus attestation into a
+grammar: all 28 requested cells were realized although no complete generated
+sentence was an exact corpus sentence. At the same time, most baseline records
+depend on individually reviewed cells rather than paradigm-wide extrapolation.
+The architecture therefore represents incompleteness explicitly instead of
+silently completing paradigms by analogy.
 
-The approach also makes incremental revision possible. New corpus observations
-can enter a review queue without changing the grammar; a human decision can
-then add an exact cell, a construction-specific realization, or, where
-independently justified, a complete lexical class. Each change can be tested
-against the existing reviewed inventory.
+The LLM comparison adds a second result. Direct surface generation and abstract
+structural proposal behave differently under the same frozen task inventory.
+Only one direct output is an exact match to the controlled realization, but this
+fact cannot be interpreted as 27 grammatical errors. The human audit shows why:
+some direct outputs are potentially well-formed expressions that fail the
+requested construction or person specification, while the internal analysis of
+others remains unresolved. In particular, the distinction between
+morphological well-formedness and task adequacy is empirically necessary rather
+than merely terminological.
+
+Condition B isolates a narrower capability of the LLM. All 28 abstract
+proposals preserve the requested structural specification, and all 28 can then
+be realized from the grammar frozen before the model outputs were collected.
+The result does not show that the deterministic system has complete Bororo
+coverage, nor does it constitute independent native-speaker validation.
+Instead, it shows that, for this reviewed test set, probabilistic structural
+proposal can be separated from surface morphological realization without loss
+of the requested task information. The model need not be entrusted with the
+morphological generalizations that the experiment is intended to control.
+
+The asymmetry is important for low-resource work. A direct model output can be
+fluent-looking while leaving unclear whether a divergence reflects
+morphological ill-formedness, a different grammatical construction, incorrect
+participant indexing, or an analysis not yet supported by the available
+description. An evidence-bounded system can instead preserve these states as
+distinct outcomes. Blocking and unresolved status are consequently informative
+behaviors, not merely failures to generate.
+
+The present comparison remains deliberately small. It contains five target
+lexemes and 28 reviewed tasks, and 16 direct outputs still require further
+linguistic analysis in at least part of the audit. The 28/28 realization result
+for Condition B is also conditioned on tasks sampled from the frozen reviewed
+inventory; it should not be generalized to arbitrary Bororo structures. A
+larger experiment should add lexical items and construction types while
+preserving the same pre-registration principle: grammar and task inventory are
+frozen before model outputs are inspected.
+
+Finally, the architecture supports incremental revision without contaminating
+an existing evaluation. New corpus observations can enter a review queue
+without changing the grammar. Human analysis can subsequently add an exact
+cell, a construction-specific realization, or, where independently justified,
+a complete lexical class to a later grammar version. Experimental discoveries
+therefore remain evidence for future analysis rather than retroactive licenses
+for the outputs being evaluated.
 
 \section{Conclusion}
 
-Controlled generation for a low-resource language need not begin by treating
-corpus distributions or language-model output as grammar. The Bororo case study
-shows an alternative workflow in which corpus evidence, human analysis,
-generation, and attestation remain separate computational objects. The first
-baseline is deliberately narrow, but it provides a reproducible point from
-which broader lexical coverage and an AI-assisted proposal experiment can be
-evaluated without weakening the evidential boundary on which the system is
-based.
+This study argues for an evidential boundary between documentary data,
+linguistic analysis, and computational generation in low-resource language
+technology. In the Bororo case study, corpus occurrence is observational
+evidence rather than an automatic productive rule, and human-reviewed
+grammatical knowledge is represented explicitly enough to license, block, or
+leave a request unresolved.
+
+The frozen baseline demonstrates controlled recombination across 28 reviewed
+structural cells without exact sentence retrieval from the corpus. The LLM
+experiment then shows a complementary result: direct surface generation rarely
+matches the controlled realization exactly and requires multidimensional human
+audit, whereas all 28 abstract proposals preserve the requested structure and
+can be realized by the frozen evidence-bounded system. These findings concern
+task preservation and reviewed licensing, not a general grammaticality score or
+a claim of complete coverage.
+
+The broader methodological implication is that an LLM need not function as the
+grammar of a low-resource language in order to contribute to generation. It can
+operate as a proposal mechanism upstream of an explicit, revisable, and
+auditable grammatical layer. This arrangement keeps uncertainty visible,
+prevents experimental outputs from becoming their own evidence, and provides a
+reproducible path for extending computational resources as linguistic analysis
+progresses.
 
 \bibliographystyle{plain}
 \bibliography{references}
