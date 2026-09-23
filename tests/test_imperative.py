@@ -13,7 +13,13 @@ def test_reviewed_mako_2pl_imperative():
     assert c.text=="tamagodo"
     assert c.predicate_form=="tamagodo"
 
-def test_mako_imperative_does_not_license_other_cells():
+def test_reviewed_mako_2sg_imperative():
     from bororo_generator.imperative import reviewed_positive_imperative
-    assert reviewed_positive_imperative("mako","2SG") is None
+    c=reviewed_positive_imperative("mako","2SG")
+    assert c is not None
+    assert c.text=="amagodo"
+    assert c.predicate_form=="amagodo"
+
+def test_mako_imperative_does_not_license_unreviewed_cells():
+    from bororo_generator.imperative import reviewed_positive_imperative
     assert reviewed_positive_imperative("mako","1SG") is None
