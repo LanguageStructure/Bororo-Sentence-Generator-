@@ -37,6 +37,7 @@ def morphology_review_queue(lemmas, corpus_path):
         for obs in corpus_lemma_forms(lemma,corpus_path):
             # A full reviewed class is already generative; corpus forms still
             # remain observations, but are not queued as missing morphology.
+            exact_surface=obs["form"] in reviewed_surfaces
             matched_requests=reviewed_surfaces_folded.get(obs["form"].casefold(),[])
             if matched_requests:
                 state="full_class_reviewed" if full is not None else "exact_cell_reviewed"
@@ -55,6 +56,7 @@ def morphology_review_queue(lemmas, corpus_path):
                 "inferred_stem_class":None,
                 "licenses_generation":state in {"full_class_reviewed","exact_cell_reviewed"},
                 "reviewed_requests":matched_requests,
+                "match_type":("exact_surface" if exact_surface else "capitalization_variant") if matched_requests else None,
             })
     rank={"needs_human_review":0,"exact_cell_reviewed":1,"full_class_reviewed":2}
     return sorted(rows,key=lambda r:(rank[r["review_state"]],-r["tokens"],r["lemma"],r["form"]))
