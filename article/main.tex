@@ -157,11 +157,13 @@ NüshuRescue provides a particularly close computational contrast
 \cite{yang2025nushurescue}. Yang et al.\ construct a 500-sentence manually
 validated Nüshu--Chinese corpus and use 35 seed examples with GPT-4-Turbo to
 generate additional translations. Their pipeline combines LLM generation,
-automatic validation, and manual review. A language-specific length constraint
-raises their reported strict translation accuracy from 31.37\% without the
-constraint to 48.69\% with it. The study therefore provides direct evidence
-that explicit linguistic constraints can materially improve an LLM-based
-low-resource pipeline.
+automatic validation, and manual review. A rule-based length validator enforces a one-to-one character mapping and
+rejects length mismatches, prompting the model again for up to seven retries.
+The authors report 31.37\% accuracy without enforced length validation and
+48.69\% with it; the latter is measured as perfect character-by-character
+translation of 50 held-out NCGold examples using 35 seed sentences. The study
+therefore provides a concrete example in which explicit language-specific
+validation improves an LLM-based low-resource pipeline.
 
 The present work shares the broader human-in-the-loop motivation but addresses
 a different problem. NüshuRescue uses an LLM primarily to expand parallel data
