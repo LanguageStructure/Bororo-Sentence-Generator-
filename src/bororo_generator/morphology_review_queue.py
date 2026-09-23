@@ -80,6 +80,12 @@ def morphology_review_queue(lemmas, corpus_path):
                 "licenses_generation":state in {"full_class_reviewed","exact_cell_reviewed","construction_cell_reviewed"},
                 "reviewed_requests":matched_requests,
                 "reviewed_construction_cells":construction_matches,
+                "operator_analysis":(
+                    ["IRR","DECL"] if any(
+                        m.get("construction")=="irrealis_declarative"
+                        for m in construction_matches
+                    ) else None
+                ),
                 "analysis_scope":(
                     "construction_cell" if construction_matches else
                     "full_stem_class" if matched_requests and full is not None else
