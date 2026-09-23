@@ -16,4 +16,7 @@ def main():
     print("lexemes:",s["lexemes"])
     print("generated_records:",s["generated_records"])
     print("unique_predicate_forms_attested:",s["unique_predicate_forms_attested"])
+    print("licensed_by_full_class:",s["licensed_by_full_class"])
+    print("licensed_by_exact_cell:",s["licensed_by_exact_cell"])
+    print("blocked:",s["blocked"])
 if __name__=="__main__": main()
