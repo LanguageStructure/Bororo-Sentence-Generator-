@@ -1,9 +1,9 @@
-"""Conservative realization of reviewed declarative predicate frames.
+"""Conservative realization of reviewed indicative predicate frames.
 
 This layer combines only independently reviewed facts:
 - lexical coding frame;
 - reviewed stem-class paradigm or exact reviewed person cell;
-- declarative -re for ordinary monovalent predication.
+- indicative -re for ordinary monovalent predication.
 
 It does not yet synthesize divalent A expressions or extended-intransitive
 obliques; those require additional constructional choices.
@@ -13,7 +13,7 @@ from .valency_review import reviewed_frame
 from .candidate import Candidate
 from .provenance import Provenance
 
-def monovalent_declarative(lemma, person, valency_path="config/valency_review.yaml"):
+def monovalent_indicative(lemma, person, valency_path="config/valency_review.yaml"):
     if reviewed_frame(lemma,valency_path)!="monovalent":
         return None
     stem=indexed_reviewed_stem(lemma,person)
@@ -22,8 +22,8 @@ def monovalent_declarative(lemma, person, valency_path="config/valency_review.ya
     predicate=stem+"re"
     return Candidate(predicate,Provenance(
         status="generated",
-        pattern="reviewed monovalent declarative: S=LEX-re",
-        rules=["reviewed_coding_frame","reviewed_person_cell_or_class","declarative_re"],
+        pattern="reviewed monovalent indicative: S=LEX-re",
+        rules=["reviewed_coding_frame","reviewed_person_cell_or_class","indicative_re"],
         notes=[f"lemma={lemma}",f"S={person}",
                "Controlled morphological predicate candidate; no overt RP generated."],
     ),predicate_form=predicate)
