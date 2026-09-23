@@ -8,6 +8,7 @@ from .corpus import read_conllu
 from .batch import generate_batch
 from .paradigm_generation import paradigm_requests
 from .evidence_layers import evidence_layers
+from .person_index import REVIEWED_CONSTRUCTION_CELLS
 
 def evaluate_paradigm(lemma, corpus_path):
     sentences=list(read_conllu(corpus_path))
@@ -46,8 +47,25 @@ def evaluate_paradigm(lemma, corpus_path):
         ),
     }
 
+def reviewed_construction_inventory(lemmas):
+    rows=[]
+    for lemma in lemmas:
+        for construction,cells in REVIEWED_CONSTRUCTION_CELLS.get(lemma,{}).items():
+            for person,surface in cells.items():
+                rows.append({"lemma":lemma,"construction":construction,"person":person,"surface":surface})
+    return rows
+
 def evaluate_lexemes(lemmas, corpus_path):
     rows=[evaluate_paradigm(l,corpus_path) for l in lemmas]
+    construction_cells=reviewed_construction_inventory(lemmas)
+    by_frame={}
+    for row in rows:
+        by_frame.setdefault(row["frame"],{"lexemes":0,"requested":0,"generated":0,"blocked":0})
+        bucket=by_frame[row["frame"]]
+        bucket["lexemes"]+=1
+        bucket["requested"]+=row["structural_cells_requested"]
+        bucket["generated"]+=row["generated_records"]
+        bucket["blocked"]+=row["blocked"]
     return {
         "lexemes":len(rows),
         "structural_cells_requested":sum(r["structural_cells_requested"] for r in rows),
@@ -57,5 +75,8 @@ def evaluate_lexemes(lemmas, corpus_path):
         "blocked":sum(r["blocked"] for r in rows),
         "licensed_by_full_class":sum(r["licensed_by_full_class"] for r in rows),
         "licensed_by_exact_cell":sum(r["licensed_by_exact_cell"] for r in rows),
+        "reviewed_construction_cells":len(construction_cells),
+        "construction_inventory":construction_cells,
+        "by_frame":by_frame,
         "results":rows,
     }
