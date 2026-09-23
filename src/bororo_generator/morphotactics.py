@@ -22,3 +22,14 @@ def ordering_licensed(sequence):
 
 def working_schema():
     return ("PERSON","LEX","CAUS","PASS","IRR","NEG","ASPECT","ILLOC","REL")
+
+
+# Reviewed surface realization of adjacent operators. This is kept separate
+# from ordering constraints: it states how an already reviewed combination is
+# realized, not where operators may occur in general.
+REVIEWED_OPERATOR_SURFACES={
+    ("IRR","DECL"):"mode",  # -modu + -re -> -mode
+}
+
+def reviewed_operator_surface(*operators):
+    return REVIEWED_OPERATOR_SURFACES.get(tuple(operators))
