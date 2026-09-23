@@ -29,15 +29,22 @@ def generate_batch_against_corpus(requests, corpus_path):
 
 def batch_summary(records):
     counts={"generated":0,"blocked":0,"accepted":0,
-            "sentence_attested":0,"predicate_form_attested":0,"generated_unattested":0}
+            "sentence_attested":0,"predicate_form_attested":0,"generated_unattested":0,
+            "licensed_by_full_class":0,"licensed_by_exact_cell":0,
+            "blocked_no_morphology_license":0}
     for r in records:
         counts[r["status"]]=counts.get(r["status"],0)+1
         if r.get("validation",{}).get("accepted"): counts["accepted"]+=1
+        lic=r.get("evidence_layers",{}).get("reviewed_grammar",{}).get("morphology_license")
         if r.get("status")=="generated":
+            if lic and lic.get("type")=="full_stem_class": counts["licensed_by_full_class"]+=1
+            if lic and lic.get("type")=="exact_person_cell": counts["licensed_by_exact_cell"]+=1
             att=r.get("attestation",{})
             if att.get("sentence_attested"): counts["sentence_attested"]+=1
             if att.get("predicate_form_attested"): counts["predicate_form_attested"]+=1
             if "attestation" in r and not att.get("sentence_attested") and not att.get("predicate_form_attested"):
                 counts["generated_unattested"]+=1
+        elif not lic:
+            counts["blocked_no_morphology_license"]+=1
     counts["total"]=len(records)
     return counts
