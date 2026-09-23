@@ -16,7 +16,7 @@ def audit_lemma_contexts(corpus_path, lemma, limit=30):
             rows.append({
                 "sent_id":s.sent_id,
                 "text":s.text,
-                "text_por":s.translation_por,
+                "text_por":getattr(s,"translation_por",None),
                 "form":str(t.get("form","")),
                 "upos":str(t.get("upos","")),
                 "deprel":str(t.get("deprel","")),
