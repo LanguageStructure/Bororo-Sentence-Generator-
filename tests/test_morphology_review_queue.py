@@ -89,3 +89,17 @@ def test_exact_surface_match_is_distinguished(monkeypatch):
     row=q.morphology_review_queue(["kodu"],"x")[0]
     assert row["review_state"]=="exact_cell_reviewed"
     assert row["match_type"]=="exact_surface"
+
+
+def test_mako_imperative_surface_is_reviewed_construction_cell(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"tamagodo","count":3,"sent_ids":["s1"],"upos":["VERB"],"deprels":["ccomp"]},
+        {"form":"Tamagodo","count":1,"sent_ids":["s2"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    rows=q.morphology_review_queue(["mako"],"x")
+    by_form={r["form"]:r for r in rows}
+    assert by_form["tamagodo"]["review_state"]=="construction_cell_reviewed"
+    assert by_form["tamagodo"]["match_type"]=="exact_surface"
+    assert by_form["Tamagodo"]["match_type"]=="capitalization_variant"
+    assert by_form["tamagodo"]["reviewed_construction_cells"]==[
+        {"lemma":"mako","construction":"imperative","person":"2PL"}]
