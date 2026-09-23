@@ -225,3 +225,15 @@ def test_Ikodui_matches_kodu_gerund_cell(monkeypatch):
     assert row["match_type"]=="capitalization_variant"
     assert row["reviewed_construction_cells"]==[
         {"lemma":"kodu","construction":"gerund","person":"1SG"}]
+
+
+def test_Ikoduia_matches_kodu_optative_cell(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Ikoduia","count":1,"sent_ids":["41-4"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="construction_cell_reviewed"
+    assert row["analysis_scope"]=="construction_cell"
+    assert row["match_type"]=="capitalization_variant"
+    assert row["reviewed_construction_cells"]==[
+        {"lemma":"kodu","construction":"optative","person":"1SG"}]
