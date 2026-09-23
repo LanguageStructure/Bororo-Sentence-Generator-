@@ -55,6 +55,11 @@ def morphology_review_queue(lemmas, corpus_path):
             exact_surface=obs["form"] in reviewed_surfaces
             matched_requests=reviewed_surfaces_folded.get(obs["form"].casefold(),[])
             construction_matches=construction_surfaces.get(obs["form"].casefold(),[])
+            construction_exact=any(
+                obs["form"]==surface
+                for cells in REVIEWED_CONSTRUCTION_CELLS.get(lemma,{}).values()
+                for surface in cells.values()
+            )
             if matched_requests:
                 state="full_class_reviewed" if full is not None else "exact_cell_reviewed"
             elif construction_matches:
@@ -75,7 +80,7 @@ def morphology_review_queue(lemmas, corpus_path):
                 "licenses_generation":state in {"full_class_reviewed","exact_cell_reviewed","construction_cell_reviewed"},
                 "reviewed_requests":matched_requests,
                 "reviewed_construction_cells":construction_matches,
-                "match_type":(("exact_surface" if obs["form"] in {s for s in REVIEWED_CONSTRUCTION_CELLS.get(lemma,{}).get("imperative",{}).values()} else "capitalization_variant") if construction_matches else (("exact_surface" if exact_surface else "capitalization_variant") if matched_requests else None)),
+                "match_type":(("exact_surface" if construction_exact else "capitalization_variant") if construction_matches else (("exact_surface" if exact_surface else "capitalization_variant") if matched_requests else None)),
             })
     rank={"needs_human_review":0,"construction_cell_reviewed":1,"exact_cell_reviewed":2,"full_class_reviewed":3}
     return sorted(rows,key=lambda r:(rank[r["review_state"]],-r["tokens"],r["lemma"],r["form"]))
