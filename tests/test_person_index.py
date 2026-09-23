@@ -152,3 +152,8 @@ def test_mako_reviewed_corf_gerund_cell():
     assert reviewed_construction_cell(
         "mako","gerund","CORF"
     )=="tumagoi"
+
+
+def test_meru_reviewed_1pl_inclusive_cell():
+    assert reviewed_person_cell("meru","1PL.INCL")=="pameru"
+    assert indexed_reviewed_stem("meru","1PL.INCL")=="pameru"
