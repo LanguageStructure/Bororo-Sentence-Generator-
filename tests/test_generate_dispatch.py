@@ -8,7 +8,7 @@ def test_dispatch_monovalent():
 def test_dispatch_extended():
     r=generate_declarative("mako",s_person="2SG",oblique_phrase="Boe")
     assert not r.blocked and r.frame=="extended_intransitive"
-    assert r.candidate.text=="amakore Boe ji"
+    assert r.candidate.text=="amagore Boe ji"
 
 def test_dispatch_divalent():
     r=generate_declarative("maku",a_person="3PL",o_person="3PL")
