@@ -6,20 +6,20 @@ stem class, or coding frame is inferred from corpus shape or frequency.
 from .corpus_evidence import corpus_lemma_forms
 from .person_index import reviewed_stem_class
 from .paradigm_generation import paradigm_requests
-from .generate import generate_declarative
+from .generate import generate_indicative
 from .person_index import REVIEWED_CONSTRUCTION_CELLS
 from .context_audit import audit_lemma_contexts
 
 def reviewed_predicate_surfaces(lemma):
     """Exact reviewed generated predicate surfaces, indexed by request.
 
-    This is construction-aware: declarative -re is present for monovalent and
+    This is construction-aware: indicative -re is present for monovalent and
     extended predicates, while divalent predicate realization follows its own
     generator. No suffix is stripped or appended heuristically.
     """
     out={}
     for request in paradigm_requests(lemma):
-        result=generate_declarative(**request)
+        result=generate_indicative(**request)
         if result.blocked or result.candidate is None:
             continue
         form=result.candidate.predicate_form
@@ -96,8 +96,8 @@ def morphology_review_queue(lemmas, corpus_path):
                 "reviewed_requests":matched_requests,
                 "reviewed_construction_cells":construction_matches,
                 "operator_analysis":(
-                    ["IRR","DECL"] if any(
-                        m.get("construction")=="irrealis_declarative"
+                    ["IRR","IND"] if any(
+                        m.get("construction")=="irrealis_indicative"
                         for m in construction_matches
                     ) else None
                 ),
