@@ -406,20 +406,22 @@ changes the reviewed grammatical inventory used to produce the same records.
 \section{Experiment 2: direct vs. evidence-bounded LLM generation}
 \label{sec:ai}
 
-The second experiment evaluates the central operational claim of the
-evidence-bound architecture: probabilistic proposal can be separated from
-grammatical realization so that model output does not itself supply the
-morphological license. The comparison uses the same frozen lexical and
-constructional inventory in two conditions.
+The second experiment tests whether LLM proposal can be separated operationally
+from grammatical realization without allowing model output to supply its own
+morphological license. The comparison uses the same 28 frozen tasks in two
+conditions.
 
 \paragraph{Condition A: direct generation.}
-An LLM receives a task specification and is asked to return a Bororo surface
-form or sentence directly. The output is retained exactly as produced and is
-subsequently audited against the reviewed grammar and corpus evidence.
+GPT-5.6 Sol receives a task specification and is asked to return a Bororo
+surface form directly. The raw response and parsed output are retained. The
+surface is first compared mechanically with the deterministic realization and
+then subjected to a separate linguistic audit; arbitrary direct outputs are not
+automatically segmented in order to make the evaluator infer the grammar being
+tested.
 
 \paragraph{Condition B: evidence-bounded generation.}
-The same LLM receives an equivalent task but returns an abstract proposal
-rather than Bororo surface morphology. A proposal specifies the lexeme,
+The same model, GPT-5.6 Sol, receives the corresponding task but returns an
+abstract proposal rather than Bororo surface morphology. A proposal specifies the lexeme,
 construction, relevant S/A/O person values, and any oblique phrase represented
 in the task schema. The deterministic component either realizes the proposal
 from reviewed licenses or blocks it. The LLM is not permitted to add a person
@@ -446,24 +448,26 @@ Provenance & prompt/output audit & proposal + licenses + realization\\
 
 \subsection{Research questions}
 
-The experiment asks three related questions: (i) what kinds of divergence
-appear under direct LLM surface generation; (ii) whether an LLM can preserve
-the requested abstract structural specification when surface realization is
-delegated to reviewed grammar; and (iii) whether any proposal in the frozen
-task set lacks a required license and is therefore blocked. In v1, all 28
-proposals preserve the requested specification and all 28 are realizable.
-Accordingly, no blocking event occurs in this deliberately licensed task set;
-the experiment does not estimate a general blocking rate for arbitrary Bororo
-requests.
+The experiment asks three related questions: (i) how direct LLM surfaces
+diverge from the frozen controlled realizations; (ii) whether the model
+preserves the requested abstract structural specification when surface
+realization is delegated to reviewed grammar; and (iii) whether the frozen
+realizer can realize those submitted proposals. Because the task inventory was
+drawn from combinations already licensed by v1, the third question is a
+pipeline check for this experiment, not an estimate of a general blocking rate
+for arbitrary Bororo requests.
 
 \subsection{Experimental controls}
 
-To make the two conditions comparable, task specifications, target lexical
-items, person values, and constructions were drawn from the same frozen
-inventory. Prompts and model settings were frozen and archived with the
-experiment. The direct condition did not receive additional examples unavailable
-to the proposal condition. Raw outputs were retained, and classifications that
-depend on linguistic analysis remain auditable against the reviewed grammar.
+To make the two conditions comparable, both conditions use the same 28 task
+specifications and the same five target lexemes. The model was GPT-5.6 Sol in
+both conditions, with reasoning effort set to \texttt{none}. Separate prompts
+were frozen for direct surface generation and abstract proposal. Each condition
+was run once over the complete task inventory; the resulting 28 raw responses
+per condition were retained rather than regenerated after inspection. The
+prompts sent only the frozen task representation and instructions: neither the
+private grammar, the private dictionary, nor the corpus was supplied to the
+model in these runs.
 
 The v1 grammar and task inventory were frozen before the LLM outputs were
 collected. Inspection of those outputs did not modify the grammar used to score
@@ -487,19 +491,15 @@ mismatch}, and \emph{frame violation}. It additionally records
 violation}, and \emph{unsupported but plausible} analyses. Unresolved cases
 remain unresolved rather than being forced into an error category.
 
-Corpus status is reported separately. A candidate may be sentence-attested,
-predicate-form-attested, or unattested in the supplied corpus. These labels
-describe documentary evidence and do not alter its grammatical-review status.
-
-\subsection{Results of the frozen v1 comparison}
+ \subsection{Results of the frozen v1 comparison}
 
 The frozen experiment contains 28 tasks. In the direct condition, only one
 output (1/28; 3.6\%) is an exact surface match to the deterministic realization.
 This number is a string-level comparison and is \emph{not} interpreted as a
 3.6\% grammaticality or accuracy score. Human audit currently marks 12 outputs
 as reviewed and 16 as pending further linguistic analysis. Twenty-five of the
-28 direct outputs show a construction mismatch relative to the requested task,
-whereas three do not.
+28 direct outputs are classified as construction mismatches relative to the
+requested task, whereas three are classified as non-mismatches.
 
 The multidimensional audit illustrates why exact nonmatch cannot be equated
 with ungrammaticality. Morphological violation is established for three outputs,
@@ -508,16 +508,17 @@ nine outputs are mismatches, ten are not, and three remain unresolved among the
 22 applicable S tasks. All six divalent tasks show an A-person mismatch. For O,
 two of the six divalent tasks match, two mismatch, and two remain unresolved.
 Six outputs show a coding-frame violation, eighteen do not, and four remain
-unresolved. No complementary-distribution violation was identified in the 28
-outputs. Constructional overgeneralization and unsupported-but-plausible status
-remain unresolved in fourteen and sixteen cases, respectively.
+unresolved. No complementary-distribution violation is identified under the reviewed
+segmentations available to the audit. Constructional overgeneralization remains
+unresolved in fourteen cases, and unsupported-but-plausible status remains
+unresolved in sixteen; these unresolved labels are not negative judgments.
 
-In the evidence-bounded condition, all 28 abstract proposals preserve the
-requested task specification exactly: lemma, construction, S, A, O, and oblique
-fields show no proposal--task mismatch. The frozen deterministic system then
-realizes all 28 proposals, with no blocked request. Thus the observed v1 chain
-is 28 tasks $\rightarrow$ 28 structurally aligned proposals $\rightarrow$ 28
-licensed deterministic realizations.
+In the evidence-bounded condition, an evaluator-side alignment check finds no
+proposal--task mismatch in lemma, construction, S, A, O, or oblique fields:
+28/28 proposals are fully aligned. The frozen deterministic system subsequently
+returns a realization for all 28 submitted proposals and blocks none. Thus the
+observed v1 chain is 28 tasks $\rightarrow$ 28 structurally aligned proposals
+$\rightarrow$ 28 deterministic realizations under the frozen licenses.
 
 \begin{table}[ht]
 \centering
@@ -543,13 +544,16 @@ Condition-B proposals deterministically realized & 28/28\\
 \end{table}
 
 These results test task preservation and evidence-bounded realization, not
-native-speaker acceptability. In particular, a deterministic realization means
-that the frozen reviewed system licensed the requested structural cell; it is
-not an independent grammaticality judgment. Conversely, a direct output that
-differs from the controlled realization may still be a well-formed Bororo
-expression in another construction.
+native-speaker acceptability and not comparative model accuracy. Condition B is
+also not an independent language-generation baseline: once an aligned proposal
+is submitted, its surface is produced by the reviewed deterministic component.
+The 28/28 result therefore demonstrates successful preservation and passage
+through this frozen pipeline for the licensed v1 tasks. Conversely, a direct
+output that differs from the controlled realization may still be a well-formed
+Bororo expression in another construction, or may remain linguistically
+unresolved.
 
-\n\section{Evaluation design and limitations}
+\section{Evaluation design and limitations}
 \label{sec:limits}
 
 The baseline is intentionally small. It measures the behavior of an
