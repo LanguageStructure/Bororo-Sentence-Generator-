@@ -49,3 +49,8 @@ def test_emagu_preserves_underlying_e_plus_maku_analysis():
     assert reviewed_person_analysis("maku","3PL")=={
         "index":"e","lexeme":"maku","surface":"emagu"}
     assert reviewed_person_cell("maku","3PL")=="emagu"
+
+
+def test_meru_reviewed_1pl_exclusive_cell():
+    assert reviewed_person_cell("meru","1PL.EXCL")=="cemeru"
+    assert indexed_reviewed_stem("meru","1PL.EXCL")=="cemeru"
