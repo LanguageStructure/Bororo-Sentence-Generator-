@@ -5,6 +5,7 @@ stem class, or coding frame is inferred from corpus shape or frequency.
 """
 from .corpus_evidence import corpus_lemma_forms
 from .person_index import REVIEWED_PERSON_CELLS, reviewed_stem_class
+from .context_audit import audit_lemma_contexts
 
 def morphology_review_queue(lemmas, corpus_path):
     rows=[]
@@ -35,3 +36,21 @@ def morphology_review_queue(lemmas, corpus_path):
             })
     rank={"needs_human_review":0,"exact_cell_reviewed":1,"full_class_reviewed":2}
     return sorted(rows,key=lambda r:(rank[r["review_state"]],-r["tokens"],r["lemma"],r["form"]))
+
+
+def review_packet(lemma, form, corpus_path, limit=12):
+    """Return corpus contexts for one queued form without adding an analysis."""
+    contexts=audit_lemma_contexts(corpus_path,lemma,limit=limit,form=form)
+    return {
+        "lemma":lemma,
+        "form":form,
+        "contexts":contexts,
+        "analysis":{
+            "person":None,
+            "segmentation":None,
+            "stem_class":None,
+            "coding_frame":None,
+        },
+        "licenses_generation":False,
+        "instruction":"Human review required; corpus context is evidence, not an inferred analysis.",
+    }
