@@ -66,7 +66,7 @@ def reviewed_persons(stem):
 # Construction-specific reviewed cells must not be promoted to the ordinary
 # person paradigm. Surface includes the constructional morphology.
 REVIEWED_CONSTRUCTION_CELLS={
-    "nudu":{"subjunctive":{"1PL.EXCL":"cenuduwo"}},
+    "nudu":{"subjunctive":{"1PL.EXCL":"cenuduwo"},"negative_indicative":{"1SG":"inudukare"}},
     "mako":{
         "imperative":{
             "2SG":"amagodo",
