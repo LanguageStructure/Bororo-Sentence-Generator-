@@ -376,7 +376,7 @@ reviewed grammar.
 
 \begin{table}[ht]
 \centering
-\caption{Planned comparison between direct and evidence-bounded generation.}
+\caption{Comparison between direct and evidence-bounded generation.}
 \label{tab:llmexperiment}
 \begin{tabular}{p{.28\linewidth}p{.31\linewidth}p{.31\linewidth}}
 \toprule
@@ -394,32 +394,90 @@ Provenance & prompt/output audit & proposal + licenses + realization\\
 
 \subsection{Evaluation categories}
 
-Outputs will be classified independently along several dimensions rather than
-collapsed into a single accuracy score. A \emph{morphological violation}
-contains a person realization or operator sequence incompatible with the
-reviewed inventory. A \emph{frame violation} requests or realizes an argument
-structure incompatible with the reviewed coding frame. A \emph{constructional
-overgeneralization} extends a construction-specific cell to an unreviewed
-context. A \emph{complementary-distribution violation} combines members of a
-reviewed mutually exclusive suffix domain. An \emph{unsupported but
-plausible} output is structurally interpretable by analogy but lacks the
-reviewed evidence required for a license. This last category is central: the
-controlled system should preserve it as unresolved rather than converting
-plausibility into grammatical knowledge.
+Outputs are classified independently along several dimensions rather than
+collapsed into a single accuracy score. Crucially, morphological well-formedness
+is separated from task adequacy. A grammatical Bororo form may instantiate a
+different construction from the one requested. For example, a form without the
+indicative marker need not be morphologically ill formed merely because the
+experimental task requested indicative predication.
+
+The audit therefore distinguishes \emph{morphological violation},
+\emph{construction mismatch}, position-specific \emph{S-, A-, and O-person
+mismatch}, and \emph{frame violation}. It additionally records
+\emph{constructional overgeneralization}, \emph{complementary-distribution
+violation}, and \emph{unsupported but plausible} analyses. Unresolved cases
+remain unresolved rather than being forced into an error category.
 
 Corpus status is reported separately. A candidate may be sentence-attested,
 predicate-form-attested, or unattested in the supplied corpus. These labels
 describe documentary evidence and do not alter its grammatical-review status.
 
+\subsection{Results of the frozen v1 comparison}
+
+The frozen experiment contains 28 tasks. In the direct condition, only one
+output (1/28; 3.6\%) is an exact surface match to the deterministic realization.
+This number is a string-level comparison and is \emph{not} interpreted as a
+3.6\% grammaticality or accuracy score. Human audit currently marks 12 outputs
+as reviewed and 16 as pending further linguistic analysis. Twenty-five of the
+28 direct outputs show a construction mismatch relative to the requested task,
+whereas three do not.
+
+The multidimensional audit illustrates why exact nonmatch cannot be equated
+with ungrammaticality. Morphological violation is established for three outputs,
+rejected for nine, and remains unresolved for sixteen. For S-person realization,
+nine outputs are mismatches, ten are not, and three remain unresolved among the
+22 applicable S tasks. All six divalent tasks show an A-person mismatch. For O,
+two of the six divalent tasks match, two mismatch, and two remain unresolved.
+Six outputs show a coding-frame violation, eighteen do not, and four remain
+unresolved. No complementary-distribution violation was identified in the 28
+outputs. Constructional overgeneralization and unsupported-but-plausible status
+remain unresolved in fourteen and sixteen cases, respectively.
+
+In the evidence-bounded condition, all 28 abstract proposals preserve the
+requested task specification exactly: lemma, construction, S, A, O, and oblique
+fields show no proposal--task mismatch. The frozen deterministic system then
+realizes all 28 proposals, with no blocked request. Thus the observed v1 chain
+is 28 tasks $\rightarrow$ 28 structurally aligned proposals $\rightarrow$ 28
+licensed deterministic realizations.
+
+\begin{table}[ht]
+\centering
+\caption{Frozen v1 LLM comparison. Audit categories are reported independently.}
+\label{tab:v1llmresults}
+\begin{tabular}{lr}
+\toprule
+Measure & Result\\
+\midrule
+Tasks & 28\\
+Direct exact surface matches & 1/28 (3.6\%)\\
+Direct construction mismatches & 25/28\\
+Direct morphological violation & 3 yes; 9 no; 16 unresolved\\
+Direct S-person mismatch (22 applicable) & 9 yes; 10 no; 3 unresolved\\
+Direct A-person mismatch (6 applicable) & 6 yes\\
+Direct O-person mismatch (6 applicable) & 2 yes; 2 no; 2 unresolved\\
+Direct frame violation & 6 yes; 18 no; 4 unresolved\\
+Direct complementary-distribution violation & 0/28\\
+Condition-B proposals aligned to task & 28/28\\
+Condition-B proposals deterministically realized & 28/28\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+These results test task preservation and evidence-bounded realization, not
+native-speaker acceptability. In particular, a deterministic realization means
+that the frozen reviewed system licensed the requested structural cell; it is
+not an independent grammaticality judgment. Conversely, a direct output that
+differs from the controlled realization may still be a well-formed Bororo
+expression in another construction.
+
 \subsection{Experimental controls}
 
 To make the two conditions comparable, task specifications, target lexical
-items, person values, and constructions will be sampled from the same inventory.
-Prompts and model settings will be frozen and archived with the experiment.
-The direct condition will not receive additional examples unavailable to the
-proposal condition. Repeated runs will be retained rather than selectively
-discarded, and all automatic classifications that depend on a linguistic
-analysis will remain auditable against the reviewed grammar.
+items, person values, and constructions were drawn from the same frozen
+inventory. Prompts and model settings were frozen and archived with the
+experiment. The direct condition did not receive additional examples unavailable
+to the proposal condition. Raw outputs were retained, and classifications that
+depend on linguistic analysis remain auditable against the reviewed grammar.
 
 The frozen v1 baseline precedes this experiment and will not be retrospectively
 modified in response to LLM outputs. New linguistic analyses discovered during
