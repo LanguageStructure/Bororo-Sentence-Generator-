@@ -32,7 +32,7 @@ REVIEWED_PERSON_CELLS={
     "meru":{"2SG":"ameru","1PL.EXCL":"cemeru","3PL":"emeru"},
     "kodu":{"1SG":"ikodu","1PL.EXCL":"cegodu","3PL":"ekodu","CORF":"tugodu"},
     "maragodu":{"2PL":"tamaragodu"},
-    "mako":{"1SG":"imago","2SG":"amago","3SG":"mako"},
+    "mako":{"1SG":"imago","2SG":"amago","3SG":"mako","1PL.EXCL":"cemago"},
     "kudu":{"2SG":"akudu"},
     "maku":{"3SG":"maku","3PL":"emagu"},
 }
