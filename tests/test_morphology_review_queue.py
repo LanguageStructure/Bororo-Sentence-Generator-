@@ -10,3 +10,13 @@ def test_queue_does_not_infer_analysis(monkeypatch):
     assert r["inferred_segmentation"] is None
     assert r["inferred_stem_class"] is None
     assert r["licenses_generation"] is False
+
+
+def test_review_packet_preserves_analysis_boundary(monkeypatch):
+    monkeypatch.setattr(q,"audit_lemma_contexts",lambda *a,**k:[
+        {"sent_id":"s1","text":"X kodure","text_por":"...","form":"kodure",
+         "upos":"VERB","deprel":"root","head":0}])
+    p=q.review_packet("kodu","kodure","x")
+    assert p["contexts"][0]["sent_id"]=="s1"
+    assert p["analysis"]=={"person":None,"segmentation":None,"stem_class":None,"coding_frame":None}
+    assert p["licenses_generation"] is False
