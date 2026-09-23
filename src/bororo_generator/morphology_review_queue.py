@@ -50,6 +50,11 @@ def morphology_review_queue(lemmas, corpus_path):
         construction_surfaces=reviewed_construction_surfaces(lemma)
         full=reviewed_stem_class(lemma)
         for obs in corpus_lemma_forms(lemma,corpus_path):
+            # The current morphology queue reviews verbal predicate morphology.
+            # Same-spelling tokens annotated only as another UPOS are retained
+            # as corpus evidence, but are not treated as missing verbal cells.
+            upos=set(obs.get("upos",[]))
+            lexical_homograph = bool(upos) and "VERB" not in upos
             # A full reviewed class is already generative; corpus forms still
             # remain observations, but are not queued as missing morphology.
             exact_surface=obs["form"] in reviewed_surfaces
@@ -60,7 +65,9 @@ def morphology_review_queue(lemmas, corpus_path):
                 for cells in REVIEWED_CONSTRUCTION_CELLS.get(lemma,{}).values()
                 for surface in cells.values()
             )
-            if matched_requests:
+            if lexical_homograph:
+                state="nonverbal_homograph"
+            elif matched_requests:
                 state="full_class_reviewed" if full is not None else "exact_cell_reviewed"
             elif construction_matches:
                 state="construction_cell_reviewed"
@@ -78,6 +85,7 @@ def morphology_review_queue(lemmas, corpus_path):
                 "inferred_segmentation":None,
                 "inferred_stem_class":None,
                 "licenses_generation":state in {"full_class_reviewed","exact_cell_reviewed","construction_cell_reviewed"},
+                "lexical_identity_status":"nonverbal_homograph" if lexical_homograph else "verbal_candidate",
                 "reviewed_requests":matched_requests,
                 "reviewed_construction_cells":construction_matches,
                 "operator_analysis":(
@@ -94,7 +102,7 @@ def morphology_review_queue(lemmas, corpus_path):
                 ),
                 "match_type":(("exact_surface" if construction_exact else "capitalization_variant") if construction_matches else (("exact_surface" if exact_surface else "capitalization_variant") if matched_requests else None)),
             })
-    rank={"needs_human_review":0,"construction_cell_reviewed":1,"exact_cell_reviewed":2,"full_class_reviewed":3}
+    rank={"needs_human_review":0,"construction_cell_reviewed":1,"exact_cell_reviewed":2,"full_class_reviewed":3,"nonverbal_homograph":4}
     return sorted(rows,key=lambda r:(rank[r["review_state"]],-r["tokens"],r["lemma"],r["form"]))
 
 
