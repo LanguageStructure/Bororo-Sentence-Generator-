@@ -36,10 +36,8 @@ def morphology_review_queue(lemmas, corpus_path):
         for obs in corpus_lemma_forms(lemma,corpus_path):
             # A full reviewed class is already generative; corpus forms still
             # remain observations, but are not queued as missing morphology.
-            if full is not None:
-                state="full_class_reviewed"
-            elif obs["form"] in reviewed_surfaces:
-                state="exact_cell_reviewed"
+            if obs["form"] in reviewed_surfaces:
+                state="full_class_reviewed" if full is not None else "exact_cell_reviewed"
             else:
                 state="needs_human_review"
             rows.append({
