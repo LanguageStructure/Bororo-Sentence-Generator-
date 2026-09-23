@@ -79,6 +79,9 @@ REVIEWED_CONSTRUCTION_CELLS={
         "irrealis_indicative":{
             "1SG":"imagomode",
         },
+        "gerund":{
+            "CORF":"tumagoi",
+        },
     },
     "kodu":{
         "irrealis_indicative":{
