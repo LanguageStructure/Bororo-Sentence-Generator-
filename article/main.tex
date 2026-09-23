@@ -212,15 +212,16 @@ reviewed cells coexist with fuller paradigms, corpus matches remain
 observations, and unresolved evidence remains computationally unresolved.
 
 AvarLab offers a recent and especially close point of comparison
-\cite{zagidov2026avarlab}. Its rule-based generate--verify workflow
-generates inflected forms from lexical resources and verifies them against
-corpora. Our workflow shares the use of explicit rules and corpus verification,
-but reverses an important evidential assumption: corpus verification is not
-allowed to promote a generated Bororo form into reviewed grammatical knowledge.
-The human-review layer remains an independent gate. This distinction is
-designed for documentary situations in which corpus sparsity, homography,
-construction-specific allomorphy, and incomplete paradigms make automatic
-promotion particularly risky.
+\cite{zagidov2026avarlab}. Its rule-based generate--verify workflow generates
+large inflectional inventories from lexical resources and couples morphological
+generation with corpus verification. Our workflow shares the use of explicit
+rules and corpus comparison. The present paper, however, asks a different
+evidential question: corpus attestation is represented separately from the
+human-reviewed license that permits productive generation. We therefore do not
+treat a corpus match, by itself, as sufficient to promote a candidate into the
+reviewed grammatical inventory. This separation is motivated by documentary
+situations in which corpus sparsity, homography, construction-specific
+allomorphy, and incomplete paradigms can make automatic generalization risky.
 
 \subsection{Human-in-the-loop systems and the closest architectural comparison}
 
@@ -242,16 +243,19 @@ LLM integration. This substantially narrows the novelty claim available to the
 present work: integration of corpus evidence, explicit morphology, provenance,
 human review, and optional LLM assistance is not by itself novel.
 
-The distinction investigated here is more specific. The generator represents
-\emph{licensing status} as an independent computational layer. Corpus
-observation, a human linguistic analysis, a license for generation, a generated
-candidate, and subsequent corpus attestation are different states with
-one-way promotion rules. Partial knowledge is first-class: an exact reviewed
-person cell need not imply a paradigm, and a construction-specific realization
-need not imply the corresponding ordinary indicative cell. The empirical
-question is therefore whether this evidence-bounded representation provides a
-useful safety and auditability advantage when generation is extended with LLM
-proposals.
+The distinction investigated here is therefore deliberately narrower than
+platform integration. The generator represents \emph{licensing status} as an
+independent computational layer: corpus observation, human linguistic analysis,
+a license for generation, a generated candidate, and subsequent corpus
+attestation are distinct states. Partial knowledge is represented explicitly:
+an exact reviewed person cell need not imply a paradigm, and a
+construction-specific realization need not imply the corresponding ordinary
+indicative cell. We evaluate this representation directly by freezing the
+reviewed grammar before comparing direct LLM surface generation with abstract
+LLM proposals whose realization is delegated to that grammar. The claimed
+contribution is this operationalization and evaluation of evidence-bounded
+licensing, rather than the individual presence of an FST or rule system,
+corpus search, provenance, human review, or LLM assistance.
 
 \section{Methodological motivation}
 \label{sec:motivation}
