@@ -73,3 +73,18 @@ python3 scripts/build_experiment_tasks.py --output reports/experiment-v1/tasks.j
 ```
 
 The v1 inventory must contain exactly 28 tasks, with stable IDs v1-001 through v1-028. Both experimental conditions consume this same file.
+
+## Model registration for the first run
+
+The first OpenAI run uses the exact model ID `gpt-5.6-sol` through the Responses API.
+Use the same model and reasoning setting in both conditions. The runner must
+record the model ID returned by the API, UTC execution time, reasoning effort,
+prompt hash, task ID, raw response, and parsed response.
+
+Do not substitute the moving alias `gpt-5.6` for the recorded experimental
+identifier. If the API exposes a more specific snapshot identifier in the
+response, preserve it in the raw metadata.
+
+Initial setting: `reasoning.effort = none`. This minimizes hidden reasoning as
+an uncontrolled difference between conditions; the structural proposal
+condition is testing the architecture, not additional inference budget.
