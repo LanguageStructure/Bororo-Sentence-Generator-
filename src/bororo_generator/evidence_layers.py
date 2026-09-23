@@ -4,6 +4,7 @@ Corpus occurrence is observational evidence only. It never promotes a cell to
 human-reviewed grammar and never licenses generation by itself.
 """
 from .orthography import form_key
+from .person_index import reviewed_stem_class, reviewed_person_cell
 
 def corpus_form_evidence(record):
     att=record.get("attestation",{}) or {}
@@ -21,9 +22,19 @@ def corpus_form_evidence(record):
 
 def evidence_layers(record):
     ev=record.get("evidence",{}) or {}
+    req=record.get("request",{}) or {}
+    lemma=req.get("lemma") or ev.get("lemma")
+    person=req.get("s_person") or req.get("o_person")
+    cls=reviewed_stem_class(lemma) if lemma else None
+    exact=reviewed_person_cell(lemma,person) if lemma and person else None
     grammar={
         "reviewed_frame":ev.get("reviewed_frame"),
-        "reviewed_stem_class":ev.get("reviewed_stem_class"),
+        "morphology_license":(
+            {"type":"exact_person_cell","person":person,"form":exact}
+            if exact is not None else
+            {"type":"full_stem_class","stem_class":cls}
+            if cls is not None else None
+        ),
         "valency_evidence":ev.get("valency_evidence"),
     }
     return {
