@@ -55,6 +55,7 @@ def morphology_review_queue(lemmas, corpus_path):
             # as corpus evidence, but are not treated as missing verbal cells.
             upos=set(obs.get("upos",[]))
             lexical_homograph = bool(upos) and "VERB" not in upos
+            mixed_upos = "VERB" in upos and any(tag!="VERB" for tag in upos)
             # A full reviewed class is already generative; corpus forms still
             # remain observations, but are not queued as missing morphology.
             exact_surface=obs["form"] in reviewed_surfaces
@@ -65,7 +66,9 @@ def morphology_review_queue(lemmas, corpus_path):
                 for cells in REVIEWED_CONSTRUCTION_CELLS.get(lemma,{}).values()
                 for surface in cells.values()
             )
-            if lexical_homograph:
+            if mixed_upos:
+                state="token_identity_review"
+            elif lexical_homograph:
                 state="nonverbal_homograph"
             elif matched_requests:
                 state="full_class_reviewed" if full is not None else "exact_cell_reviewed"
@@ -85,7 +88,11 @@ def morphology_review_queue(lemmas, corpus_path):
                 "inferred_segmentation":None,
                 "inferred_stem_class":None,
                 "licenses_generation":state in {"full_class_reviewed","exact_cell_reviewed","construction_cell_reviewed"},
-                "lexical_identity_status":"nonverbal_homograph" if lexical_homograph else "verbal_candidate",
+                "lexical_identity_status":(
+                    "mixed_upos_requires_token_review" if mixed_upos else
+                    "nonverbal_homograph" if lexical_homograph else
+                    "verbal_candidate"
+                ),
                 "reviewed_requests":matched_requests,
                 "reviewed_construction_cells":construction_matches,
                 "operator_analysis":(
@@ -102,7 +109,7 @@ def morphology_review_queue(lemmas, corpus_path):
                 ),
                 "match_type":(("exact_surface" if construction_exact else "capitalization_variant") if construction_matches else (("exact_surface" if exact_surface else "capitalization_variant") if matched_requests else None)),
             })
-    rank={"needs_human_review":0,"construction_cell_reviewed":1,"exact_cell_reviewed":2,"full_class_reviewed":3,"nonverbal_homograph":4}
+    rank={"token_identity_review":0,"needs_human_review":1,"construction_cell_reviewed":2,"exact_cell_reviewed":3,"full_class_reviewed":4,"nonverbal_homograph":5}
     return sorted(rows,key=lambda r:(rank[r["review_state"]],-r["tokens"],r["lemma"],r["form"]))
 
 
@@ -126,10 +133,11 @@ def review_packet(lemma, form, corpus_path, limit=12):
 
 def review_queue_summary(rows):
     """Summarize review workload without converting observations into analyses."""
-    unresolved=[r for r in rows if r.get("review_state")=="needs_human_review"]
+    unresolved=[r for r in rows if r.get("review_state") in {"needs_human_review","token_identity_review"}]
     return {
         "observed_forms":len(rows),
         "needs_human_review":len(unresolved),
+        "token_identity_review":sum(r.get("review_state")=="token_identity_review" for r in unresolved),
         "tokens_needing_review":sum(r.get("tokens",0) for r in unresolved),
         "lemmas_needing_review":len({r.get("lemma") for r in unresolved}),
         "top_unresolved":[
