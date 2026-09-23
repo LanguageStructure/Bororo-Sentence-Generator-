@@ -9,5 +9,10 @@ def test_ako_candidate_has_generated_provenance():
  assert r["validation"]["accepted"]
  assert "experimental output" in r["validation"]["warnings"][0]
 
+def test_reviewed_2sg_ind_candidate_is_licensed():
+ c=ako_candidate(person=2,number="Sing",mood="Ind")
+ assert c is not None
+ assert c.text=="akagore"
+
 def test_unreviewed_candidate_is_blocked():
- assert ako_candidate(person=2,number="Sing",mood="Ind") is None
+ assert ako_candidate(person=2,number="Plur",mood="Ind") is None
