@@ -68,6 +68,7 @@ def reviewed_persons(stem):
 REVIEWED_CONSTRUCTION_CELLS={
     "mako":{
         "imperative":{
+            "2SG":"amagodo",
             "2PL":"tamagodo",
         },
     },
