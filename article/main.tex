@@ -43,23 +43,52 @@ remains explicitly unresolved.
 
 Generative experiments with low-resource languages face a basic evidential
 problem: occurrence in a corpus is not equivalent to a grammatical rule, while
-absence from a small corpus is not evidence of ungrammaticality. This problem
+absence from a small corpus is not evidence of ungrammaticality. The problem
 becomes more acute when automatic induction or a large language model is allowed
 to convert distributional regularities directly into productive analyses.
+Surface plausibility can then obscure whether an output is licensed by
+documented grammatical evidence, extrapolated from an incomplete paradigm, or
+simply produced by analogy.
 
 We investigate an alternative architecture in which documentary corpus evidence
 and grammatical licensing remain formally distinct. The CorBo corpus supplies
 observations. Human linguistic review establishes the morphological and
-constructional facts that may license generation. A deterministic generator then
-realizes only reviewed combinations, retaining provenance for the evidence and
-rules used. Artificial-intelligence components can subsequently propose
-structures for evaluation, but do not themselves constitute grammatical
-evidence.
+constructional facts that may license generation. A deterministic generator
+realizes only reviewed combinations and retains provenance for the evidence and
+rules used. Unresolved evidence remains an explicit computational state rather
+than being completed automatically.
 
-The contribution is methodological rather than a claim to broad-coverage
-generation. We ask whether a small, explicitly reviewed grammatical layer can
-support reproducible controlled generation while making the boundary between
-observed data, linguistic analysis, and generated output inspectable.
+The study evaluates this architecture in two stages. First, a frozen controlled
+baseline asks whether a small reviewed grammar can recombine licensed Bororo
+structures without reducing generation to retrieval from the corpus. Second, we
+compare two uses of the same LLM over a common frozen task inventory. In the
+direct condition, the model produces Bororo surface output. In the
+evidence-bounded condition, it produces only an abstract structural proposal;
+surface morphology is then supplied by the reviewed deterministic grammar or
+the request is blocked if the required license is absent.
+
+This comparison requires a distinction that is often hidden by exact-match
+evaluation. A model output may differ from the requested realization while
+remaining a possible expression in another construction. We therefore separate
+morphological well-formedness from construction match, S/A/O person match, and
+coding-frame match. Corpus attestation is measured independently and never
+promotes an analysis to grammatical status.
+
+The paper addresses three empirical questions. First, can reviewed but partial
+grammatical knowledge support controlled recombination beyond exact corpus
+sentences? Second, what kinds of divergence arise when an LLM is asked to
+produce Bororo morphology directly? Third, can the model preserve the requested
+structural information when morphology is delegated to an evidence-bounded
+realizer? These questions concern evidential control and task preservation, not
+a claim of complete Bororo coverage or a single model-wide grammaticality
+score.
+
+The contribution is therefore methodological. The architecture makes
+\emph{observation}, \emph{analysis}, \emph{licensing}, \emph{generation},
+and \emph{attestation} separately inspectable, while the frozen comparison
+tests a division of labor in which an LLM can serve as a proposal mechanism
+without becoming the source of the grammatical generalizations against which
+its outputs are evaluated.
 
 \section{Boe-Bororo and the corpus setting}
 \label{sec:bororo}
