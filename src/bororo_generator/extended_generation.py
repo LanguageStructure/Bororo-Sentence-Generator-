@@ -9,7 +9,7 @@ from .valency_review import reviewed_frame, reviewed_oblique
 from .candidate import Candidate
 from .provenance import Provenance
 
-def extended_intransitive_declarative(
+def extended_intransitive_indicative(
     lemma, s_person, oblique_phrase=None,
     valency_path="config/valency_review.yaml"
 ):
@@ -25,7 +25,7 @@ def extended_intransitive_declarative(
         return None
 
     text=stem+"re"
-    rules=["reviewed_extended_intransitive_frame","reviewed_person_cell_or_class","declarative_re"]
+    rules=["reviewed_extended_intransitive_frame","reviewed_person_cell_or_class","indicative_re"]
     if oblique_phrase is not None:
         text += " " + oblique_phrase.strip() + " " + marker
         rules.append("reviewed_selected_oblique")
