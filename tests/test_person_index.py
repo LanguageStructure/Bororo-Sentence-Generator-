@@ -129,3 +129,9 @@ def test_mako_reviewed_1sg_irrealis_indicative_cell():
     assert reviewed_construction_cell(
         "mako","irrealis_indicative","1SG"
     )=="imagomode"
+
+
+def test_mako_reviewed_3sg_negative_indicative_cell():
+    assert reviewed_construction_cell(
+        "mako","negative_indicative","3SG"
+    )=="makokare"
