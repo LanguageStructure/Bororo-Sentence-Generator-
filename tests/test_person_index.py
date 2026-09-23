@@ -157,3 +157,7 @@ def test_mako_reviewed_corf_gerund_cell():
 def test_meru_reviewed_1pl_inclusive_cell():
     assert reviewed_person_cell("meru","1PL.INCL")=="pameru"
     assert indexed_reviewed_stem("meru","1PL.INCL")=="pameru"
+
+
+def test_nudu_reviewed_1pl_excl_subjunctive():
+    assert reviewed_construction_cell("nudu","subjunctive","1PL.EXCL")=="cenuduwo"
