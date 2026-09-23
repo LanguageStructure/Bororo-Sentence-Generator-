@@ -17,6 +17,11 @@ def test_divalent_maku_is_rejected():
     assert extended_intransitive_indicative("maku","3SG") is None
 
 
+def test_reviewed_mako_3pl_extended_indicative():
+    c=extended_intransitive_indicative("mako","3PL")
+    assert c is not None
+    assert c.text=="emagore"
+    assert c.predicate_form=="emagore"
+
 def test_sparse_extended_cells_do_not_expand():
-    assert extended_intransitive_indicative("mako","3PL") is None
     assert extended_intransitive_indicative("kudu","1SG") is None
