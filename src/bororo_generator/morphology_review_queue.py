@@ -4,20 +4,41 @@ Observed forms are ranked for human review.  No person value, segmentation,
 stem class, or coding frame is inferred from corpus shape or frequency.
 """
 from .corpus_evidence import corpus_lemma_forms
-from .person_index import REVIEWED_PERSON_CELLS, reviewed_stem_class
+from .person_index import reviewed_stem_class
+from .paradigm_generation import paradigm_requests
+from .generate import generate_declarative
 from .context_audit import audit_lemma_contexts
+
+def reviewed_predicate_surfaces(lemma):
+    """Exact reviewed generated predicate surfaces, indexed by request.
+
+    This is construction-aware: declarative -re is present for monovalent and
+    extended predicates, while divalent predicate realization follows its own
+    generator. No suffix is stripped or appended heuristically.
+    """
+    out={}
+    for request in paradigm_requests(lemma):
+        result=generate_declarative(**request)
+        if result.blocked or result.candidate is None:
+            continue
+        form=result.candidate.predicate_form
+        if not form:
+            continue
+        out.setdefault(form,[]).append(dict(request))
+    return out
+
 
 def morphology_review_queue(lemmas, corpus_path):
     rows=[]
     for lemma in lemmas:
-        exact=set(REVIEWED_PERSON_CELLS.get(lemma,{}).values())
+        reviewed_surfaces=reviewed_predicate_surfaces(lemma)
         full=reviewed_stem_class(lemma)
         for obs in corpus_lemma_forms(lemma,corpus_path):
             # A full reviewed class is already generative; corpus forms still
             # remain observations, but are not queued as missing morphology.
             if full is not None:
                 state="full_class_reviewed"
-            elif obs["form"] in exact:
+            elif obs["form"] in reviewed_surfaces:
                 state="exact_cell_reviewed"
             else:
                 state="needs_human_review"
@@ -33,6 +54,7 @@ def morphology_review_queue(lemmas, corpus_path):
                 "inferred_segmentation":None,
                 "inferred_stem_class":None,
                 "licenses_generation":state in {"full_class_reviewed","exact_cell_reviewed"},
+                "reviewed_requests":reviewed_surfaces.get(obs["form"],[]),
             })
     rank={"needs_human_review":0,"exact_cell_reviewed":1,"full_class_reviewed":2}
     return sorted(rows,key=lambda r:(rank[r["review_state"]],-r["tokens"],r["lemma"],r["form"]))
