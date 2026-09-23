@@ -4,13 +4,13 @@ Separates a surface candidate from the evidence that licensed it.  This makes
 blocked outputs inspectable without inventing a sentence.
 """
 from dataclasses import asdict
-from .generate import generate_declarative
+from .generate import generate_indicative
 from .valency_review import valency_entry
 from .person_index import reviewed_stem_class, reviewed_person_cell
 from .evidence_layers import evidence_layers
 
 def generate_record(lemma, **kwargs):
-    r=generate_declarative(lemma,**kwargs)
+    r=generate_indicative(lemma,**kwargs)
     val=valency_entry(lemma) or {}
     evidence={
         "lemma":lemma,
