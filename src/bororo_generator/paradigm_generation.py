@@ -1,5 +1,5 @@
 """Automatic review matrices for lexemes with independently reviewed evidence."""
-from .person_index import INDEXES, reviewed_stem_class
+from .person_index import reviewed_stem_class, reviewed_persons
 from .valency_review import reviewed_frame
 from .batch import generate_batch
 from .a_host import reviewed_a_persons
@@ -8,10 +8,12 @@ PERSONS=("1SG","2SG","3SG","1PL.INCL","1PL.EXCL","2PL","3PL","CORF")
 
 def paradigm_requests(lemma):
     frame=reviewed_frame(lemma)
-    cls=reviewed_stem_class(lemma)
-    if frame is None or cls is None:
+    if frame is None:
         return []
-    persons=[p for p in PERSONS if p in INDEXES[cls]]
+    licensed=set(reviewed_persons(lemma))
+    persons=[p for p in PERSONS if p in licensed]
+    if not persons:
+        return []
     if frame=="monovalent":
         return [{"lemma":lemma,"s_person":p} for p in persons]
     # Extended-intransitive paradigms here cover the core S predicate only.
