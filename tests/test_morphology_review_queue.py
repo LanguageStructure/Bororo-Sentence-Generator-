@@ -116,3 +116,13 @@ def test_construction_matching_is_not_imperative_specific(monkeypatch):
     assert row["match_type"]=="exact_surface"
     assert row["reviewed_construction_cells"]==[
         {"lemma":"dummy","construction":"other_construction","person":"2SG"}]
+
+
+def test_cegodure_matches_reviewed_kodu_1pl_exclusive(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Cegodure","count":2,"sent_ids":["7-2","556-4"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="exact_cell_reviewed"
+    assert row["match_type"]=="capitalization_variant"
+    assert row["reviewed_requests"]==[{"lemma":"kodu","s_person":"1PL.EXCL"}]
