@@ -60,11 +60,11 @@ def test_unreviewed_surface_is_not_licensed_by_shape():
 
 def test_full_class_does_not_blanket_license_unknown_surface(monkeypatch):
     monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
-        {"form":"nudure","count":1,"sent_ids":["s1"],"upos":["VERB"],"deprels":["root"]},
+        {"form":"unudure","count":1,"sent_ids":["s1"],"upos":["VERB"],"deprels":["root"]},
         {"form":"nuduUNKNOWN","count":1,"sent_ids":["s2"],"upos":["VERB"],"deprels":["root"]},
     ])
     rows=q.morphology_review_queue(["nudu"],"x")
     by_form={r["form"]:r for r in rows}
-    assert by_form["nudure"]["review_state"]=="full_class_reviewed"
+    assert by_form["unudure"]["review_state"]=="full_class_reviewed"
     assert by_form["nuduUNKNOWN"]["review_state"]=="needs_human_review"
     assert by_form["nuduUNKNOWN"]["licenses_generation"] is False
