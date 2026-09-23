@@ -331,3 +331,16 @@ def test_imagokare_matches_reviewed_mako_negative_indicative(monkeypatch):
     assert row["match_type"]=="capitalization_variant"
     assert row["reviewed_construction_cells"]==[
         {"lemma":"mako","construction":"negative_indicative","person":"1SG"}]
+
+
+def test_imagomode_matches_reviewed_mako_irrealis_indicative(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Imagomode","count":2,"sent_ids":["Jussila-1"],"upos":["VERB"],"deprels":["root","nmod"]},
+    ])
+    row=q.morphology_review_queue(["mako"],"x")[0]
+    assert row["review_state"]=="construction_cell_reviewed"
+    assert row["analysis_scope"]=="construction_cell"
+    assert row["match_type"]=="capitalization_variant"
+    assert row["operator_analysis"]==["IRR","IND"]
+    assert row["reviewed_construction_cells"]==[
+        {"lemma":"mako","construction":"irrealis_indicative","person":"1SG"}]
