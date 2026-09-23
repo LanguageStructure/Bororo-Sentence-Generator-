@@ -90,3 +90,10 @@ def test_kodu_reviewed_1sg_subjunctive_cell():
     from bororo_generator.person_index import reviewed_construction_cell
     assert reviewed_construction_cell("kodu","subjunctive","1SG")=="ikoduwo"
     assert reviewed_person_cell("kodu","1SG")=="ikodu"
+
+
+def test_kodu_reviewed_1pl_incl_irrealis_indicative_cell():
+    from bororo_generator.person_index import reviewed_construction_cell
+    assert reviewed_construction_cell(
+        "kodu","irrealis_indicative","1PL.INCL"
+    )=="pagodumode"
