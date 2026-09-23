@@ -41,3 +41,18 @@ def test_top_unresolved_preserves_priority_order():
     ]
     s=q.review_queue_summary(rows)
     assert s["top_unresolved"][0]=={"lemma":"kodu","form":"a","tokens":9}
+
+
+def test_reviewed_predicate_surfaces_are_construction_aware():
+    mako=q.reviewed_predicate_surfaces("mako")
+    assert "imagore" in mako
+    assert "amagore" in mako
+    assert "makore" in mako
+    assert "imago" not in mako
+    maku=q.reviewed_predicate_surfaces("maku")
+    assert "maku" in maku
+    assert "emaku" in maku
+
+def test_unreviewed_surface_is_not_licensed_by_shape():
+    assert "kodure" not in q.reviewed_predicate_surfaces("kodu")
+    assert "ikodure" in q.reviewed_predicate_surfaces("kodu")
