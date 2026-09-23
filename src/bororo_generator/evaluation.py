@@ -7,6 +7,7 @@ from .attestation import surface_attestation,token_attestation
 from .corpus import read_conllu
 from .batch import generate_batch
 from .paradigm_generation import paradigm_requests
+from .evidence_layers import evidence_layers
 
 def evaluate_paradigm(lemma, corpus_path):
     sentences=list(read_conllu(corpus_path))
@@ -34,6 +35,7 @@ def evaluate_paradigm(lemma, corpus_path):
         "attested_predicate_forms":forms,
         "blocked":len([r for r in records if r.get("status")=="blocked"]),
         "records":records,
+        "evidence_layers":[evidence_layers(r) for r in records],
         "interpretation":(
             "Predicate FORM attestation is morphological evidence only. "
             "For divalents it does not establish the A×O structural cell."
