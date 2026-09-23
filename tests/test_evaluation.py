@@ -19,3 +19,16 @@ def test_multi_lexeme_summary(monkeypatch):
     assert r["generated_records"]==16
     assert r["structural_cells_sentence_attested"]==4
     assert r["unique_predicate_forms_attested"]==6
+
+
+def test_evaluation_exposes_separate_evidence_layers(monkeypatch):
+    monkeypatch.setattr(evaluation,"read_conllu",lambda p:[])
+    monkeypatch.setattr(evaluation,"surface_attestation",lambda xs:{})
+    monkeypatch.setattr(evaluation,"token_attestation",lambda xs:{"inudure":["s1"]})
+    r=evaluation.evaluate_paradigm("nudu","dummy.conllu")
+    assert len(r["evidence_layers"])==r["structural_cells_requested"]
+    layer=next(x for x in r["evidence_layers"]
+               if x["generated_candidate"]["predicate_form"]=="inudure")
+    assert layer["reviewed_grammar"]["reviewed_frame"]=="monovalent"
+    assert layer["corpus_evidence"]["attested"]
+    assert layer["corpus_evidence"]["sent_ids"]==["s1"]
