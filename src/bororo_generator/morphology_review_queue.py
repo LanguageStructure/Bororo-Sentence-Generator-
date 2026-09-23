@@ -4,7 +4,7 @@ Observed forms are ranked for human review.  No person value, segmentation,
 stem class, or coding frame is inferred from corpus shape or frequency.
 """
 from .corpus_evidence import corpus_lemma_forms
-from .person_index import reviewed_stem_class
+from .person_index import reviewed_stem_class, REVIEWED_PERSON_CELLS
 from .paradigm_generation import paradigm_requests
 from .generate import generate_indicative
 from .person_index import REVIEWED_CONSTRUCTION_CELLS
@@ -48,6 +48,10 @@ def morphology_review_queue(lemmas, corpus_path):
         reviewed_surfaces=reviewed_predicate_surfaces(lemma)
         reviewed_surfaces_folded={form.casefold():requests for form,requests in reviewed_surfaces.items()}
         construction_surfaces=reviewed_construction_surfaces(lemma)
+        reviewed_person_surfaces={
+            surface.casefold(): person
+            for person,surface in REVIEWED_PERSON_CELLS.get(lemma,{}).items()
+        }
         full=reviewed_stem_class(lemma)
         for obs in corpus_lemma_forms(lemma,corpus_path):
             # The current morphology queue reviews verbal predicate morphology.
@@ -61,6 +65,7 @@ def morphology_review_queue(lemmas, corpus_path):
             exact_surface=obs["form"] in reviewed_surfaces
             matched_requests=reviewed_surfaces_folded.get(obs["form"].casefold(),[])
             construction_matches=construction_surfaces.get(obs["form"].casefold(),[])
+            person_surface_match=reviewed_person_surfaces.get(obs["form"].casefold())
             construction_exact=any(
                 obs["form"]==surface
                 for cells in REVIEWED_CONSTRUCTION_CELLS.get(lemma,{}).values()
@@ -74,6 +79,8 @@ def morphology_review_queue(lemmas, corpus_path):
                 state="full_class_reviewed" if full is not None else "exact_cell_reviewed"
             elif construction_matches:
                 state="construction_cell_reviewed"
+            elif person_surface_match is not None:
+                state="person_cell_surface_reviewed"
             else:
                 state="needs_human_review"
             rows.append({
@@ -103,13 +110,20 @@ def morphology_review_queue(lemmas, corpus_path):
                 ),
                 "analysis_scope":(
                     "construction_cell" if construction_matches else
+                    "exact_person_cell_surface" if person_surface_match is not None else
                     "full_stem_class" if matched_requests and full is not None else
                     "exact_person_cell" if matched_requests else
                     None
                 ),
-                "match_type":(("exact_surface" if construction_exact else "capitalization_variant") if construction_matches else (("exact_surface" if exact_surface else "capitalization_variant") if matched_requests else None)),
+                "match_type":(
+                    ("exact_surface" if construction_exact else "capitalization_variant")
+                    if construction_matches else
+                    ("exact_surface" if obs["form"]==REVIEWED_PERSON_CELLS.get(lemma,{}).get(person_surface_match) else "capitalization_variant")
+                    if person_surface_match is not None else
+                    (("exact_surface" if exact_surface else "capitalization_variant") if matched_requests else None)
+                ),
             })
-    rank={"token_identity_review":0,"needs_human_review":1,"construction_cell_reviewed":2,"exact_cell_reviewed":3,"full_class_reviewed":4,"nonverbal_homograph":5}
+    rank={"token_identity_review":0,"needs_human_review":1,"construction_cell_reviewed":2,"person_cell_surface_reviewed":3,"exact_cell_reviewed":4,"full_class_reviewed":5,"nonverbal_homograph":6}
     return sorted(rows,key=lambda r:(rank[r["review_state"]],-r["tokens"],r["lemma"],r["form"]))
 
 
