@@ -34,14 +34,21 @@ REVIEWED_PERSON_CELLS={
     "maragodu":{"2PL":"tamaragodu"},
     "mako":{"1SG":"imago","2SG":"amago","3SG":"mako"},
     "kudu":{"2SG":"akudu"},
-    "maku":{"3SG":"maku","3PL":"emaku"},
+    "maku":{"3SG":"maku","3PL":"emagu"},
 }
 
 def reviewed_stem_class(stem):
     return REVIEWED_STEM_CLASSES.get(stem)
 
+REVIEWED_PERSON_ANALYSES={
+    ("maku","3PL"):{"index":"e","lexeme":"maku","surface":"emagu"},
+}
+
 def reviewed_person_cell(stem,person):
     return REVIEWED_PERSON_CELLS.get(stem,{}).get(person)
+
+def reviewed_person_analysis(stem,person):
+    return REVIEWED_PERSON_ANALYSES.get((stem,person))
 
 def indexed_reviewed_stem(stem,person):
     cell=reviewed_person_cell(stem,person)
