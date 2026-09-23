@@ -2,7 +2,7 @@
 
 This layer combines only independently reviewed facts:
 - lexical coding frame;
-- reviewed stem class/person index;
+- reviewed stem-class paradigm or exact reviewed person cell;
 - declarative -re for ordinary monovalent predication.
 
 It does not yet synthesize divalent A expressions or extended-intransitive
@@ -23,7 +23,7 @@ def monovalent_declarative(lemma, person, valency_path="config/valency_review.ya
     return Candidate(predicate,Provenance(
         status="generated",
         pattern="reviewed monovalent declarative: S=LEX-re",
-        rules=["reviewed_coding_frame","reviewed_stem_class","declarative_re"],
+        rules=["reviewed_coding_frame","reviewed_person_cell_or_class","declarative_re"],
         notes=[f"lemma={lemma}",f"S={person}",
                "Controlled morphological predicate candidate; no overt RP generated."],
     ),predicate_form=predicate)
