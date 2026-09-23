@@ -63,3 +63,28 @@ Os dados do CorBo permanecem em seu próprio repositório. Este projeto os conso
 ## Estado
 
 Protótipo experimental em desenvolvimento.
+
+
+## Avaliação reproduzível
+
+A avaliação mantém separadas três camadas: análise gramatical revisada, candidato
+gerado e evidência observacional do corpus. Uma ocorrência no corpus não promove
+automaticamente uma análise a `reviewed`.
+
+A licença morfológica também distingue:
+
+- `full_stem_class`: paradigma de classe explicitamente revisado;
+- `exact_person_cell`: somente a célula de pessoa explicitamente revisada.
+
+Exemplo:
+
+```bash
+python3 scripts/evaluation_report.py \
+  data/corbo/trusted.conllu \
+  nudu meru kodu mako maku \
+  --output reports/core-evaluation.json
+```
+
+O relatório registra cobertura estrutural, atestação de formas predicativas e a
+força da evidência morfológica. Ausência no corpus fornecido não é tratada como
+evidência de agramaticalidade.
