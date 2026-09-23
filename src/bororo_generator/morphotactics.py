@@ -33,3 +33,11 @@ REVIEWED_OPERATOR_SURFACES={
 
 def reviewed_operator_surface(*operators):
     return REVIEWED_OPERATOR_SURFACES.get(tuple(operators))
+
+
+def realize_irrealis_declarative(indexed_stem):
+    """Realize reviewed indexed predicate + IRR + DECL surface."""
+    surface=reviewed_operator_surface("IRR","DECL")
+    if surface is None:
+        return None
+    return indexed_stem+surface
