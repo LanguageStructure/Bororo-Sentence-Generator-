@@ -2,6 +2,7 @@
 from .api import generate_record
 from .attestation import surface_attestation,token_attestation,annotate_attestation
 from .corpus import read_conllu
+from .evidence_layers import evidence_layers
 
 def generate_batch(requests, attestation_index=None, token_index=None):
     """Generate requested cells; optionally annotate exact CorBo surface matches."""
@@ -14,6 +15,9 @@ def generate_batch(requests, attestation_index=None, token_index=None):
             rec=annotate_attestation(rec,attestation_index,token_index)
         rec["request_id"]=i
         rec["request"]={"lemma":lemma,**req}
+        # Recompute after the request is attached so morphology provenance can
+        # distinguish an exact reviewed cell from a full stem-class license.
+        rec["evidence_layers"]=evidence_layers(rec)
         out.append(rec)
     return out
 
