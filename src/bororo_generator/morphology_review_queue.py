@@ -80,6 +80,12 @@ def morphology_review_queue(lemmas, corpus_path):
                 "licenses_generation":state in {"full_class_reviewed","exact_cell_reviewed","construction_cell_reviewed"},
                 "reviewed_requests":matched_requests,
                 "reviewed_construction_cells":construction_matches,
+                "analysis_scope":(
+                    "construction_cell" if construction_matches else
+                    "full_stem_class" if matched_requests and full is not None else
+                    "exact_person_cell" if matched_requests else
+                    None
+                ),
                 "match_type":(("exact_surface" if construction_exact else "capitalization_variant") if construction_matches else (("exact_surface" if exact_surface else "capitalization_variant") if matched_requests else None)),
             })
     rank={"needs_human_review":0,"construction_cell_reviewed":1,"exact_cell_reviewed":2,"full_class_reviewed":3}
