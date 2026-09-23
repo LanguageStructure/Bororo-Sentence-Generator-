@@ -18,5 +18,5 @@ def test_blocked_record_is_inspectable():
 
 def test_api_exposes_layered_evidence():
     r=generate_record("nudu",s_person="3SG")
-    assert r["evidence_layers"]["reviewed_grammar"]["morphology_license"] is None
+    assert r["evidence_layers"]["reviewed_grammar"]["morphology_license"]=={"type":"full_stem_class","stem_class":"U"}
 
