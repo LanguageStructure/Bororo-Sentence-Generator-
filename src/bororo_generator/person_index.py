@@ -54,3 +54,20 @@ def reviewed_persons(stem):
     cls=reviewed_stem_class(stem)
     if cls is not None: return tuple(INDEXES[cls])
     return tuple(REVIEWED_PERSON_CELLS.get(stem,{}))
+
+
+# Construction-specific reviewed cells must not be promoted to the ordinary
+# person paradigm. Surface includes the constructional morphology.
+REVIEWED_CONSTRUCTION_CELLS={
+    "mako":{
+        "imperative":{
+            "2PL":"tamagodo",
+        },
+    },
+}
+
+def reviewed_construction_cell(stem,construction,person):
+    return REVIEWED_CONSTRUCTION_CELLS.get(stem,{}).get(construction,{}).get(person)
+
+def reviewed_construction_persons(stem,construction):
+    return tuple(REVIEWED_CONSTRUCTION_CELLS.get(stem,{}).get(construction,{}))
