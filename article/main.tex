@@ -283,36 +283,65 @@ observed.
 \section{Reviewed grammatical constraints}
 \label{sec:grammar}
 
-The baseline distinguishes monovalent, extended-intransitive, and divalent
-coding frames. Morphological licensing is also separated into two types.
-A \texttt{full\_stem\_class} license permits the independently reviewed
-person-index paradigm associated with that lexical assignment. An
-\texttt{exact\_person\_cell} license permits only the explicitly reviewed
-lemma--person realization.
+The v1 grammar used in the experiments is intentionally narrower than the
+descriptive grammar from which individual analyses are reviewed. It records
+three coding-frame labels needed by the generator: \emph{monovalent},
+\emph{extended-intransitive}, and \emph{divalent}. Coding-frame review is
+independent of morphological review; similarity of surface form or translation
+does not assign a frame.
 
-Construction-specific morphology is stored separately from the ordinary person
-paradigm. This prevents an imperative, subjunctive, gerund, optative, negative,
-or irrealis form from silently licensing an ordinary person cell. The current
-morphotactic model additionally records the reviewed complementary distribution
-of \textit{-re}, \textit{-wo}, \textit{-iagu}, \textit{-ie}, and
-\textit{-ia} as a mutually exclusive suffix domain. Membership in this domain
-does not by itself assign an unrevised functional interpretation to a suffix.
+Person morphology has two licensing scopes. A \texttt{full\_stem\_class}
+license makes available the independently reviewed person-index paradigm for
+that lexical assignment. An \texttt{exact\_person\_cell} license makes
+available only the explicitly reviewed lemma--person realization. Exact cells
+therefore do not complete missing members of a paradigm.
+
+Construction-specific morphology is stored separately from ordinary indicative
+person cells. A reviewed imperative, subjunctive, gerund, optative, negative, or
+irrealis realization consequently licenses only that reviewed constructional
+cell unless broader evidence has been entered independently. The morphotactic
+component likewise separates ordering constraints from surface realization of
+reviewed operator combinations. It records, for example, reviewed
+IRR--IND and IRR--NEG--IND realizations without treating them as a general
+fixed-slot template.
+
+The v1 constraint inventory also records \textit{-re}, \textit{-wo},
+\textit{-iagu}, \textit{-ie}, and \textit{-ia} as members of one reviewed
+mutually exclusive suffix domain. This is a co-occurrence constraint only:
+membership in the domain does not assign a functional analysis to a suffix
+whose function has not independently been reviewed.
 
 \section{Controlled generation}
 \label{sec:generation}
 
-For each lexical item, a reviewed coding frame selects the appropriate
-structural generator. Generation fails closed: if a required morphological or
-constructional license is absent, the requested candidate is blocked rather
-than completed by analogy. This is particularly important for partial
-paradigms, where individual reviewed cells must not be extrapolated to an
-entire stem class.
+The experiment uses the ordinary indicative dispatcher as the frozen
+surface-realization path. The reviewed lexical frame determines which of three
+generators is called; there is no fallback to another frame when the requested
+combination lacks evidence. A missing required person cell, A host, or selected
+oblique therefore returns a blocked result rather than an analogically completed
+form.
 
-For divalent predicates, evidence for the predicate form concerns the indexed
-O realization and does not independently establish the A$\times$O structural
-cell. Extended-intransitive predicates similarly keep the core predicate and
-additional oblique participant distinct; no postposition is generalized across
-the construction without lexical evidence.
+For a reviewed monovalent predicate, the generator combines a licensed
+S-indexed stem with indicative \textit{-re}. For a reviewed
+extended-intransitive predicate, the same core predicate pattern is retained and
+an additional participant may be added only through a lexically reviewed
+postpositional relation. The existence of an extended-intransitive frame does
+not itself license a particular postposition.
+
+For a reviewed divalent predicate, the implementation keeps A and O as distinct
+coding positions. The frozen v1 pattern is \texttt{(RP-A) A=re (RP-O) O=LEX}:
+the A expression uses a separately reviewed indicative host, while the predicate
+is realized with the reviewed O-indexed stem. Corpus occurrence of that
+predicate form is therefore evidence about the predicate morphology, not
+independent attestation of the complete A$\times$O structural cell.
+
+This dispatcher is deliberately construction-specific. Other reviewed forms
+present elsewhere in the computational grammar---for example imperative,
+subjunctive, gerundial, optative, negative, or irrealis cells---do not enter the
+v1 ordinary-indicative experiment merely because they are available to other
+modules. The experimental surface inventory is thus fixed by the dispatcher and
+its reviewed dependencies, not by every analysis represented in the broader
+codebase.
 
 \section{Experiment 1: controlled-generation baseline}
 \label{sec:evaluation}
