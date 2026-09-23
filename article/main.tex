@@ -381,10 +381,18 @@ divalent predicate it does not resolve the A argument of the generated
 structural cell. Conversely, a generated form absent from the supplied corpus
 is not thereby classified as ungrammatical.
 
-The present numbers should therefore be read as reproducible coverage and
-evidence measures, not as an accuracy or grammaticality score. Broader
-evaluation will require additional reviewed lexical items and independent human
-judgment of novel outputs.
+The same caution applies to the LLM comparison. Exact agreement with the
+controlled surface is a reproducible string-level measure, but disagreement is
+not itself evidence of ungrammaticality. Direct outputs are therefore audited
+along independent dimensions, and an unresolved analysis is retained as such.
+The current human audit is incomplete by design where the frozen evidence does
+not justify a stronger classification.
+
+The reported numbers should therefore be read as coverage, task-preservation,
+and evidence-control measures rather than as a single accuracy or
+grammaticality score. Broader evaluation requires additional reviewed lexical
+items and constructions and, for claims about acceptability beyond the reviewed
+analysis, independent speaker judgment.
 
 \section{AI proposal experiment}
 \label{sec:ai}
@@ -513,19 +521,23 @@ experiment. The direct condition did not receive additional examples unavailable
 to the proposal condition. Raw outputs were retained, and classifications that
 depend on linguistic analysis remain auditable against the reviewed grammar.
 
-The frozen v1 baseline precedes this experiment and will not be retrospectively
-modified in response to LLM outputs. New linguistic analyses discovered during
-error inspection will enter a later review version, preventing evaluation data
-from silently changing the grammar against which the same outputs are scored.
+The v1 grammar and task inventory were frozen before the LLM outputs were
+collected. Inspection of those outputs did not modify the grammar used to score
+the same experiment. Linguistic observations arising during audit are therefore
+eligible only for a later review version. This prevents evaluation data from
+silently changing the grammatical licenses against which they are evaluated.
 
 \subsection{Research questions}
 
-The experiment addresses three questions: (i) what kinds of unsupported
-generalization arise under direct LLM generation; (ii) which of these are
-prevented by explicit evidential licensing; and (iii) what proportion of
-otherwise plausible proposals must be blocked because the available linguistic
-evidence is genuinely incomplete. The third question treats abstention as an
-observable system behavior rather than automatically as an error.
+The experiment asks three related questions: (i) what kinds of divergence
+appear under direct LLM surface generation; (ii) whether an LLM can preserve
+the requested abstract structural specification when surface realization is
+delegated to reviewed grammar; and (iii) whether the evidence-bounded system
+must block any of those proposals because a required license is absent. In the
+frozen v1 sample, all 28 proposals preserve the requested specification and all
+28 are realizable, so the third outcome is observed as zero blocked proposals
+for this particular reviewed task set. This does not imply that blocking would
+remain zero outside the frozen licensed inventory.
 
 \section{Discussion}
 
