@@ -79,3 +79,13 @@ def test_surface_matching_ignores_textual_capitalization(monkeypatch):
     assert row["review_state"]=="exact_cell_reviewed"
     assert row["licenses_generation"] is True
     assert row["reviewed_requests"]==[{"lemma":"kodu","s_person":"1SG"}]
+    assert row["match_type"]=="capitalization_variant"
+
+
+def test_exact_surface_match_is_distinguished(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"ikodure","count":1,"sent_ids":["s1"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="exact_cell_reviewed"
+    assert row["match_type"]=="exact_surface"
