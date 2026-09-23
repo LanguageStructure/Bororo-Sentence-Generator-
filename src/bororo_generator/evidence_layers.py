@@ -43,6 +43,7 @@ def evidence_layers(record):
             "status":record.get("status"),
             "text":record.get("text"),
             "predicate_form":record.get("predicate_form"),
+            "reasons":record.get("reasons",[]) if record.get("status")=="blocked" else [],
         },
         "corpus_evidence":corpus_form_evidence(record),
     }
