@@ -1,4 +1,4 @@
-from bororo_generator.person_index import indexed_stem,indexed_reviewed_stem,reviewed_person_cell
+from bororo_generator.person_index import indexed_stem,indexed_reviewed_stem,reviewed_person_cell,reviewed_person_analysis
 def test_reviewed_stem_classes():
     assert indexed_stem("aregodu","1SG","O")=="itaregodu"
     assert indexed_stem("aregodu","2SG","O")=="akaregodu"
@@ -43,3 +43,9 @@ def test_kodu_irrealis_declarative_cell_is_under_kodu():
     from bororo_generator.person_index import reviewed_construction_cell
     assert reviewed_construction_cell("kodu","irrealis_declarative","1SG")=="ikodumode"
     assert reviewed_construction_cell("mako","irrealis_declarative","1SG") is None
+
+
+def test_emagu_preserves_underlying_e_plus_maku_analysis():
+    assert reviewed_person_analysis("maku","3PL")=={
+        "index":"e","lexeme":"maku","surface":"emagu"}
+    assert reviewed_person_cell("maku","3PL")=="emagu"
