@@ -153,3 +153,14 @@ def test_ikodumode_exposes_reviewed_operator_analysis(monkeypatch):
     assert row["operator_analysis"]==["IRR","DECL"]
     assert row["reviewed_construction_cells"]==[
         {"lemma":"kodu","construction":"irrealis_declarative","person":"1SG"}]
+
+
+def test_nonverbal_kodu_homograph_is_not_morphology_review(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"kodu","count":2,"sent_ids":["37-2","67-1"],"upos":["NOUN"],"deprels":["nsubj","root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="nonverbal_homograph"
+    assert row["lexical_identity_status"]=="nonverbal_homograph"
+    assert row["licenses_generation"] is False
+    assert q.review_queue_summary([row])["needs_human_review"]==0
