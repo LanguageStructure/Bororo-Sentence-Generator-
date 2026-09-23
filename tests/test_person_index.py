@@ -161,3 +161,7 @@ def test_meru_reviewed_1pl_inclusive_cell():
 
 def test_nudu_reviewed_1pl_excl_subjunctive():
     assert reviewed_construction_cell("nudu","subjunctive","1PL.EXCL")=="cenuduwo"
+
+
+def test_nudu_reviewed_1sg_negative_indicative():
+    assert reviewed_construction_cell("nudu","negative_indicative","1SG")=="inudukare"
