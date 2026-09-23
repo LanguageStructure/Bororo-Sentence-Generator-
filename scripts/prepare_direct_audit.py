@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Prepare a conservative human-audit worksheet for direct-condition nonmatches.
+"""Prepare a conservative human-audit worksheet for direct-condition outputs.
 
-This script does not infer linguistic error types. It pre-fills only mechanical
-facts established by the frozen controlled comparison and leaves linguistic
-labels unresolved for human review.
+Form well-formedness and task/construction adequacy are independent dimensions.
+A grammatical form can therefore receive construction_mismatch=yes without
+morphological_violation=yes.
 """
 import argparse,csv,json
 from pathlib import Path
@@ -11,7 +11,7 @@ from pathlib import Path
 FIELDS=[
  "task_id","lemma","frame","s_person","a_person","o_person",
  "direct_surface","controlled_surface","exact_match",
- "morphological_violation","frame_violation",
+ "morphological_violation","construction_mismatch","frame_violation",
  "constructional_overgeneralization","complementary_distribution_violation",
  "unsupported_but_plausible","auditor_status","notes"
 ]
@@ -40,6 +40,7 @@ def main():
               "direct_surface":c["direct_surface"],"controlled_surface":c["controlled_surface"],
               "exact_match":"yes" if match else "no",
               "morphological_violation":"no" if match else "unresolved",
+              "construction_mismatch":"no" if match else "unresolved",
               "frame_violation":"no" if match else "unresolved",
               "constructional_overgeneralization":"no" if match else "unresolved",
               "complementary_distribution_violation":"no" if match else "unresolved",
