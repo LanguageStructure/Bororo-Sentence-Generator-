@@ -1,1 +1,29 @@
 task_id	morphological_violation	construction_mismatch	s_person_mismatch	a_person_mismatch	o_person_mismatch	frame_violation	constructional_overgeneralization	complementary_distribution_violation	unsupported_but_plausible	auditor_status	notes
+v1-001	no	yes	no	not_applicable	not_applicable	no	no	no	no	reviewed	i=nudu is well formed in another function; requested task is ordinary IND i=nudu-re
+v1-002	no	yes	yes	not_applicable	not_applicable	no	no	no	no	reviewed	i=nudu can be well formed, but does not realize requested 2SG IND
+v1-003	unresolved	yes	yes	not_applicable	not_applicable	no	no	no	unresolved	pending	Bare nudu does not realize requested 3SG IND; absolute well-formedness not decided here
+v1-004	unresolved	yes	unresolved	not_applicable	not_applicable	unresolved	unresolved	no	unresolved	pending	pagi nudu requires independent analysis; do not infer segmentation
+v1-005	no	yes	no	not_applicable	not_applicable	no	no	no	no	reviewed	ce=nudu can be well formed outside requested IND; person matches 1PL.EXCL
+v1-006	unresolved	yes	yes	not_applicable	not_applicable	no	unresolved	no	unresolved	pending	tunududu does not realize reviewed 2PL IND; internal analysis unresolved
+v1-007	no	no	no	not_applicable	not_applicable	no	no	no	no	reviewed	Same reviewed morpheme sequence as enudure; graphic segmentation alone is not a morphological violation
+v1-008	no	no	no	not_applicable	not_applicable	no	no	no	no	reviewed	Exact frozen-v1 surface match
+v1-009	no	yes	no	not_applicable	not_applicable	no	no	no	no	reviewed	a=meru can be well formed; requested task is 2SG IND a=meru-re
+v1-010	unresolved	yes	unresolved	not_applicable	not_applicable	no	unresolved	no	unresolved	pending	pamere does not equal reviewed pa=meru; final e is not analyzed here
+v1-011	unresolved	yes	yes	not_applicable	not_applicable	no	unresolved	no	unresolved	pending	remeru does not realize reviewed 1PL.EXCL ce=meru; re- is not segmented here
+v1-012	no	no	yes	not_applicable	not_applicable	no	no	no	no	reviewed	meru-re realizes IND but lacks requested 3PL e=
+v1-013	unresolved	yes	no	not_applicable	not_applicable	no	unresolved	no	unresolved	pending	i= is compatible with 1SG; final du is not analyzed automatically
+v1-014	yes	yes	yes	not_applicable	not_applicable	no	no	no	no	reviewed	Requested reviewed 1PL.EXCL realization is ce=godu; cekodu conflicts with that cell and does not realize IND
+v1-015	no	yes	no	not_applicable	not_applicable	no	no	no	no	reviewed	e-kodu realizes requested 3PL person sequence; graphic segmentation is not an error; IND not realized
+v1-016	unresolved	yes	yes	not_applicable	not_applicable	no	no	no	unresolved	pending	Bare kodu does not realize requested CORF tu=/tugodu or IND; absolute status of bare form left unresolved
+v1-017	yes	yes	no	not_applicable	not_applicable	no	no	no	no	reviewed	Requested reviewed 1SG mako realization is imago; imako fails reviewed morphophonological realization and lacks IND
+v1-018	yes	yes	no	not_applicable	not_applicable	no	no	no	no	reviewed	Requested reviewed 2SG mako realization is amago; amako fails reviewed morphophonological realization and lacks IND
+v1-019	no	yes	yes	not_applicable	not_applicable	no	no	no	no	reviewed	imako is not treated as globally ill formed here; it does not realize requested 3SG IND
+v1-020	unresolved	yes	yes	not_applicable	not_applicable	unresolved	unresolved	no	unresolved	pending	Mako pudure requires independent structural analysis; requested 1PL.EXCL is not realized
+v1-021	unresolved	yes	unresolved	not_applicable	not_applicable	unresolved	unresolved	no	unresolved	pending	tagi mako requires independent analysis; do not infer function of tagi
+v1-022	unresolved	yes	no	not_applicable	not_applicable	unresolved	unresolved	no	unresolved	pending	Initial e is compatible with requested 3PL; doge is not segmented automatically
+v1-023	unresolved	yes	not_applicable	yes	no	yes	unresolved	no	unresolved	pending	Does not realize separate reviewed 2SG A host are; maku is compatible with O=3SG
+v1-024	unresolved	yes	not_applicable	yes	yes	yes	unresolved	no	unresolved	pending	Does not realize reviewed A=2SG are or O=3PL emagu; bo and tugu left unanalyzed
+v1-025	unresolved	yes	not_applicable	yes	unresolved	yes	unresolved	no	unresolved	pending	Does not realize separate A=3SG ure; internal analysis of umakudö left unresolved
+v1-026	unresolved	yes	not_applicable	yes	unresolved	yes	unresolved	no	unresolved	pending	Does not realize separate A=3SG ure; do not infer segmentation of emakure
+v1-027	unresolved	yes	not_applicable	yes	no	yes	unresolved	no	unresolved	pending	maku is compatible with O=3SG; ema is not reviewed A=3PL host ere
+v1-028	unresolved	yes	not_applicable	yes	yes	yes	unresolved	no	unresolved	pending	Does not realize separate A=3PL ere or reviewed O=3PL emagu; dumode not segmented automatically
