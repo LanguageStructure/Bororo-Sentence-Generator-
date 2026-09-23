@@ -74,6 +74,7 @@ REVIEWED_CONSTRUCTION_CELLS={
         "negative_indicative":{
             "1SG":"imagokare",
             "3SG":"makokare",
+            "3PL":"emagokare",
         },
         "irrealis_indicative":{
             "1SG":"imagomode",
