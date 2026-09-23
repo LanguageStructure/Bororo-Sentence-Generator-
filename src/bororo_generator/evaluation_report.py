@@ -6,7 +6,7 @@ judgments or promote corpus observations to reviewed status.
 from datetime import datetime,timezone
 from .evaluation import evaluate_lexemes
 
-SCHEMA_VERSION="1.1"
+SCHEMA_VERSION="1.2"
 
 def evaluation_report(lemmas,corpus_path):
     ev=evaluate_lexemes(lemmas,corpus_path)
@@ -24,6 +24,8 @@ def evaluation_report(lemmas,corpus_path):
             "blocked":ev["blocked"],
             "licensed_by_full_class":ev["licensed_by_full_class"],
             "licensed_by_exact_cell":ev["licensed_by_exact_cell"],
+            "reviewed_construction_cells":ev["reviewed_construction_cells"],
+            "by_frame":ev["by_frame"],
         },
         "method":{
             "sentence_attestation":"exact normalized generated surface",
@@ -34,5 +36,6 @@ def evaluation_report(lemmas,corpus_path):
                 "absence from the supplied corpus is not evidence of ungrammaticality",
             ],
         },
+        "construction_inventory":ev["construction_inventory"],
         "results":ev["results"],
     }
