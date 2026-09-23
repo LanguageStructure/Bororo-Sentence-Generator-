@@ -1,0 +1,244 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+
+\title{From Corpus Evidence to Controlled Generation:\\
+A Human-in-the-Loop Approach for Low-Resource Languages}
+\author{Fabrício Ferraz Gerardi}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper presents an evidence-bound architecture for controlled sentence
+generation in a low-resource language, using Boe-Bororo as a case study. The
+central methodological distinction is between corpus observation and
+grammatical licensing. Corpus forms, frequencies, dependency annotations, and
+translations are treated as evidence for analysis, but do not automatically
+license generation. Generation is instead constrained by human-reviewed coding
+frames, person-index realizations, construction-specific morphology, and
+morphotactic restrictions. A first frozen experimental baseline evaluates five
+lexemes across monovalent, extended-intransitive, and divalent frames. The
+system generates all 28 requested reviewed structural cells, while none of the
+complete generated sentences is an exact corpus sentence. Fourteen unique
+generated predicate forms are independently attested as corpus tokens. The
+baseline therefore separates controlled recombination from simple retrieval
+while preserving a strict distinction between attestation and grammatical
+analysis.
+\end{abstract}
+
+\section{Introduction}
+
+Generative experiments with low-resource languages face a basic evidential
+problem: occurrence in a corpus is not equivalent to a grammatical rule, while
+absence from a small corpus is not evidence of ungrammaticality. This problem
+becomes more acute when automatic induction or a large language model is allowed
+to convert distributional regularities directly into productive analyses.
+
+We investigate an alternative architecture in which documentary corpus evidence
+and grammatical licensing remain formally distinct. The CorBo corpus supplies
+observations. Human linguistic review establishes the morphological and
+constructional facts that may license generation. A deterministic generator then
+realizes only reviewed combinations, retaining provenance for the evidence and
+rules used. Artificial-intelligence components can subsequently propose
+structures for evaluation, but do not themselves constitute grammatical
+evidence.
+
+The contribution is methodological rather than a claim to broad-coverage
+generation. We ask whether a small, explicitly reviewed grammatical layer can
+support reproducible controlled generation while making the boundary between
+observed data, linguistic analysis, and generated output inspectable.
+
+\section{Boe-Bororo and the corpus setting}
+\label{sec:bororo}
+
+% TODO: Add the language/community background from the private grammar only
+% after selecting the passages to be cited. Do not infer demographic facts here.
+
+The present experiment uses a reviewed subset of CorBo represented in CoNLL-U.
+The corpus functions as the observational layer of the system. Token forms,
+lemmas, UPOS labels, dependency relations, sentence contexts, and translations
+may be retrieved for human inspection, but corpus frequency or formal
+resemblance does not promote a morphological analysis to reviewed status.
+
+\section{Corpus evidence is not grammatical licensing}
+\label{sec:evidence}
+
+The architecture distinguishes three evidential layers. First,
+\emph{reviewed grammar} records human-reviewed coding frames, person-index
+cells, stem-class assignments where a complete paradigm is independently
+supported, and construction-specific cells. Second, the \emph{generated
+candidate} records the surface output and the rules used to produce it. Third,
+\emph{corpus evidence} records whether a generated surface or predicate form
+occurs in the supplied corpus. The third layer never promotes itself into the
+first.
+
+This distinction also applies to lexical identity. Homographic corpus forms are
+not automatically assigned to the same lexical item, and a familiar-looking
+prefix or suffix is not segmented solely from its shape. Review queues expose
+the relevant contexts while leaving person, segmentation, stem class, and
+coding frame unset until they are explicitly reviewed.
+
+\section{Evidence-first architecture}
+\label{sec:architecture}
+
+The current pipeline is:
+
+\begin{quote}
+CorBo $\rightarrow$ corpus evidence $\rightarrow$ human linguistic review
+$\rightarrow$ reviewed grammar $\rightarrow$ controlled generator
+$\rightarrow$ generated candidate $\rightarrow$ validation and corpus
+attestation.
+\end{quote}
+
+The architecture is deliberately asymmetric. Corpus evidence can motivate a
+human review decision, but cannot directly license a new generation rule.
+Likewise, corpus attestation of a generated predicate form is reported as
+observational support and not as proof that the complete generated structural
+cell is attested.
+
+\section{Reviewed grammatical constraints}
+\label{sec:grammar}
+
+The baseline distinguishes monovalent, extended-intransitive, and divalent
+coding frames. Morphological licensing is also separated into two types.
+A \texttt{full\_stem\_class} license permits the independently reviewed
+person-index paradigm associated with that lexical assignment. An
+\texttt{exact\_person\_cell} license permits only the explicitly reviewed
+lemma--person realization.
+
+Construction-specific morphology is stored separately from the ordinary person
+paradigm. This prevents an imperative, subjunctive, gerund, optative, negative,
+or irrealis form from silently licensing an ordinary person cell. The current
+morphotactic model additionally records the reviewed complementary distribution
+of \textit{-re}, \textit{-wo}, \textit{-iagu}, \textit{-ie}, and
+\textit{-ia} as a mutually exclusive suffix domain. Membership in this domain
+does not by itself assign an unrevised functional interpretation to a suffix.
+
+\section{Controlled generation}
+\label{sec:generation}
+
+For each lexical item, a reviewed coding frame selects the appropriate
+structural generator. Generation fails closed: if a required morphological or
+constructional license is absent, the requested candidate is blocked rather
+than completed by analogy. This is particularly important for partial
+paradigms, where individual reviewed cells must not be extrapolated to an
+entire stem class.
+
+For divalent predicates, evidence for the predicate form concerns the indexed
+O realization and does not independently establish the A$\times$O structural
+cell. Extended-intransitive predicates similarly keep the core predicate and
+additional oblique participant distinct; no postposition is generalized across
+the construction without lexical evidence.
+
+\section{Experimental baseline}
+\label{sec:evaluation}
+
+We froze a first experimental baseline after resolving the human-review queue
+for five target lexemes: \textit{nudu}, \textit{meru}, \textit{kodu},
+\textit{mako}, and \textit{maku}. The evaluation requests only structural cells
+licensed by the reviewed grammar and compares generated surfaces against the
+supplied trusted corpus.
+
+\begin{table}[ht]
+\centering
+\caption{Controlled-generation baseline (v1; report schema 1.2).}
+\label{tab:baseline}
+\begin{tabular}{lr}
+\toprule
+Measure & Value\\
+\midrule
+Lexemes evaluated & 5\\
+Structural cells requested & 28\\
+Generated records & 28\\
+Blocked requests & 0\\
+Unique generated predicate forms attested in corpus & 14\\
+Complete generated sentences exactly attested & 0\\
+Licensed by full stem class & 8\\
+Licensed by exact person cell & 20\\
+Reviewed construction-specific cells & 16\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Of the 28 requested cells, 16 belong to three monovalent lexemes, six to one
+extended-intransitive lexeme, and six to one divalent lexeme. All requested
+cells were generated and none was blocked. Twenty of the 28 records
+(71.4\%) depend on exact reviewed person cells, whereas eight (28.6\%) are
+licensed through a complete reviewed stem-class assignment.
+
+No complete generated sentence is an exact normalized corpus sentence. At the
+same time, 14 unique generated predicate forms occur independently as corpus
+tokens. These two measurements answer different questions: sentence
+attestation detects exact retrieval-like overlap, whereas predicate-form
+attestation supplies morphological corpus evidence. Neither measurement is
+treated as automatic grammatical validation.
+
+\section{Evaluation design and limitations}
+\label{sec:limits}
+
+The baseline is intentionally small. It measures the behavior of an
+evidence-bound generation architecture, not general coverage of Bororo.
+Predicate-form occurrence is morphological evidence only; in particular, for a
+divalent predicate it does not resolve the A argument of the generated
+structural cell. Conversely, a generated form absent from the supplied corpus
+is not thereby classified as ungrammatical.
+
+The present numbers should therefore be read as reproducible coverage and
+evidence measures, not as an accuracy or grammaticality score. Broader
+evaluation will require additional reviewed lexical items and independent human
+judgment of novel outputs.
+
+\section{AI as a proposal layer}
+\label{sec:ai}
+
+A subsequent experiment will add an AI proposal layer above the deterministic
+grammar. Rather than asking a language model to produce an unrestricted Bororo
+surface sentence, the model can propose an abstract request such as a lemma,
+coding frame, participant features, and construction. The reviewed generator
+then realizes or rejects that request. This preserves the separation between a
+probabilistic proposal mechanism and the evidence required to license a
+surface form.
+
+A direct comparison between unrestricted model output and model proposals
+filtered through the controlled system can then measure constraint violations,
+blocked proposals, and the provenance available for accepted candidates. These
+results are not included in the v1 baseline.
+
+\section{Discussion}
+
+The baseline demonstrates the practical consequence of separating evidence
+from licensing. Most generated records depend on individually reviewed
+morphological cells rather than paradigm-wide extrapolation. The architecture
+therefore exposes incompleteness instead of hiding it behind automatic analogy.
+This is useful in a documentary setting, where a conservative unresolved state
+can be more informative than a fluent but unsupported output.
+
+The approach also makes incremental revision possible. New corpus observations
+can enter a review queue without changing the grammar; a human decision can
+then add an exact cell, a construction-specific realization, or, where
+independently justified, a complete lexical class. Each change can be tested
+against the existing reviewed inventory.
+
+\section{Conclusion}
+
+Controlled generation for a low-resource language need not begin by treating
+corpus distributions or language-model output as grammar. The Bororo case study
+shows an alternative workflow in which corpus evidence, human analysis,
+generation, and attestation remain separate computational objects. The first
+baseline is deliberately narrow, but it provides a reproducible point from
+which broader lexical coverage and an AI-assisted proposal experiment can be
+evaluated without weakening the evidential boundary on which the system is
+based.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
