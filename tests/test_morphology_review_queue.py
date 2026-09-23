@@ -150,9 +150,9 @@ def test_ikodumode_exposes_reviewed_operator_analysis(monkeypatch):
     row=q.morphology_review_queue(["kodu"],"x")[0]
     assert row["review_state"]=="construction_cell_reviewed"
     assert row["analysis_scope"]=="construction_cell"
-    assert row["operator_analysis"]==["IRR","DECL"]
+    assert row["operator_analysis"]==["IRR","IND"]
     assert row["reviewed_construction_cells"]==[
-        {"lemma":"kodu","construction":"irrealis_declarative","person":"1SG"}]
+        {"lemma":"kodu","construction":"irrealis_indicative","person":"1SG"}]
 
 
 def test_nonverbal_kodu_homograph_is_not_morphology_review(monkeypatch):
@@ -248,7 +248,7 @@ def test_Kodumodukare_matches_reviewed_construction_cell(monkeypatch):
     assert row["analysis_scope"]=="construction_cell"
     assert row["match_type"]=="capitalization_variant"
     assert row["reviewed_construction_cells"]==[
-        {"lemma":"kodu","construction":"irrealis_negative_declarative","person":"3SG"}]
+        {"lemma":"kodu","construction":"irrealis_negative_indicative","person":"3SG"}]
 
 
 def test_ikoduwo_matches_kodu_subjunctive_cell(monkeypatch):
