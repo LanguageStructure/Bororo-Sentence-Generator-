@@ -319,3 +319,15 @@ def test_emagore_matches_reviewed_mako_3pl(monkeypatch):
     assert row["analysis_scope"]=="exact_person_cell"
     assert row["match_type"]=="capitalization_variant"
     assert row["reviewed_requests"]==[{"lemma":"mako","s_person":"3PL"}]
+
+
+def test_imagokare_matches_reviewed_mako_negative_indicative(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Imagokare","count":2,"sent_ids":["467-13","653-12"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["mako"],"x")[0]
+    assert row["review_state"]=="construction_cell_reviewed"
+    assert row["analysis_scope"]=="construction_cell"
+    assert row["match_type"]=="capitalization_variant"
+    assert row["reviewed_construction_cells"]==[
+        {"lemma":"mako","construction":"negative_indicative","person":"1SG"}]
