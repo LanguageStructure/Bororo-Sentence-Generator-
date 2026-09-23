@@ -102,3 +102,7 @@ def test_kodu_reviewed_1pl_incl_irrealis_indicative_cell():
 def test_kodu_reviewed_corf_cell():
     assert reviewed_person_cell("kodu","CORF")=="tugodu"
     assert indexed_reviewed_stem("kodu","CORF")=="tugodu"
+
+
+def test_mako_reviewed_2sg_imperative_cell():
+    assert reviewed_construction_cell("mako","imperative","2SG")=="amagodo"
