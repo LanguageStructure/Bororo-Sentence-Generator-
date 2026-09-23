@@ -72,7 +72,7 @@ REVIEWED_CONSTRUCTION_CELLS={
         },
     },
     "kodu":{
-        "irrealis_declarative":{
+        "irrealis_indicative":{
             "1SG":"ikodumode",
         },
         "imperative":{
@@ -87,7 +87,7 @@ REVIEWED_CONSTRUCTION_CELLS={
         "subjunctive":{
             "1SG":"ikoduwo",
         },
-        "irrealis_negative_declarative":{
+        "irrealis_negative_indicative":{
             "3SG":"kodumodukare",
         },
     },
