@@ -11,3 +11,7 @@ def test_reviewed_irrealis_declarative_surface():
     from bororo_generator.morphotactics import reviewed_operator_surface,realize_irrealis_declarative
     assert reviewed_operator_surface("IRR","DECL")=="mode"
     assert realize_irrealis_declarative("ikodu")=="ikodumode"
+
+
+def test_reviewed_irrealis_negative_declarative_surface():
+    assert reviewed_operator_surface("IRR","NEG","DECL")=="modukare"
