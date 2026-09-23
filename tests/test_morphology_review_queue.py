@@ -141,3 +141,15 @@ def test_construction_cell_has_construction_scope(monkeypatch):
     ])
     row=q.morphology_review_queue(["mako"],"x")[0]
     assert row["analysis_scope"]=="construction_cell"
+
+
+def test_ikodumode_exposes_reviewed_operator_analysis(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"ikodumode","count":2,"sent_ids":["43-2","46-2"],"upos":["VERB"],"deprels":["root","ccomp"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["review_state"]=="construction_cell_reviewed"
+    assert row["analysis_scope"]=="construction_cell"
+    assert row["operator_analysis"]==["IRR","DECL"]
+    assert row["reviewed_construction_cells"]==[
+        {"lemma":"kodu","construction":"irrealis_declarative","person":"1SG"}]
