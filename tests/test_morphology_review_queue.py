@@ -356,3 +356,14 @@ def test_makokare_matches_reviewed_mako_3sg_negative_indicative(monkeypatch):
     assert row["match_type"]=="capitalization_variant"
     assert row["reviewed_construction_cells"]==[
         {"lemma":"mako","construction":"negative_indicative","person":"3SG"}]
+
+
+def test_tamagore_matches_reviewed_mako_2pl(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"tamagore","count":1,"sent_ids":["Jussila-17"],"upos":["VERB"],"deprels":["ccomp"]},
+    ])
+    row=q.morphology_review_queue(["mako"],"x")[0]
+    assert row["review_state"]=="exact_cell_reviewed"
+    assert row["analysis_scope"]=="exact_person_cell"
+    assert row["match_type"]=="exact_surface"
+    assert row["reviewed_requests"]==[{"lemma":"mako","s_person":"2PL"}]
