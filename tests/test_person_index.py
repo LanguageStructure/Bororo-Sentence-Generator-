@@ -77,3 +77,10 @@ def test_kodu_reviewed_1sg_optative_cell():
     from bororo_generator.person_index import reviewed_construction_cell
     assert reviewed_construction_cell("kodu","optative","1SG")=="ikoduia"
     assert reviewed_person_cell("kodu","1SG")=="ikodu"
+
+
+def test_kodu_reviewed_3sg_irrealis_negative_declarative_cell():
+    from bororo_generator.person_index import reviewed_construction_cell
+    assert reviewed_construction_cell(
+        "kodu","irrealis_negative_declarative","3SG"
+    )=="kodumodukare"
