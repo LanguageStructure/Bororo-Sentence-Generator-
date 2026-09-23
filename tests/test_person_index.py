@@ -32,3 +32,8 @@ def test_representative_paradigm_remains_full_class():
     from bororo_generator.person_index import reviewed_stem_class
     assert reviewed_stem_class("nudu")=="U"
     assert indexed_reviewed_stem("nudu","3SG")=="unudu"
+
+
+def test_kodu_reviewed_1pl_exclusive_cell():
+    assert reviewed_person_cell("kodu","1PL.EXCL")=="cegodu"
+    assert indexed_reviewed_stem("kodu","1PL.EXCL")=="cegodu"
