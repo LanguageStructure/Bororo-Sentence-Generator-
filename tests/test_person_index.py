@@ -106,3 +106,8 @@ def test_kodu_reviewed_corf_cell():
 
 def test_mako_reviewed_2sg_imperative_cell():
     assert reviewed_construction_cell("mako","imperative","2SG")=="amagodo"
+
+
+def test_mako_reviewed_1pl_exclusive_cell():
+    assert reviewed_person_cell("mako","1PL.EXCL")=="cemago"
+    assert indexed_reviewed_stem("mako","1PL.EXCL")=="cemago"
