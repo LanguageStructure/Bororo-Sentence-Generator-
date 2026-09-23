@@ -68,3 +68,14 @@ def test_full_class_does_not_blanket_license_unknown_surface(monkeypatch):
     assert by_form["unudure"]["review_state"]=="full_class_reviewed"
     assert by_form["nuduUNKNOWN"]["review_state"]=="needs_human_review"
     assert by_form["nuduUNKNOWN"]["licenses_generation"] is False
+
+
+def test_surface_matching_ignores_textual_capitalization(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Ikodure","count":5,"sent_ids":["s1"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["kodu"],"x")[0]
+    assert row["form"]=="Ikodure"
+    assert row["review_state"]=="exact_cell_reviewed"
+    assert row["licenses_generation"] is True
+    assert row["reviewed_requests"]==[{"lemma":"kodu","s_person":"1SG"}]
