@@ -596,59 +596,64 @@ retroactively changing the licenses used for the present results.
 
 \section{Discussion}
 
-The two experiments expose different consequences of separating evidence from
-licensing. The controlled baseline shows that partial reviewed knowledge can
-support productive recombination without collapsing corpus attestation into a
-grammar: all 28 requested cells were realized although no complete generated
-sentence was an exact corpus sentence. At the same time, most baseline records
-depend on individually reviewed cells rather than paradigm-wide extrapolation.
-The architecture therefore represents incompleteness explicitly instead of
-silently completing paradigms by analogy.
+Experiment~1 shows that the frozen reviewed inventory supports recombination
+beyond exact sentence retrieval: all 28 requested structural cells are realized
+although none of the complete outputs is an exact normalized corpus sentence.
+This result is modest but useful. It establishes that the baseline is not merely
+returning stored sentences, while the provenance record still identifies
+whether each morphological realization comes from an exact reviewed cell or a
+reviewed full stem class. The experiment does not determine how far the same
+architecture will generalize once the licensed inventory is expanded.
 
-The LLM comparison adds a second result. Direct surface generation and abstract
-structural proposal behave differently under the same frozen task inventory.
-Only one direct output is an exact match to the controlled realization, but this
-fact cannot be interpreted as 27 grammatical errors. The human audit shows why:
-some direct outputs are potentially well-formed expressions that fail the
-requested construction or person specification, while the internal analysis of
-others remains unresolved. In particular, the distinction between
-morphological well-formedness and task adequacy is empirically necessary rather
-than merely terminological.
+Experiment~2 addresses a different question and should not be read as a
+head-to-head accuracy comparison between two autonomous generators. In
+Condition~A, the model is responsible for the Bororo surface. In Condition~B,
+the model is responsible only for preserving an abstract task specification;
+the frozen deterministic grammar supplies the surface. The observed contrast
+therefore localizes responsibility rather than establishing overall superiority
+of one generation method.
 
-Condition B isolates a narrower capability of the LLM. All 28 abstract
-proposals preserve the requested structural specification, and all 28 can then
-be realized from the grammar frozen before the model outputs were collected.
-The result does not show that the deterministic system has complete Bororo
-coverage, nor does it constitute independent native-speaker validation.
-Instead, it shows that, for this reviewed test set, probabilistic structural
-proposal can be separated from surface morphological realization without loss
-of the requested task information. The model need not be entrusted with the
-morphological generalizations that the experiment is intended to control.
+That localization is visible in the results. The direct condition produces one
+exact surface match to the controlled realization, while the linguistic audit
+separates several reasons for nonmatch. A direct output may fail to instantiate
+the requested indicative construction or requested participant value without
+thereby being demonstrably morphologically ill formed. Other outputs remain
+unresolved under the current analysis. Consequently, a binary exact-match score
+would collapse distinctions that are relevant both linguistically and
+computationally.
 
-The asymmetry is important for low-resource work. A direct model output can be
-fluent-looking while leaving unclear whether a divergence reflects
-morphological ill-formedness, a different grammatical construction, incorrect
-participant indexing, or an analysis not yet supported by the available
-description. An evidence-bounded system can instead preserve these states as
-distinct outcomes. Blocking and unresolved status are consequently informative
-behaviors, not merely failures to generate.
+Condition~B, by contrast, tests whether the LLM can transmit the requested
+abstract structure to the reviewed realization layer. It does so for all 28 v1
+tasks: the submitted proposals preserve every audited task field, and the
+frozen realizer returns a surface for each one. This result supports the
+feasibility of the proposed division of labor for the licensed test set. It
+does not establish that the model will preserve structure for unseen task
+types, that the deterministic grammar covers Bororo generally, or that the
+resulting surfaces constitute independent speaker judgments.
 
-The present comparison remains deliberately small. It contains five target
-lexemes and 28 reviewed tasks, and 16 direct outputs still require further
-linguistic analysis in at least part of the audit. The 28/28 realization result
-for Condition B is also conditioned on tasks sampled from the frozen reviewed
-inventory; it should not be generalized to arbitrary Bororo structures. A
-larger experiment should add lexical items and construction types while
-preserving the same pre-registration principle: grammar and task inventory are
-frozen before model outputs are inspected.
+The main architectural consequence is therefore auditability. Corpus evidence,
+human analysis, generation licenses, model proposals, deterministic
+realizations, and post-generation attestation remain separately inspectable.
+This separation makes it possible to identify whether uncertainty belongs to
+the documentary evidence, the linguistic analysis, the requested structure, or
+the realization layer. It also permits the system to preserve an unresolved
+state instead of converting analogy or corpus frequency into an implicit
+grammatical decision.
 
-Finally, the architecture supports incremental revision without contaminating
-an existing evaluation. New corpus observations can enter a review queue
-without changing the grammar. Human analysis can subsequently add an exact
-cell, a construction-specific realization, or, where independently justified,
-a complete lexical class to a later grammar version. Experimental discoveries
-therefore remain evidence for future analysis rather than retroactive licenses
-for the outputs being evaluated.
+The experiment provides only indirect evidence about blocking. The
+implementation fails closed when a required reviewed license is absent, but the
+v1 LLM task set was sampled from licensed combinations and therefore contains
+no blocking event. Demonstrating the behavior empirically will require a
+separate challenge set containing systematically unsupported or partially
+reviewed requests. Such a test would complement the present experiment rather
+than change its interpretation.
+
+Finally, versioning is essential to the human-review workflow. New corpus
+observations and analyses discovered during audit can motivate later exact
+cells, construction-specific realizations, or broader classes, but they must
+enter a subsequent grammar version. Keeping those later decisions out of the
+frozen v1 evaluation prevents experimental outputs from becoming retroactive
+evidence for their own licensing.
 
 \section{Conclusion}
 
