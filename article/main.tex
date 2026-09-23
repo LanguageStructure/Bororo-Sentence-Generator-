@@ -107,6 +107,45 @@ prefix or suffix is not segmented solely from its shape. Review queues expose
 the relevant contexts while leaving person, segmentation, stem class, and
 coding frame unset until they are explicitly reviewed.
 
+\section{Related work}
+\label{sec:related}
+
+Recent work on endangered-language NLP provides an important comparison for
+the present architecture. Zhang et al.~\cite{zhang2022cherokee} frame
+computational work on Cherokee around collaboration with language communities
+and propose machine-in-the-loop methods for enriching resources. Joshi
+et al.~\cite{joshi2019unsung} likewise emphasize that low-resource language
+technology is not only a modeling problem: data creation, deployment, and the
+conditions under which a technology is useful to a community are integral to
+the task.
+
+NüshuRescue provides a particularly close computational contrast
+\cite{yang2025nushurescue}. Yang et al.\ construct a 500-sentence manually
+validated Nüshu--Chinese corpus and use 35 seed examples with GPT-4-Turbo to
+generate additional translations. Their pipeline combines LLM generation,
+automatic validation, and manual review. A language-specific length constraint
+raises their reported strict translation accuracy from 31.37\% without the
+constraint to 48.69\% with it. The study therefore provides direct evidence
+that explicit linguistic constraints can materially improve an LLM-based
+low-resource pipeline.
+
+The present work shares the broader human-in-the-loop motivation but addresses
+a different problem. NüshuRescue uses an LLM primarily to expand parallel data
+and seeks to reduce the amount of manual annotation required. Our system does
+not treat generated data as a route to automatic grammar expansion. Instead,
+human-reviewed linguistic analysis defines the space within which generation is
+licensed. The LLM, when introduced, is positioned upstream as a proposal
+mechanism; it cannot promote its own output into grammatical knowledge.
+
+This contrast is consequential for evaluation. Translation accuracy measures
+agreement with a reference translation. Controlled grammatical generation
+requires additional questions: whether a person realization was independently
+reviewed, whether a coding frame licenses the requested argument structure,
+whether construction-specific morphology has been generalized beyond its
+evidence, and whether corpus attestation is being mistaken for grammatical
+productivity. Our evaluation therefore reports provenance and licensing
+coverage separately from surface attestation.
+
 \section{Methodological motivation}
 \label{sec:motivation}
 
