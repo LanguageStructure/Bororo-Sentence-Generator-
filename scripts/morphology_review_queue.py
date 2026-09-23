@@ -36,4 +36,8 @@ def main():
     print("lemma\tform\ttokens\treview_state\tsent_ids")
     for r in rows[:a.limit]:
         print(f'{r["lemma"]}\t{r["form"]}\t{r["tokens"]}\t{r["review_state"]}\t{",".join(r["sent_ids"][:5])}')
+        if a.next_only and r.get("review_packet"):
+            for x in r["review_packet"]["contexts"]:
+                tr=f' | PT: {x["text_por"]}' if x.get("text_por") else ""
+                print(f'  [{x["sent_id"]}] {x["form"]} <{x["upos"]},{x["deprel"]}> :: {x["text"]}{tr}')
 if __name__=="__main__": main()
