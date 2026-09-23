@@ -297,3 +297,14 @@ def test_amagodo_matches_reviewed_mako_2sg_imperative(monkeypatch):
     assert row["match_type"]=="capitalization_variant"
     assert row["reviewed_construction_cells"]==[
         {"lemma":"mako","construction":"imperative","person":"2SG"}]
+
+
+def test_cemagore_matches_reviewed_mako_1pl_exclusive(monkeypatch):
+    monkeypatch.setattr(q,"corpus_lemma_forms",lambda lemma,path:[
+        {"form":"Cemagore","count":1,"sent_ids":["33-4"],"upos":["VERB"],"deprels":["root"]},
+    ])
+    row=q.morphology_review_queue(["mako"],"x")[0]
+    assert row["review_state"]=="exact_cell_reviewed"
+    assert row["analysis_scope"]=="exact_person_cell"
+    assert row["match_type"]=="capitalization_variant"
+    assert row["reviewed_requests"]==[{"lemma":"mako","s_person":"1PL.EXCL"}]
