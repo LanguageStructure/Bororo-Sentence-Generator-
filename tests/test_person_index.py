@@ -71,3 +71,9 @@ def test_kodu_reviewed_1sg_gerund_cell():
     from bororo_generator.person_index import reviewed_construction_cell
     assert reviewed_construction_cell("kodu","gerund","1SG")=="ikodui"
     assert reviewed_person_cell("kodu","1SG")=="ikodu"
+
+
+def test_kodu_reviewed_1sg_optative_cell():
+    from bororo_generator.person_index import reviewed_construction_cell
+    assert reviewed_construction_cell("kodu","optative","1SG")=="ikoduia"
+    assert reviewed_person_cell("kodu","1SG")=="ikodu"
