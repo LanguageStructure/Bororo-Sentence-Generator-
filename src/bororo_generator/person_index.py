@@ -84,6 +84,9 @@ REVIEWED_CONSTRUCTION_CELLS={
         "optative":{
             "1SG":"ikoduia",
         },
+        "irrealis_negative_declarative":{
+            "3SG":"kodumodukare",
+        },
     },
 }
 
