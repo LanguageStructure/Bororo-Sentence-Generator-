@@ -59,14 +59,35 @@ observed data, linguistic analysis, and generated output inspectable.
 \section{Boe-Bororo and the corpus setting}
 \label{sec:bororo}
 
-% TODO: Add the language/community background from the private grammar only
-% after selecting the passages to be cited. Do not infer demographic facts here.
+Bororo is a Bororoan language spoken in Mato Grosso, Brazil. The grammatical
+description underlying the present system is based especially on data from
+speakers in Meruri. Contemporary Bororo communities are sociolinguistically
+heterogeneous: their historical trajectories differ, and speaker competence
+varies by generation and locality. Consequently, variation in documentary
+materials cannot be interpreted independently of locality, chronology, contact,
+mobility, and language shift.
+
+This point also affects the treatment of historical documentation. Sources
+produced in different periods and contact settings are not interchangeable
+samples of a single invariant linguistic system. Historical records and modern
+fieldwork differ in locality, transcription practice, consultant background,
+genre, and documentary purpose. The controlled-generation experiment therefore
+does not collapse all documentary forms into a single automatically productive
+grammar.
 
 The present experiment uses a reviewed subset of CorBo represented in CoNLL-U.
 The corpus functions as the observational layer of the system. Token forms,
 lemmas, UPOS labels, dependency relations, sentence contexts, and translations
 may be retrieved for human inspection, but corpus frequency or formal
-resemblance does not promote a morphological analysis to reviewed status.
+resemblance does not promote a morphological analysis to reviewed status. The
+trusted experimental subset is deliberately separated from larger working
+collections whose annotation remains under development.
+
+This separation is important for reproducibility. The generator consumes a
+specified corpus snapshot, while grammatical licenses are stored independently
+and require explicit human review. Thus a change in corpus annotation can alter
+the observational evidence without silently changing the grammar used for
+generation.
 
 \section{Corpus evidence is not grammatical licensing}
 \label{sec:evidence}
