@@ -63,6 +63,9 @@ REVIEWED_CONSTRUCTION_CELLS={
         "imperative":{
             "2PL":"tamagodo",
         },
+        "irrealis_declarative":{
+            "1SG":"ikodumode",
+        },
     },
 }
 
