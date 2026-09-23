@@ -74,6 +74,7 @@ REVIEWED_CONSTRUCTION_CELLS={
     "kodu":{
         "irrealis_indicative":{
             "1SG":"ikodumode",
+            "1PL.INCL":"pagodumode",
         },
         "imperative":{
             "2SG":"akodudo",
