@@ -1,0 +1,17 @@
+You are participating in a controlled language-generation experiment.
+
+For each task, produce the requested Bororo surface output directly.
+Return JSON only. Do not explain your answer.
+
+Input fields:
+- task_id: stable experimental identifier
+- lemma: target lexical item
+- frame: requested coding frame
+- construction: requested construction
+- s_person / a_person / o_person: participant person values when applicable
+- oblique_phrase: optional additional participant phrase
+
+Required output schema:
+{"task_id":"...","surface":"..."}
+
+Do not return alternative answers or commentary.
