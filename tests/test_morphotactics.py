@@ -16,3 +16,15 @@ def test_reviewed_irrealis_indicative_surface():
 def test_reviewed_irrealis_negative_indicative_surface():
     from bororo_generator.morphotactics import reviewed_operator_surface
     assert reviewed_operator_surface("IRR","NEG","IND")=="modukare"
+
+
+def test_reviewed_suffix_slot_is_mutually_exclusive():
+    from bororo_generator.morphotactics import exclusive_suffix_licensed
+    assert exclusive_suffix_licensed(["re"])
+    assert exclusive_suffix_licensed(["wo"])
+    assert exclusive_suffix_licensed(["iagu"])
+    assert exclusive_suffix_licensed(["ie"])
+    assert exclusive_suffix_licensed(["ia"])
+    assert not exclusive_suffix_licensed(["re","wo"])
+    assert not exclusive_suffix_licensed(["wo","ia"])
+    assert not exclusive_suffix_licensed(["iagu","ie"])
