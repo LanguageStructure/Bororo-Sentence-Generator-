@@ -78,6 +78,9 @@ REVIEWED_CONSTRUCTION_CELLS={
         "imperative":{
             "2SG":"akodudo",
         },
+        "gerund":{
+            "1SG":"ikodui",
+        },
     },
 }
 
