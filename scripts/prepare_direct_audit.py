@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Prepare a conservative human-audit worksheet for direct-condition outputs.
 
-Form well-formedness and task/construction adequacy are independent dimensions.
-A grammatical form can therefore receive construction_mismatch=yes without
-morphological_violation=yes.
+Form well-formedness, construction choice, person realization, and coding-frame
+adequacy are independent dimensions.
 """
 import argparse,csv,json
 from pathlib import Path
@@ -11,7 +10,7 @@ from pathlib import Path
 FIELDS=[
  "task_id","lemma","frame","s_person","a_person","o_person",
  "direct_surface","controlled_surface","exact_match",
- "morphological_violation","construction_mismatch","frame_violation",
+ "morphological_violation","construction_mismatch","person_mismatch","frame_violation",
  "constructional_overgeneralization","complementary_distribution_violation",
  "unsupported_but_plausible","auditor_status","notes"
 ]
@@ -33,18 +32,18 @@ def main():
             t=row["task"]; tid=t["task_id"]; c=by_id[tid]
             match=bool(c["exact_match"])
             if not match: pending+=1
+            status="no" if match else "unresolved"
             w.writerow({
               "task_id":tid,"lemma":t["lemma"],"frame":t.get("frame",""),
               "s_person":t.get("s_person") or "","a_person":t.get("a_person") or "",
               "o_person":t.get("o_person") or "",
               "direct_surface":c["direct_surface"],"controlled_surface":c["controlled_surface"],
               "exact_match":"yes" if match else "no",
-              "morphological_violation":"no" if match else "unresolved",
-              "construction_mismatch":"no" if match else "unresolved",
-              "frame_violation":"no" if match else "unresolved",
-              "constructional_overgeneralization":"no" if match else "unresolved",
-              "complementary_distribution_violation":"no" if match else "unresolved",
-              "unsupported_but_plausible":"no" if match else "unresolved",
+              "morphological_violation":status,"construction_mismatch":status,
+              "person_mismatch":status,"frame_violation":status,
+              "constructional_overgeneralization":status,
+              "complementary_distribution_violation":status,
+              "unsupported_but_plausible":status,
               "auditor_status":"reviewed" if match else "pending",
               "notes":"exact frozen-v1 surface match" if match else "",
             })
