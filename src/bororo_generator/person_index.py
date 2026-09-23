@@ -75,6 +75,9 @@ REVIEWED_CONSTRUCTION_CELLS={
         "irrealis_declarative":{
             "1SG":"ikodumode",
         },
+        "imperative":{
+            "2SG":"akodudo",
+        },
     },
 }
 
