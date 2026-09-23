@@ -6,7 +6,7 @@ judgments or promote corpus observations to reviewed status.
 from datetime import datetime,timezone
 from .evaluation import evaluate_lexemes
 
-SCHEMA_VERSION="1.0"
+SCHEMA_VERSION="1.1"
 
 def evaluation_report(lemmas,corpus_path):
     ev=evaluate_lexemes(lemmas,corpus_path)
@@ -22,6 +22,8 @@ def evaluation_report(lemmas,corpus_path):
             "generated_records":ev["generated_records"],
             "unique_predicate_forms_attested":ev["unique_predicate_forms_attested"],
             "blocked":ev["blocked"],
+            "licensed_by_full_class":ev["licensed_by_full_class"],
+            "licensed_by_exact_cell":ev["licensed_by_exact_cell"],
         },
         "method":{
             "sentence_attestation":"exact normalized generated surface",
