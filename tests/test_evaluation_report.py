@@ -7,7 +7,7 @@ def test_report_keeps_methodological_limits(monkeypatch):
         "unique_predicate_forms_attested":2,"blocked":0,
         "licensed_by_full_class":6,"licensed_by_exact_cell":2,"results":[]})
     r=er.evaluation_report(["nudu"],"corpus.conllu")
-    assert r["schema_version"]=="1.1"
+    assert r["schema_version"]=="1.2"
     assert r["summary"]["generated_records"]==8
     assert r["summary"]["licensed_by_full_class"]==6
     assert r["summary"]["licensed_by_exact_cell"]==2
