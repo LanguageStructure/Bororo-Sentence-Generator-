@@ -71,6 +71,9 @@ REVIEWED_CONSTRUCTION_CELLS={
             "2SG":"amagodo",
             "2PL":"tamagodo",
         },
+        "negative_indicative":{
+            "1SG":"imagokare",
+        },
     },
     "kodu":{
         "irrealis_indicative":{
