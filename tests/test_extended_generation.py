@@ -15,3 +15,8 @@ def test_kudu_oblique_marker_is_not_guessed():
 
 def test_divalent_maku_is_rejected():
     assert extended_intransitive_declarative("maku","3SG") is None
+
+
+def test_sparse_extended_cells_do_not_expand():
+    assert extended_intransitive_declarative("mako","3PL") is None
+    assert extended_intransitive_declarative("kudu","1SG") is None
