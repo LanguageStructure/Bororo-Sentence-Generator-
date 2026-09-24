@@ -1,14 +1,14 @@
 lemma	occurrences	development_examples	review_status	proposed_frame	grammar_v1_status	note
 ako	58	FWFFG-031.RaimundoItogoga;criacao_13;0055e.PessGr	pending		morphology_reviewed	High-frequency development evidence; lexical/category review required.
-mako	37	FWFFG-009;FWFFG-010;FWFFG-025.RaimundoItogoga	pending	extended_intransitive	reviewed_v1	Re-review against development only before v2 freeze.
-maragodu	33	FWFFG-008;CGPB-p61.1a;0055d.PessGr	pending	monovalent	reviewed_v1	Re-review against development only.
+mako	37	FWFFG-009;FWFFG-010;FWFFG-025.RaimundoItogoga	accepted	extended_intransitive	reviewed_v1	Development evidence includes overt ji-marked oblique in FWFFG-010; retain reviewed v1 frame.
+maragodu	33	FWFFG-008;CGPB-p61.1a;0055d.PessGr	accepted	monovalent	reviewed_v1	Development shows indexed predicate without core object; locative material is oblique; retain reviewed v1 frame.
 tu	33	FWFFG-012;FWFFG-0102;FWFFG-0104	pending		unreviewed	Potentially heterogeneous analysis; inspect before licensing.
-aregodu	29	FWFFG-007;FWFFG-011;FWFFG-0107	pending		unreviewed	Do not conflate automatically with reviewed arego.
-kodu	24	FWFFG-0107;CGPB-p13.1;CGPB-p13.2	pending	monovalent	reviewed_v1	Re-review against development only.
-maku	24	FWFFG-0102;FWFFG-0103;0057d.PessGr	pending	divalent	reviewed_v1	Re-review against development only.
+aregodu	29	FWFFG-007;FWFFG-011;FWFFG-0107	pending		unreviewed	Development supports motion/arrival uses, but lemma relation to arego and exact coding-frame analysis require linguistic adjudication.
+kodu	24	FWFFG-0107;CGPB-p13.1;CGPB-p13.2	accepted	monovalent	reviewed_v1	Development examples support subject-indexed motion predicate; interrogative location is oblique.
+maku	24	FWFFG-0102;FWFFG-0103;0057d.PessGr	accepted	divalent	reviewed_v1	FWFFG-0102 has theme object and ji-marked recipient; retain reviewed v1 divalent classification, with recipient separately oblique.
 ro	22	FWFFG-005a;FWFFG-023;FWFFG-024	pending		unreviewed	Inspect constructional heterogeneity.
 to	22	criacao_03	pending		unreviewed	May include non-verbal/homographic analyses; inspect.
-mugu	17	FWFFG-020;FWFFG-022;FWFFG-023	pending		unreviewed	Candidate for review.
+mugu	17	FWFFG-020;FWFFG-022;FWFFG-023	pending	monovalent	unreviewed	Development strongly suggests a subject-indexed existential/locative predicate; proposed frame awaits linguist approval.
 aidu	15	criacao_11;CGPB-p19.1;CGPB-p19.3	pending		unreviewed	Candidate for review.
 jorudu	15	FWFFG-008;FWFFG-0103;FWFFG-0104	pending		unreviewed	Candidate for review.
 mearudu	15	0057b.PessGr;0057j.PessGr;0057k.PessGr	pending		unreviewed	Candidate for review.
