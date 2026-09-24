@@ -9,7 +9,7 @@ maku	24	FWFFG-0102;FWFFG-0103;0057d.PessGr	accepted	divalent	reviewed_v1	FWFFG-0
 ro	22	FWFFG-005a;FWFFG-023;FWFFG-024	pending		unreviewed	Inspect constructional heterogeneity.
 to	22	criacao_03	pending		unreviewed	May include non-verbal/homographic analyses; inspect.
 mugu	17	FWFFG-020;FWFFG-022;FWFFG-023	accepted	monovalent	human_reviewed_v2	Confirmed by linguist 2026-09-24: monovalent existential/locative predicate; S is indexed and locative constituent is oblique.
-aidu	15	criacao_11;CGPB-p19.1;CGPB-p19.3	pending		unreviewed	Candidate for review.
+aidu	15	criacao_11;CGPB-p19.1;CGPB-p19.3	pending	extended_intransitive+complement	unreviewed	Development evidence distinguishes at least two constructions: experiencer/S-indexed aidu with ji-marked participant (CGPB-p19.3), and aidu selecting a clausal complement (CGPB-p19.1). criacao_11 UD obj annotation is not promoted to a grammar license without adjudication.
 jorudu	15	FWFFG-008;FWFFG-0103;FWFFG-0104	pending		unreviewed	Candidate for review.
 mearudu	15	0057b.PessGr;0057j.PessGr;0057k.PessGr	pending		unreviewed	Candidate for review.
 joruduwa	13	FWFFG-003;FWFFG-004;FWFFG-006	pending		unreviewed	Candidate for review.
