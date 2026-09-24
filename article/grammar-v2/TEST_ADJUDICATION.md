@@ -38,3 +38,34 @@ Human adjudication of the 10 annotation-or-implicit-object tokens:
 - underlying frozen lexical-license errors: 1 (`ro`)
 
 These results are not yet a final accuracy figure. The 13 `manual_required` tokens remain to be adjudicated.
+
+
+## Manual-required adjudication
+
+The 13 manually scorable tokens were reviewed against their sentence, translation and annotation, without modifying the frozen grammar.
+
+- 0.1.BEBE, `aidu`: supported. Propositional content is compatible with the reviewed extended-intransitive lexical analysis.
+- ABE-30, `mako`: supported. Absolute use does not contradict the reviewed lexical class.
+- ABE-48, ABE-49, ABE-219, ABE-291, ABE-292, and C.O.82-2b, `ako`: supported. Clausal or nominal speech content without an overt interlocutor does not contradict the reviewed lexical license; selection of an interlocutor with `ji` does not require that participant to be overt in every occurrence.
+- ABE-305 and ABE-306, `aiwo`: supported. `kuiejedoge i` provides a postpositionally coded complement with `ji`, matching the reviewed analysis.
+- ABE-316, `rema`: supported. The annotation `Pred=AtrEq` and translation are compatible with the frozen identificational-copula analysis.
+- ABE-241, `mako ... bapera to`: unresolved. The `to` phrase may reflect a distinct construction/semantic relation and is not sufficient to revise the frozen lexical license.
+- ABE-246, causative `aiwodo`: unresolved for lexical-frame scoring. A causative construction should not be used directly to revise the valency of the base.
+
+Manual-required totals: 11 supported, 2 unresolved, 0 newly established conflicts.
+
+## Final covered-token accounting
+
+Of 194 test predicate tokens, 64 (32.99%) have a frozen grammar-v2 lexical license and 130 (67.01%) are outside lexical coverage.
+
+Among the 64 covered tokens:
+
+- 41 mechanical matches
+- 2 supported contextual/implicit-object cases
+- 11 manually supported cases
+- 8 genuine token-level conflicts, all attributable to one frozen lexical-license error (`ro: divalent`)
+- 2 unresolved cases
+
+Thus 54/64 covered tokens (84.38%) are positively compatible with the frozen grammar, 8/64 (12.50%) conflict, and 2/64 (3.12%) remain unresolved. Restricting the denominator to adjudicable covered tokens gives 54/62 = 87.10% compatibility.
+
+The preferred description is **compatibility rate among adjudicable covered predicate tokens**, not accuracy. Coverage and compatibility must be reported separately. The eight conflicting tokens must also be distinguished from the single underlying lexical-license error.
