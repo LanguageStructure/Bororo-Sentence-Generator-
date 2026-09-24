@@ -1,0 +1,41 @@
+# Grammar-v2 frozen lexical licenses
+# Frozen before test evaluation. Only accepted human-reviewed development decisions are licensed.
+version: 2
+freeze_date: "2026-09-24"
+source_review: "article/grammar-v2/grammar_v2_review.tsv"
+policy: "accepted-only; uncertain items are excluded"
+
+lexemes:
+  ako: {frame: extended_intransitive, selected_oblique: ji, status: accepted}
+  mako: {frame: extended_intransitive, selected_oblique: ji, status: accepted}
+  maragodu: {frame: monovalent, status: accepted}
+  tu: {frame: monovalent, meaning: "ir", status: accepted}
+  aregodu: {frame: monovalent, meaning: "chegar", status: accepted}
+  kodu: {frame: monovalent, status: accepted}
+  maku: {frame: divalent, status: accepted, note: "recipient may be obliquely coded"}
+  ro: {frame: divalent, status: accepted}
+  to: {frame: divalent, status: accepted, note: "verbal to only; homophonous postposition to is a distinct lexical item"}
+  mugu: {frame: monovalent, status: accepted}
+  aidu: {frame: extended_intransitive, meaning: "gostar/querer", status: accepted}
+  mearudu: {frame: extended_intransitive, selected_oblique: ji, meaning: "ouvir/escutar", status: accepted}
+  bito: {frame: divalent, status: accepted, note: "3SG object index has zero exponence"}
+  aiwo: {frame: intransitive_with_postpositional_complement, complement_postposition: ji, status: accepted, note: "postpositional complementation does not imply extended-intransitive status"}
+  akedu: {frame: monovalent, status: accepted, derivation: {causative: {form: akedudo, frame: divalent}}}
+  okwage: {frame: monovalent, meaning: "comer", status: accepted}
+  meru: {frame: monovalent, status: accepted}
+  kado: {frame: divalent, status: accepted}
+  pega: {frame: monovalent, status: accepted, derivation: {causative: {form: pegado, frame: divalent}}}
+  rema: {frame: identificational_copula, status: accepted, note: "same-reference identificational predicates"}
+  towuje: {frame: divalent, status: accepted}
+  rakoje: {frame: monovalent, meaning: "estar em pé", status: accepted}
+  pemega: {frame: monovalent, status: accepted, derivation: {causative: {form: pemegado, frame: divalent}}}
+  rutu: {frame: monovalent, meaning: "subir", status: accepted}
+  barigu: {frame: divalent, status: accepted, note: "3SG object may be zero-realized"}
+  reru: {frame: monovalent, meaning: "dançar", status: accepted}
+  kudu: {frame: extended_intransitive, selected_oblique: ce, meaning: "beber", status: accepted}
+  aimo: {frame: reflexive_divalent, status: accepted, constraint: "object index obligatorily co-referential with subject index", reviewed_form: "Cere cedaimo"}
+
+excluded:
+  jorudu: {status: uncertain}
+  joruduwa: {status: uncertain}
+  ciri: {status: uncertain}
