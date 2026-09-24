@@ -91,3 +91,43 @@ The 32-item Boe Ero extraction run is retained as a diagnostic pilot. Its
 near-universal abstention shows that sentence-level translation alone, under a
 strict no-outside-knowledge constraint, is insufficient to populate the
 grammar-v1 structural interface. It is not reported as grammar-v1 performance.
+
+
+## Frozen corpus inventory before partition assignment
+
+The current tagged CorBo snapshot contains 788 sentences. Legacy sentence-level
+sourcefile labels were normalized to documentary collections before splitting.
+The resulting major collections are:
+
+| collection | sentences |
+|---|---:|
+| EncIE | 205 |
+| PessGr | 145 |
+| ABE | 141 |
+| IETKB | 57 |
+| CGPB | 47 |
+| FWFFG | 35 |
+| sabia | 29 |
+| KJB | 19 |
+| KoeMakarewudo | 19 |
+| RaimundoItogoga | 17 |
+| criacao | 16 |
+| RO | 16 |
+| BEBE | 10 |
+| KuiejedogeEiodudo | 10 |
+| C.O | 6 |
+| NT.CG | 5 |
+| dialogomulherAeB | 4 |
+| NT.GO | 3 |
+
+Four singleton legacy labels remain and must be provenance-adjudicated before
+confirmatory partition assignment. No test collection is selected merely to
+optimize lexical overlap or expected grammar performance.
+
+Because the three largest collections account for a large fraction of CorBo,
+a naive random assignment of collections can produce a highly unbalanced test.
+The confirmatory partition will therefore be chosen by a deterministic
+size-targeting algorithm fixed in advance: among eligible whole-collection
+partitions, select the subset whose sentence count is closest to 20% of the
+eligible corpus; resolve exact ties lexicographically. This uses collection
+size only, never linguistic content or system performance.
