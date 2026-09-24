@@ -58,10 +58,15 @@ realizes only reviewed combinations and retains provenance for the evidence and
 rules used. Unresolved evidence remains an explicit computational state rather
 than being completed automatically.
 
-The study evaluates this architecture in two stages. First, a frozen controlled
+The study evaluates this architecture in three stages. First, a frozen controlled
 baseline asks whether a small reviewed grammar can recombine licensed Bororo
 structures without reducing generation to retrieval from the corpus. Second, we
-compare two uses of the same LLM over a common frozen task inventory. In the
+compare two uses of the same LLM over a common frozen task inventory. These two
+stages establish functional correctness inside a reviewed domain and are not
+treated as estimates of performance on unseen linguistic material. Third, we
+construct a source-group holdout from independently partitioned annotated
+CorBo material, build grammar-v2 from the development partition only, freeze
+its lexical licenses, and then open the held-out sources for evaluation. In the
 direct condition, the model produces Bororo surface output. In the
 evidence-bounded condition, it produces only an abstract structural proposal;
 surface morphology is then supplied by the reviewed deterministic grammar or
@@ -553,15 +558,106 @@ output that differs from the controlled realization may still be a well-formed
 Bororo expression in another construction, or may remain linguistically
 unresolved.
 
+
+\section{Experiment 3: source-group holdout evaluation}
+\label{sec:holdout}
+
+The first two experiments deliberately operate inside a domain represented in
+the frozen grammar. They therefore establish functional correctness of the
+pipeline rather than performance on unseen linguistic material. To test
+generalization separately, we constructed a second evaluation in which the
+corpus was partitioned by documentary source group before grammar-v2 was
+reviewed.
+
+After excluding four singleton records whose provenance required separate
+adjudication, the eligible annotated corpus contained 784 sentences. Whole
+source groups, rather than individual sentences, were assigned to development
+or test. The development partition contains 627 sentences (79.97\%); the
+held-out partition contains 157 sentences (20.03\%) from ABE, BEBE, and C.O.
+No test token or annotation was used to add or revise a grammar-v2 license
+before the grammar was frozen. Three ABE examples and two BEBE examples had
+been accidentally exposed during earlier corpus inspection; consequently the
+holdout is reported as partially unblinded rather than as a pristine blind
+test. None of those exposed examples was used to license a grammar-v2 rule.
+
+Human review of the development partition yielded 28 accepted lexical licenses.
+Three analyses (\textit{jorudu}, \textit{joruduwa}, and \textit{ciri}) remained
+uncertain and were excluded. The accepted grammar was frozen before systematic
+test evaluation. Corpus evidence alone did not create a license.
+
+The held-out 157 sentences contain 194 tokens annotated as VERB or AUX. Of
+these, 64 (33.0\%) have a lexical entry in the frozen grammar-v2 and 130
+(67.0\%) fall outside its lexical coverage. Coverage is therefore reported
+separately from compatibility: an unlicensed predicate is not counted as an
+error.
+
+A first mechanical comparison produced six apparent frame mismatches. All six
+were causative forms whose base lemmas were correctly licensed as monovalent;
+the evaluator had incorrectly applied the base valency directly to predicates
+annotated \texttt{Voice=Cau}. The evaluation procedure was corrected
+generically to treat causativization of a monovalent base as valency-increasing,
+without changing any frozen lexical license. Re-running the same test produced
+41 mechanical matches, 10 cases requiring object/annotation adjudication, and
+13 cases requiring manual frame adjudication, with no remaining mechanical
+frame mismatch.
+
+Human adjudication classified two of the ten object cases as compatible with
+the frozen analysis: one involved contextual object omission with
+\textit{bito}, and one an implicit theme with \textit{maku}. The remaining
+eight tokens all instantiated \textit{ro}. Post-test linguistic review
+established that the frozen license \textit{ro}: divalent was incorrect.
+Accordingly, these are reported as eight token-level conflicts but one
+underlying lexical-license error. The frozen grammar was not retrospectively
+changed.
+
+Of the 13 manually assessed frame cases, 11 were compatible with the frozen
+licenses. Two remained unresolved: a \textit{mako} occurrence with a
+\textit{to} phrase and a causative \textit{aiwodo} construction. They are
+retained as unresolved rather than forced into either success or error.
+
+\begin{table}[ht]
+\centering
+\caption{Grammar-v2 source-group holdout evaluation.}
+\label{tab:v2holdout}
+\begin{tabular}{lr}
+\toprule
+Measure & Result\\
+\midrule
+Development sentences & 627\\
+Held-out sentences & 157\\
+Held-out predicate tokens & 194\\
+Tokens with frozen lexical license & 64/194 (33.0\%)\\
+Tokens outside lexical coverage & 130/194 (67.0\%)\\
+Positively compatible covered tokens & 54/64 (84.4\%)\\
+Conflicting covered tokens & 8/64 (12.5\%)\\
+Unresolved covered tokens & 2/64 (3.1\%)\\
+Compatibility among adjudicable covered tokens & 54/62 (87.1\%)\\
+Underlying lexical-license errors identified & 1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We call the final 54/62 quantity a \emph{compatibility rate among adjudicable
+covered predicate tokens}, not accuracy. The denominator excludes predicates
+for which grammar-v2 has no lexical license and the two cases whose linguistic
+status remains unresolved. Moreover, token-level conflicts are not independent
+grammar errors: all eight observed conflicts derive from the same frozen
+lexical analysis of \textit{ro}. The holdout therefore supplies information
+that the internal validation cannot: it exposes a reviewed generalization that
+failed on held-out documentary material while preserving a transparent record
+of the error rather than repairing the tested grammar.
+
 \section{Limitations and scope of inference}
 \label{sec:limits}
 
-The experiments are deliberately narrow. They contain five target lexemes and
+The v1 experiments are deliberately narrow. They contain five target lexemes and
 28 ordinary-indicative tasks selected from combinations already licensed by the
 frozen v1 grammar. They therefore test the behavior of the evidence-bounded
-architecture inside a reviewed domain; they do not estimate general coverage of
-Bororo, performance on unseen constructions, or the system's blocking rate for
-arbitrary requests. In particular, the absence of blocked proposals in
+architecture inside a reviewed domain and should not be interpreted as an
+estimate of performance on unseen linguistic queries. Experiment~3 addresses
+held-out documentary material separately, but its 33.0\% lexical coverage also
+shows that grammar-v2 remains a partial grammar rather than a general model of
+Bororo. It does not estimate the system's blocking rate for arbitrary requests. In particular, the absence of blocked proposals in
 Experiment~2 follows from the licensed task design and should not be
 extrapolated beyond it.
 
@@ -648,6 +744,15 @@ separate challenge set containing systematically unsupported or partially
 reviewed requests. Such a test would complement the present experiment rather
 than change its interpretation.
 
+The source-group holdout adds an independent diagnostic absent from the v1
+tests. Among covered and adjudicable held-out predicates, 54/62 (87.1\%) are
+compatible with the frozen grammar-v2. More importantly, the holdout identifies
+one lexical generalization that does not survive evaluation: the frozen
+divalent analysis of \textit{ro}. Its eight token-level conflicts are therefore
+reported as repeated manifestations of one lexical-license error rather than as
+eight independent grammatical rules. This illustrates why internal regression
+tests and external generalization tests answer different questions.
+
 Finally, versioning is essential to the human-review workflow. New corpus
 observations and analyses discovered during audit can motivate later exact
 cells, construction-specific realizations, or broader classes, but they must
@@ -684,9 +789,18 @@ and provenance inspectable and allows later linguistic analysis to extend a
 versioned grammar without retroactively changing the evidence used to evaluate
 earlier outputs.
 
-A complementary test would use a challenge set containing unsupported and
-partially reviewed requests, allowing abstention and blocking to be evaluated
-directly.
+The source-group holdout complements these internal tests: grammar-v2 covers
+64 of 194 held-out predicate tokens, and 54 of 62 adjudicable covered tokens
+(87.1\%) are compatible with its frozen licenses. The evaluation also exposes
+one incorrect frozen lexical generalization, \textit{ro}: divalent, manifested
+in eight held-out tokens. This distinction between internal functional
+correctness, lexical coverage, held-out compatibility, unresolved evidence, and
+underlying analytical errors is central to the evaluation protocol.
+
+A further challenge set containing unsupported and partially reviewed requests
+can evaluate abstention and blocking directly, but such a grammar-derived set
+should be reported as an internal decision-boundary test rather than as
+independent evidence of generalization.
 
 \bibliographystyle{plain}
 \bibliography{references}
