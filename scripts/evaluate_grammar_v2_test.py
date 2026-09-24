@@ -51,7 +51,12 @@ def main():
             if lemma not in lex:
                 counts["unlicensed_predicate_tokens"]+=1; continue
             counts["licensed_predicate_tokens"]+=1
-            frame=lex[lemma]["frame"]
+            base_frame=lex[lemma]["frame"]
+            feats={} if t[5]=="_" else dict(x.split("=",1) for x in t[5].split("|") if "=" in x)
+            causative=feats.get("Voice")=="Cau"
+            # Evaluation rule, not a lexical reanalysis: causativization increases
+            # the valency of a frozen monovalent base. The base grammar remains unchanged.
+            frame="divalent" if causative and base_frame=="monovalent" else base_frame
             deps=[x[7].split(":")[0] for x in toks if x[6]==t[0]]
             nobj=sum(d in CORE_OBJ for d in deps)
             outcome="not_mechanically_scorable"
@@ -62,9 +67,9 @@ def main():
             elif frame in {"extended_intransitive","intransitive_with_postpositional_complement","identificational_copula"}:
                 outcome="manual_required"
             counts[outcome]+=1; bylemma[lemma][outcome]+=1
-            rows.append({"sent_id":sid,"group":g,"lemma":lemma,"form":t[1],"frame":frame,"dependent_relations":deps,"outcome":outcome})
+            rows.append({"sent_id":sid,"group":g,"lemma":lemma,"form":t[1],"base_frame":base_frame,"evaluated_frame":frame,"causative":causative,"dependent_relations":deps,"outcome":outcome})
     out={"freeze_config":"config/valency_review_v2_frozen.yaml","test_groups":sorted(TEST_GROUPS),"counts":dict(counts),"by_lemma":{k:dict(v) for k,v in sorted(bylemma.items())},"items":rows,
-         "interpretation":"Mechanical UD comparison is diagnostic only. annotation_or_implicit_object is not an automatic grammar error (e.g. zero/omitted objects); manual_required cases must be adjudicated without changing the frozen grammar."}
+         "evaluation_rules":{"causative":"If Voice=Cau is annotated on a licensed monovalent base, evaluate the derived predicate as divalent; this does not alter the frozen lexical license."},"interpretation":"Mechanical UD comparison is diagnostic only. annotation_or_implicit_object is not an automatic grammar error (e.g. zero/omitted objects); manual_required cases must be adjudicated without changing the frozen grammar."}
     Path("reports/grammar-v2").mkdir(parents=True,exist_ok=True)
     Path("reports/grammar-v2/test-evaluation.json").write_text(json.dumps(out,ensure_ascii=False,indent=2)+"\n",encoding="utf8")
     print(json.dumps(out["counts"],ensure_ascii=False,indent=2))
