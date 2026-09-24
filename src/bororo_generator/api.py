@@ -1,0 +1,47 @@
+"""Structured public result for controlled generation.
+
+Separates a surface candidate from the evidence that licensed it.  This makes
+blocked outputs inspectable without inventing a sentence.
+"""
+from dataclasses import asdict
+from .generate import generate_indicative
+from .valency_review import valency_entry
+from .person_index import reviewed_stem_class, reviewed_person_cell
+from .evidence_layers import evidence_layers
+
+def generate_record(lemma, **kwargs):
+    r=generate_indicative(lemma,**kwargs)
+    val=valency_entry(lemma) or {}
+    evidence={
+        "lemma":lemma,
+        "reviewed_frame":r.frame,
+        # Legacy compatibility field. Prefer evidence_layers.reviewed_grammar.morphology_license.
+        "reviewed_stem_class":reviewed_stem_class(lemma),
+        "reviewed_stem_class_legacy":True,
+        "valency_evidence":val.get("evidence"),
+        "selected_oblique":val.get("selected_oblique"),
+    }
+    if r.blocked:
+        record={
+            "status":"blocked",
+            "text":None,
+            "evidence":evidence,
+            "reasons":r.reasons,
+        }
+        # Blocked records also expose the evidence boundary: no generated
+        # candidate and no corpus attestation are manufactured.
+        record["evidence_layers"]=evidence_layers(record)
+        return record
+    rec=r.candidate.record()
+    record={
+        "status":"generated",
+        "text":rec["text"],
+        "predicate_form":rec.get("predicate_form"),
+        "evidence":evidence,
+        "provenance":rec["provenance"],
+        "validation":rec["validation"],
+    }
+    # Request information is attached by batch generation; expose the generic
+    # layer here without pretending that an exact person cell is known yet.
+    record["evidence_layers"]=evidence_layers(record)
+    return record

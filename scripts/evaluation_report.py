@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+import argparse,json
+from pathlib import Path
+from bororo_generator.evaluation_report import evaluation_report
+
+def main():
+    p=argparse.ArgumentParser(description="Write a reproducible controlled-generation evaluation report")
+    p.add_argument("corpus")
+    p.add_argument("lemmas",nargs="+")
+    p.add_argument("--output",required=True)
+    a=p.parse_args()
+    report=evaluation_report(a.lemmas,a.corpus)
+    output=Path(a.output)
+    output.parent.mkdir(parents=True,exist_ok=True)
+    output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    s=report["summary"]
+    print("report:",a.output)
+    print("lexemes:",s["lexemes"])
+    print("generated_records:",s["generated_records"])
+    print("unique_predicate_forms_attested:",s["unique_predicate_forms_attested"])
+    print("licensed_by_full_class:",s["licensed_by_full_class"])
+    print("licensed_by_exact_cell:",s["licensed_by_exact_cell"])
+    print("blocked:",s["blocked"])
+if __name__=="__main__": main()
