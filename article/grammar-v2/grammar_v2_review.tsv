@@ -1,0 +1,16 @@
+lemma	occurrences	development_examples	review_status	proposed_frame	grammar_v1_status	note
+ako	58	FWFFG-031.RaimundoItogoga;criacao_13;0055e.PessGr	pending		morphology_reviewed	High-frequency development evidence; lexical/category review required.
+mako	37	FWFFG-009;FWFFG-010;FWFFG-025.RaimundoItogoga	pending	extended_intransitive	reviewed_v1	Re-review against development only before v2 freeze.
+maragodu	33	FWFFG-008;CGPB-p61.1a;0055d.PessGr	pending	monovalent	reviewed_v1	Re-review against development only.
+tu	33	FWFFG-012;FWFFG-0102;FWFFG-0104	pending		unreviewed	Potentially heterogeneous analysis; inspect before licensing.
+aregodu	29	FWFFG-007;FWFFG-011;FWFFG-0107	pending		unreviewed	Do not conflate automatically with reviewed arego.
+kodu	24	FWFFG-0107;CGPB-p13.1;CGPB-p13.2	pending	monovalent	reviewed_v1	Re-review against development only.
+maku	24	FWFFG-0102;FWFFG-0103;0057d.PessGr	pending	divalent	reviewed_v1	Re-review against development only.
+ro	22	FWFFG-005a;FWFFG-023;FWFFG-024	pending		unreviewed	Inspect constructional heterogeneity.
+to	22	criacao_03	pending		unreviewed	May include non-verbal/homographic analyses; inspect.
+mugu	17	FWFFG-020;FWFFG-022;FWFFG-023	pending		unreviewed	Candidate for review.
+aidu	15	criacao_11;CGPB-p19.1;CGPB-p19.3	pending		unreviewed	Candidate for review.
+jorudu	15	FWFFG-008;FWFFG-0103;FWFFG-0104	pending		unreviewed	Candidate for review.
+mearudu	15	0057b.PessGr;0057j.PessGr;0057k.PessGr	pending		unreviewed	Candidate for review.
+joruduwa	13	FWFFG-003;FWFFG-004;FWFFG-006	pending		unreviewed	Candidate for review.
+bito	11	0066a.PessGr;0066b.PessGr;0067i.PessGr	pending		unreviewed	Candidate for review.
