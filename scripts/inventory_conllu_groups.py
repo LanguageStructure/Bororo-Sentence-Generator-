@@ -22,14 +22,27 @@ def meta(block,key):
     return ""
 
 def source_group(block):
+    # sourcefile values in legacy CorBo are often sentence-level filenames
+    # (e.g. 0057a.PessGr). Collapse them to documentary collections.
+    raw=""
     for line in block:
         if line.startswith("# meta:"):
-            m=re.search(r"(?:^|;\s*)sourcefile=([^;]*)",line[7:].strip())
-            if m and m.group(1).strip(): return m.group(1).strip()
+            m=re.search(r"(?:^|;\\s*)sourcefile=([^;]*)",line[7:].strip())
+            if m: raw=m.group(1).strip()
     sid=meta(block,"sent_id")
-    # Conservative fallback: prefix before final numeric sequence.
-    m=re.match(r"(.+?)[-_]?\d+[A-Za-z]*$",sid)
-    return m.group(1) if m else (sid or "UNKNOWN")
+    probe=raw or sid
+    rules=[
+      (r"PessGr", "PessGr"), (r"EncI?E[x]?", "EncIE"), (r"IETKB", "IETKB"),
+      (r"KJB", "KJB"), (r"KoeMakarewudo", "KoeMakarewudo"),
+      (r"dialogomulherAeB", "dialogomulherAeB"), (r"RaimundoItogoga", "RaimundoItogoga"),
+      (r"BEBE", "BEBE"), (r"CGPB", "CGPB"), (r"KuiejedogeEiodudo", "KuiejedogeEiodudo"),
+      (r"NT\\.CG", "NT.CG"), (r"NT\\.GO", "NT.GO"), (r"^RO-", "RO"),
+      (r"^C\\.O\\.", "C.O"), (r"^ABE", "ABE"), (r"^criacao", "criacao"),
+      (r"^sabia", "sabia"), (r"^FWFFG", "FWFFG"),
+    ]
+    for pat,name in rules:
+        if re.search(pat,probe,re.I): return name
+    return raw or sid or "UNKNOWN"
 
 def main():
     ap=argparse.ArgumentParser()
