@@ -1,0 +1,8 @@
+{
+  "experiment_version": "external-v2",
+  "items": 32,
+  "prompt_blob_sha": "e37f4054a47945dbbdf8f046cd7975b150fc2df0",
+  "source_blob_sha": "05ab5c3e94157cd388c90c77aa28e1e621a45971",
+  "grammar_access_during_preparation": false,
+  "note": "Frozen registered inputs; no gold labels or grammar-v1 licenses included."
+}
