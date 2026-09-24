@@ -131,3 +131,23 @@ size-targeting algorithm fixed in advance: among eligible whole-collection
 partitions, select the subset whose sentence count is closest to 20% of the
 eligible corpus; resolve exact ties lexicographically. This uses collection
 size only, never linguistic content or system performance.
+
+
+## Partition assignment
+
+The four unresolved singleton legacy items (OBE-p75.1, OBE-p75.2,
+00FFW.001-antonioWWA.1, and 00CrowellThesis-sent71) are excluded from the
+confirmatory partition pending provenance adjudication. They are not assigned
+to development or test.
+
+This leaves 784 eligible sentences. The preregistered target is 156.8
+sentences (20%). Applying the frozen size-only subset rule yields:
+
+**TEST:** ABE (141) + BEBE (10) + C.O (6) = **157 sentences (20.03%)**.
+
+**DEVELOPMENT:** all other eligible collections = **627 sentences (79.97%)**.
+
+The test assignment was obtained without consulting grammar-v2 performance.
+ABE, BEBE, and C.O are henceforth sealed for confirmatory grammar-v2
+evaluation. Their linguistic analyses must not be used to construct or repair
+grammar-v2.
