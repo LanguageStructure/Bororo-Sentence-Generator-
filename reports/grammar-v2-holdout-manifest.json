@@ -1,0 +1,53 @@
+{
+  "manifest_version": "1.0",
+  "experiment": "grammar-v2-source-group-holdout",
+  "status": "frozen-historical-split",
+  "documented_in_manuscript": true,
+  "split_unit": "documentary_source_group",
+  "eligible_sentences": 784,
+  "excluded_records": {
+    "count": 4,
+    "reason": "singleton records whose provenance required separate adjudication"
+  },
+  "development": {
+    "sentences": 627,
+    "proportion": 0.7997,
+    "purpose": "grammar-v2 construction and human linguistic review"
+  },
+  "held_out": {
+    "sentences": 157,
+    "proportion": 0.2003,
+    "source_groups": ["ABE", "BEBE", "C.O."],
+    "predicate_tokens_verb_or_aux": 194
+  },
+  "blinding": {
+    "status": "partially-unblinded",
+    "previously_exposed_examples": {
+      "ABE": 3,
+      "BEBE": 2,
+      "total": 5
+    },
+    "licensing_effect": "None of the exposed examples was used to add or revise a grammar-v2 license."
+  },
+  "grammar_freeze": {
+    "accepted_lexical_licenses": 28,
+    "excluded_uncertain_analyses": ["jorudu", "joruduwa", "ciri"],
+    "rule": "No held-out token or annotation may add or revise a grammar-v2 license during this evaluation."
+  },
+  "reported_historical_result": {
+    "covered_tokens": 64,
+    "outside_lexical_coverage": 130,
+    "compatible": 54,
+    "conflicting": 8,
+    "unresolved": 2,
+    "underlying_lexical_license_errors": 1,
+    "note": "Historical result recorded for reproducibility; it must not be used to redefine the frozen split."
+  },
+  "governance": [
+    "The split is frozen independently of subsequent results.",
+    "Unlicensed predicates are outside lexical coverage, not generation errors.",
+    "Adjudication may classify held-out cases but may not modify the grammar under evaluation.",
+    "Any future re-evaluation with a changed corpus, grammar, annotation, or source mapping requires a new manifest version.",
+    "The 54/62 figure is compatibility among adjudicable covered predicate tokens, not general accuracy."
+  ]
+}
